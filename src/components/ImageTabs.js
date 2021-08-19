@@ -8,8 +8,10 @@ export default class ImageTabs extends React.Component {
     return (
       <div style={imageTabsStyle}>
         {getImages(this.page).map((image) => (
-          <div style={divStyle}>
+          <div style={imgTabStyle}>
+              <div style={imgWarpperStyle}>
             <img style={imgStyle} src={image.src} key={image.id} />
+             </div>
             <p>{image.id}</p>
           </div>
         ))}
@@ -18,17 +20,25 @@ export default class ImageTabs extends React.Component {
   }
 }
 
-const divStyle = {
-  width: "15em",
-  height: "23em",
+const imgTabStyle = {
+  width: "18em",
+  height: "18em",
   backgroundColor: "rgb(240,240,240)",
   margin: "1em 1em 1em 1em",
 };
 const imgStyle = {
-  width: "14em",
   margin: "0.5em 0.5em 0.5em 0.5em",
+  maxWidth:"100%",
+  overflow:"hidden"
 };
 const imageTabsStyle = {
-  display: "flex",
-  justifyContent: "space-around",
+  display: "grid",
+  gridTemplateColumns:"repeat(5,18em)",
+  gridTemplateRows:"repeat(5,18em)",
+  gap:"2em"
 };
+
+const imgWarpperStyle= {
+    display:"flex",
+    alignItems:"center"
+}
