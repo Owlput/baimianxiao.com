@@ -5,9 +5,13 @@ export default class NavBar extends React.Component{
     }
     render(){
         return (
-            <div>
-                
+            <div style={navStyle}>
+                <p>首页</p>
+
             </div>
         )
     }
+}
+const navStyle = {
+    fontSize:"20px"
 }
