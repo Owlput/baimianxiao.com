@@ -1,13 +1,20 @@
-import ImageTabs from "./components/ImageTabs";
+import ImageDiv from "./components/ImageDiv";
 import NavBar from "./components/NavBar";
 
 function App() {
   return (
     <div className="App">
+      <div style={flexWarpper}>
       <NavBar></NavBar>
-      <ImageTabs page={2}  ></ImageTabs>
+      <ImageDiv page={2}  ></ImageDiv>
+      </div>
     </div>
   );
 }
-//page function not yet implmented, routing required
+const flexWarpper = {
+  display:'flex',
+  flexDirection:'column',
+  alignContent: 'center'
+}
+
 export default App
