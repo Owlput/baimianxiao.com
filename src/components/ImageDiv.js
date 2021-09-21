@@ -1,4 +1,5 @@
 import React from "react";
+import MainWrapper from "./GlobalWrapper";
 //import getImages from './PAI'
 
 export default class ImageDiv extends React.Component {
@@ -11,7 +12,7 @@ export default class ImageDiv extends React.Component {
     };
   }
   componentDidMount() {
-    fetch(`http://localhost:4000/image/page/${this.state.currentPage}`)
+    fetch(`http://localhost:4000/baimianxiao/images/${this.state.currentPage}`)
       .then((response) => response.json())
       .then((result) => {
         this.setState({ imagesOnPage: result });
@@ -19,7 +20,7 @@ export default class ImageDiv extends React.Component {
   }
   prePage = () => {
     if (this.state.currentPage > 1) {
-      fetch(`http://localhost:4000/image/page/${this.state.currentPage-1}`)
+      fetch(`http://localhost:4000/bamianxiao/images/${this.state.currentPage-1}`)
       .then((response) => response.json())
       .then((result) => {
         this.setState({ imagesOnPage: result ,currentPage:this.state.currentPage-1});
@@ -28,7 +29,7 @@ export default class ImageDiv extends React.Component {
   };
   nextPage = () => {
     if (this.state.currentPage < this.state.maxPage) {
-      fetch(`http://localhost:4000/image/page/${this.state.currentPage+1}`)
+      fetch(`http://localhost:4000/baimianxiao/images/${this.state.currentPage+1}`)
       .then((response) => response.json())
       .then((result) => {
         this.setState({ imagesOnPage: result, currentPage:this.state.currentPage +1 });

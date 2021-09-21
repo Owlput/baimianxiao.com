@@ -1,20 +1,13 @@
-import ImageDiv from "./components/ImageDiv";
+import React from "react";
 import NavBar from "./components/NavBar";
-
+import MainWrapper from "./components/GlobalWrapper";
 function App() {
   return (
     <div className="App">
-      <div style={flexWarpper}>
       <NavBar></NavBar>
-      <ImageDiv page={2}  ></ImageDiv>
-      </div>
+      <MainWrapper></MainWrapper>
     </div>
   );
-}
-const flexWarpper = {
-  display:'flex',
-  flexDirection:'column',
-  alignContent: 'center'
 }
 
 export default App
