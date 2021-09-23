@@ -4,36 +4,48 @@ import NavBar from "./NavBar";
 import ImageInfo from "./ImageInfo";
 export default class GlobalWrapper extends React.Component {
   constructor() {
-    super(props);
+    super();
     this.state = {
       location: "index",
-      imageURL:""
+      imageURL: "",
     };
   }
 
   setLocation(params) {
-    this.setState({location:params.location,imagePRI:params.imagePRI})
+    this.setState({ 
+      location: params.location, 
+      imagePRI: params.imagePRI 
+    });
   }
 
   render() {
     switch (this.state.location) {
       case "index": {
-          this.setState({imagePage:{
-            isImagePage:false,
-            imageURL:""
-        }})
-        return (
+        console.log("render Index!")
+        let contents = (
           <>
-            <NavBar setLocation={this.setLocation.bind(this)}></NavBar>
-            <ImageDiv></ImageDiv>
+            <NavBar setLocation={this.setLocation.bind(this)}>
+            </NavBar>
+            <ImageDiv setLocation={this.setLocation.bind(this)}></ImageDiv>
           </>
         );
+        console.log(contents)
+        return contents
       }
       case "image": {
-        return (
-          <ImageInfo imageURI = {this.imageURI.bind(this)}></ImageInfo>
+        let contents = (<ImageInfo
+        imageURI = {this.imageURI.bind(this)}>
+        </ImageInfo>);
+        return contents
+      }
+      default: {
+        console.error("rendered nothing!")
+        return(<>
+        <h1>ERROR</h1>
+        </>
         )
       }
-    }
+    } 
   }
+
 }
