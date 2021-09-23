@@ -8,14 +8,14 @@ export default class ImageDiv extends React.Component {
     this.state = {
       currentPage: 1,
       maxPage: 3,
-      imagesOnPage: [{ pri: 0, url: "0.0.0.0" }],
+      imagesOnPage: [],
     };
   }
   componentDidMount() {
-    fetch(`http://localhost:6000/data/imageAllThumbs`)
+    fetch(`http://localhost:7000/data/imageAllThumbs`)
       .then((response) => response.json())
       .then((result) => {
-        this.setState({ imagesOnPage: result.images });
+        this.setState({ imagesOnPage: result.thumbs });
       });
   }
   prePage = () => {
@@ -46,9 +46,9 @@ export default class ImageDiv extends React.Component {
 
 const imageTabsStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(5,16em)",
-  gridTemplateRows: "repeat(5,16em)",
-  gap: "0.2em",
+  gridTemplateColumns: "repeat(5,18em)",
+  gridTemplateRows: "repeat(5,18em)",
+  gap: "1em",
 };
 
 const GenericFlexWarpperStyle = {

@@ -1,7 +1,6 @@
 import React from "react";
 import ImageDiv from "./ImageDiv";
 import NavBar from "./NavBar";
-import ImageInfo from "./ImageInfo";
 export default class GlobalWrapper extends React.Component {
   constructor() {
     super();
@@ -33,9 +32,8 @@ export default class GlobalWrapper extends React.Component {
         return contents
       }
       case "image": {
-        let contents = (<ImageInfo
-        imageURI = {this.imageURI.bind(this)}>
-        </ImageInfo>);
+        let contents = (
+        <><p>WIP</p></>);
         return contents
       }
       default: {
