@@ -6,22 +6,30 @@ export default class ImageCard extends React.Component {
   }
   render() {
     return (
-      <div style={this.props.style}>
+      <div style={this.props.style.background}>
+          <div style={this.props.style.container}>
         <img
           src={this.props.imageInfo.source}
-          style={imageStyle}
+          style={this.props.style.image}
           alt={this.props.imageInfo.title}
         ></img>
-        <p>{this.props.imageInfo.title}</p>
+        <p style={textStyle}>{this.props.imageInfo.title}</p>
         <div style={authorDivStyle}>
-          <img src={this.props.imageAuthor.image}></img>
-          <p>{this.props.imageAuthor.name}</p>
+          <img src={this.props.imageAuthor.image} alt={this.props.imageAuthor.name} style={authorDivStyle.text}></img>
+          <p style={textStyle}>{this.props.imageAuthor.name}</p>
+        </div>
         </div>
       </div>
     );
   }
 }
-const imageStyle = {
-  width: "250px",
+const authorDivStyle = {
+    image:{},
+    text:{
+        float:"left"
+    }
 };
-const authorDivStyle = {};
+
+const textStyle = {
+    width:"14em"
+}

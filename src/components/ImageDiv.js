@@ -19,7 +19,7 @@ export default class ImageDiv extends React.Component {
       .then((result) => {
         this.setState({
           imageAll: result.thumbs,
-          maxPage: Math.ceil(result.thumbs.length / 5),
+          maxPage: Math.ceil(result.thumbs.length / 10),
           imagesOnPage: result.thumbs.slice(
             (this.state.currentPage - 1) * 10,
             this.state.currentPage * 10
@@ -66,10 +66,10 @@ export default class ImageDiv extends React.Component {
       <div style={componentWarpperStyle}>
         <div style={imageTabsStyle}>
           {this.state.imagesOnPage.map((image) => (
-            <ImageCard {...image} style={imageCardStyle}></ImageCard>
+            <ImageCard {...image} style={imageCardStyle} key={image.pri}></ImageCard>
           ))}
         </div>
-        <div style={GenericFlexWarpperStyle}>
+        <div>
           <button style={buttonStyle} onClick={this.prePage}>
             上一页
           </button>
@@ -84,24 +84,34 @@ export default class ImageDiv extends React.Component {
 }
 
 const imageTabsStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(5,18em)",
-  gridTemplateRows: "repeat(2,18em)",
-  gap: "0.5em",
+  display: "flex",
+  width:"100%",
+  flexWrap:"wrap",
+  justifyContent:"space-around"
 };
 
-const GenericFlexWarpperStyle = {
-  display: "flex",
-  flexDirection: "row",
-};
 const buttonStyle = {
   height: "2em",
 };
 const componentWarpperStyle = {
   display: "flex",
+  margin:"auto auto 2% 2%",
+  width:"96%",
   flexDirection: "column",
+  alignItems:"center",
 };
 
 const imageCardStyle = {
-  backgroundColor: "rgb(235,235,235)",
+  background:{
+    backgroundColor:"rgb(235,235,235)",
+    width:"16em"
+  },
+  container:{
+    display:"flex",
+    flexDirection:"column",
+  },
+  image:{
+    alignSelf:"center",
+    width:"200px"
+  }
 };
