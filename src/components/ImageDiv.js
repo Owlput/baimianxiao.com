@@ -21,43 +21,52 @@ export default class ImageDiv extends React.Component {
           imageAll: result.thumbs,
           maxPage: Math.ceil(result.thumbs.length / 5),
           imagesOnPage: result.thumbs.slice(
-            (this.state.currentPage - 1) * 5,
-            this.state.currentPage * 5
+            (this.state.currentPage - 1) * 10,
+            this.state.currentPage * 10
           ),
         });
       });
   }
 
   prePage = () => {
-      console.log(`current ${this.state.currentPage}`)
-    if(this.state.currentPage > 1){
-      console.log(`from page ${this.state.currentPage} to ${this.state.currentPage -1}`)
-    this.setState({
-      currentPage: this.state.currentPage -1,
-      imagesOnPage: this.state.imageAll.slice((this.state.currentPage -2) * 5, (this.state.currentPage-1) * 5 ),
-    });}
-    console.log(`now on page ${this.state.currentPage}`)
+    //console.log(`current ${this.state.currentPage}`)
+    if (this.state.currentPage > 1) {
+      //console.log(`from page ${this.state.currentPage} to ${this.state.currentPage -1}`)
+      this.setState({
+        currentPage: this.state.currentPage - 1,
+        imagesOnPage: this.state.imageAll.slice(
+          (this.state.currentPage - 2) * 10,
+          (this.state.currentPage - 1) * 10
+        ),
+      });
+    }
+    //console.log(`now on page ${this.state.currentPage}`)
   };
   nextPage = () => {
-    console.log(`current ${this.state.currentPage}`)
-    if(this.state.currentPage < this.state.maxPage ){
-      console.log(`from page ${this.state.currentPage} to ${this.state.currentPage +1}`)
-    this.setState({
-      currentPage: this.state.currentPage + 1,
-      imagesOnPage: this.state.imageAll.slice((this.state.currentPage) * 5, (this.state.currentPage +1) * 5 ),
-    });
-    console.log(`now on page ${this.state.currentPage}`)
-  }
+    //console.log(`current ${this.state.currentPage}`)
+    if (this.state.currentPage < this.state.maxPage) {
+      //console.log(`from page ${this.state.currentPage} to ${this.state.currentPage +1}`)
+      this.setState({
+        currentPage: this.state.currentPage + 1,
+        imagesOnPage: this.state.imageAll.slice(
+          this.state.currentPage * 10,
+          (this.state.currentPage + 1) * 10
+        ),
+      });
+      //console.log(`now on page ${this.state.currentPage}`)
+    }
   };
-  currentInfo = () =>{
-    console.log(`Now page ${this.state.currentPage} with ${this.state.imagesOnPage.length} elements`)
-  }
+  currentInfo = () => {
+    console.log(
+      `Now page ${this.state.currentPage} with ${this.state.imagesOnPage.length} elements`
+    );
+  };
   render() {
     return (
       <div style={componentWarpperStyle}>
         <div style={imageTabsStyle}>
           {this.state.imagesOnPage.map((image) => (
-            <ImageCard {...image}></ImageCard>
+            <ImageCard {...image} style={imageCardStyle}></ImageCard>
           ))}
         </div>
         <div style={GenericFlexWarpperStyle}>
@@ -77,7 +86,7 @@ export default class ImageDiv extends React.Component {
 const imageTabsStyle = {
   display: "grid",
   gridTemplateColumns: "repeat(5,18em)",
-  gridTemplateRows: "repeat(1,18em)",
+  gridTemplateRows: "repeat(2,18em)",
   gap: "0.5em",
 };
 
@@ -91,4 +100,8 @@ const buttonStyle = {
 const componentWarpperStyle = {
   display: "flex",
   flexDirection: "column",
+};
+
+const imageCardStyle = {
+  backgroundColor: "rgb(235,235,235)",
 };

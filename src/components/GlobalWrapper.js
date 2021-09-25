@@ -11,39 +11,41 @@ export default class GlobalWrapper extends React.Component {
   }
 
   setLocation(params) {
-    this.setState({ 
-      location: params.location, 
-      imagePRI: params.imagePRI 
+    this.setState({
+      location: params.location,
+      imagePRI: params.imagePRI,
     });
   }
 
   render() {
     switch (this.state.location) {
       case "index": {
-        console.log("render Index!")
+        console.log("render Index!");
         let contents = (
           <>
-            <NavBar setLocation={this.setLocation.bind(this)}>
-            </NavBar>
+            <NavBar setLocation={this.setLocation.bind(this)}></NavBar>
             <ImageDiv setLocation={this.setLocation.bind(this)}></ImageDiv>
           </>
         );
-        console.log(contents)
-        return contents
+        console.log(contents);
+        return contents;
       }
       case "image": {
         let contents = (
-        <><p>WIP</p></>);
-        return contents
+          <>
+            <p>WIP</p>
+          </>
+        );
+        return contents;
       }
       default: {
-        console.error("rendered nothing!")
-        return(<>
-        <h1>ERROR</h1>
-        </>
-        )
+        console.error("rendered nothing!");
+        return (
+          <>
+            <h1>ERROR</h1>
+          </>
+        );
       }
-    } 
+    }
   }
-
 }
