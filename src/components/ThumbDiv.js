@@ -1,8 +1,8 @@
 import React from "react";
 import ImageCard from "./cards/ImageCard";
-//import getImages from './PAI'
+import APIGet from "../PAI";
 
-export default class ImageDiv extends React.Component {
+export default class ThumbDiv extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,8 +14,7 @@ export default class ImageDiv extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:7000/data/imageAllThumbs`)
-      .then((response) => response.json())
+      APIGet("http://localhost:7000/data/imageAllThumbs")
       .then((result) => {
         this.setState({
           imageAll: result.thumbs,
@@ -27,7 +26,6 @@ export default class ImageDiv extends React.Component {
         });
       });
   }
-
   prePage = () => {
     //console.log(`current ${this.state.currentPage}`)
     if (this.state.currentPage > 1) {
@@ -98,19 +96,21 @@ const componentWarpperStyle = {
   maxWidth:"1300px",
   flexDirection: "column",
   alignItems:"center",
+  backgroundColor:"rgb(250,250,250)",
 };
 
 const imageCardStyle = {
   background:{
-    backgroundColor:"rgb(235,235,235)",
-    width:"14em"
+    backgroundColor:"rgb(240,240,240)",
+    width:"14em",
+    margin:"1% 1%"
   },
   container:{
     display:"flex",
     flexDirection:"column",
+    alignItems:"center"
   },
   image:{
-    alignSelf:"center",
-    width:"200px"
+    width:"200px",
   }
 };

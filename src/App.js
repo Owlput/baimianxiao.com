@@ -1,11 +1,19 @@
 import React from "react";
-import GlobalWrapper from "./components/GlobalWrapper";
+import { BrowserRouter ,Routes, Route } from "react-router-dom"
+import ArtworkInfoPage from "./components/ArtworkInfoPage";
+import NavBar from "./components/NavBar";
+import ThumbDiv from "./components/ThumbDiv";
+
 function App() {
   return (
-    <div className="App">
-      <GlobalWrapper></GlobalWrapper>
-    </div>
+    <BrowserRouter>
+            <NavBar></NavBar>
+            <Routes>
+              <Route path='/' element={ThumbDiv}></Route>
+               <Route path='/:pri' element={ArtworkInfoPage}></Route>
+            </Routes>
+    </BrowserRouter>
   );
-}
+  }
 
 export default App
