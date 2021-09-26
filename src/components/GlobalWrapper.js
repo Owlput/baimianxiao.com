@@ -20,14 +20,13 @@ export default class GlobalWrapper extends React.Component {
   render() {
     switch (this.state.location) {
       case "index": {
-        console.log("render Index!");
         let contents = (
-          <>
+          <div style={pageStyle}>
             <NavBar setLocation={this.setLocation.bind(this)}></NavBar>
             <ImageDiv setLocation={this.setLocation.bind(this)}></ImageDiv>
-          </>
+          </div>
         );
-        console.log(contents);
+        //console.log(contents);
         return contents;
       }
       case "image": {
@@ -48,4 +47,9 @@ export default class GlobalWrapper extends React.Component {
       }
     }
   }
+}
+const pageStyle = {
+  display:"flex",
+  flexDirection:"column",
+  alignItems:"center"
 }

@@ -95,8 +95,7 @@ const buttonStyle = {
 };
 const componentWarpperStyle = {
   display: "flex",
-  margin:"auto auto 2% 2%",
-  width:"96%",
+  maxWidth:"1300px",
   flexDirection: "column",
   alignItems:"center",
 };
@@ -104,7 +103,7 @@ const componentWarpperStyle = {
 const imageCardStyle = {
   background:{
     backgroundColor:"rgb(235,235,235)",
-    width:"16em"
+    width:"14em"
   },
   container:{
     display:"flex",
