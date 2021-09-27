@@ -1,16 +1,17 @@
 import React from 'react'
 export default class AuthorSidebar extends React.Component{
     constructor(){
+        super()
         this.state={
-
         }
     }
-    Render(){
+
+    render(){
         return(
             <div style={componentWrapperStyle}>
                 <div style={AuthorInfoStyle.wrapper}>
-                    <img style={AuthorInfoStyle.image}></img>
-                    <p style={AuthorInfoStyle.text}></p>
+                    <img src={this.props.authorInfo.propic} style={AuthorInfoStyle.image} alt={this.props.authorInfo.name}></img>
+                    <p style={AuthorInfoStyle.text}>{this.props.authorInfo.name}</p>
                 </div>
                 <div style={RecentWorksStyle.wrapper}>
                     
