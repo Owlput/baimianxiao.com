@@ -1,6 +1,6 @@
 import React from "react";
-import ArtworkInfoComponent from "./ArtworkInfoComponent";
-import AuthorSidebar from "./AuthorSidebar";
+import ArtworkInfoComponent from "../ArtworkInfoComponent";
+import AuthorSidebar from "../AuthorSidebar";
 
 export default class ImageInfoPage extends React.Component {
   constructor() {

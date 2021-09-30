@@ -1,7 +1,7 @@
 import React from "react";
-import ImageInfoPage from "./ArtworkInfoPage";
+import ImageInfoPage from "./pages/ArtworkInfoPage";
 import NavBar from "./NavBar";
-import ThumbDiv from "./ThumbDiv";
+import ThumbPage from "./pages/ThumbPage";
 
 export default class GlobalWrapper extends React.Component {
   constructor() {
@@ -12,6 +12,7 @@ export default class GlobalWrapper extends React.Component {
     };
 
   }    
+
   
   render() {
     switch (this.state.location) {
@@ -19,7 +20,7 @@ export default class GlobalWrapper extends React.Component {
         return (
           <>
               <NavBar></NavBar>
-            <ThumbDiv></ThumbDiv>
+            <ThumbPage></ThumbPage>
           </>
         );
       }

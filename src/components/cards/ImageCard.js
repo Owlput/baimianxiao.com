@@ -1,13 +1,6 @@
 import React from "react";
 
-export default class ImageCard extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      onHover: false,
-    };
-  }
-  render() {
+export default function ImageCard(){
     return (
       <div style={this.props.style.background}>
         <div style={this.props.style.container}>
@@ -31,7 +24,7 @@ export default class ImageCard extends React.Component {
       </div>
     );
   }
-}
+
 
 const imageDivStyle = {
   imageViewport:{

@@ -1,5 +1,5 @@
 import React from "react";
-import ImageCard from "./cards/ImageCard";
+import ImageCard from "../cards/ImageCard";
 
 export default class ThumbDiv extends React.Component {
   constructor(props) {

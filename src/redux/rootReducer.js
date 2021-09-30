@@ -1,35 +1,10 @@
-const initialState = {
-  location: {
-    locate: 0,
-    pri: "",
-  },
-};
+import { combineReducers } from "redux";
+import locationReducer from "./reducers/locationReducer"
 
-export default function rootReducer(state = initialState, action) {
-  switch (action.type) {
-    case "toHome": {
-      if (state.location.locate !== 0) {
-        return {
-          ...state,
-          location: {
-            locate: 0,
-            pri: "",
-          },
-        };
-      } else {
-        return state;
-      }
-    }
-    case "toTestPic":
-      return {
-        ...state,
-        location: {
-          locate: 0,
-          pri: `${action.payload}`,
-        },
-      };
-    default: {
-      return state;
-    }
+const rootReducer = combineReducers(
+  {
+    location:locationReducer
   }
-}
+)
+
+export default rootReducer
