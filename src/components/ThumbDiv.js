@@ -1,6 +1,5 @@
 import React from "react";
 import ImageCard from "./cards/ImageCard";
-import APIGet from "../PAI";
 
 export default class ThumbDiv extends React.Component {
   constructor(props) {
@@ -14,7 +13,8 @@ export default class ThumbDiv extends React.Component {
   }
 
   componentDidMount() {
-      APIGet("http://localhost:7000/data/imageAllThumbs")
+      fetch("http://localhost:7000/data/thumbData/imageAllThumbs")
+      .then(response=>response.json())
       .then((result) => {
         this.setState({
           imageAll: result.thumbs,
@@ -24,7 +24,8 @@ export default class ThumbDiv extends React.Component {
             this.state.currentPage * 10
           ),
         });
-      });
+      }).catch(e=>{console.log("Error when mounting ThumbDiv:"+e)})
+      ;
   }
   prePage = () => {
     //console.log(`current ${this.state.currentPage}`)

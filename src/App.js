@@ -1,12 +1,10 @@
 import React from "react";
-import NavBar from "./components/NavBar";
-import ThumbDiv from "./components/ThumbDiv";
+import GlobalWrapper from "./components/GlobalWrapper";
 
 function App() {
   return (
           <div style={pageStyle}>
-            <NavBar></NavBar>
-            <ThumbDiv></ThumbDiv>
+            <GlobalWrapper></GlobalWrapper>
           </div>
   );
   }
