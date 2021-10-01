@@ -1,44 +1,32 @@
 import React from "react";
-import ImageInfoPage from "./pages/ArtworkInfoPage";
+import ImageInfoPage from "./bodies/ArtworkInfoBody";
 import NavBar from "./NavBar";
-import ThumbPage from "./pages/ThumbPage";
+import ThumbPage from "./bodies/ThumbPage";
 
-export default class GlobalWrapper extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      location: 0,
-      pri: "",
-    };
-
-  }    
-
-  
-  render() {
-    switch (this.state.location) {
-      case 0: {
-        return (
-          <>
-              <NavBar></NavBar>
-            <ThumbPage></ThumbPage>
-          </>
-        );
-      }
-      case 1: {
-        return (
-          <>
-              <NavBar></NavBar>
-            <ImageInfoPage pri={this.state.imagePRI}></ImageInfoPage>
-          </>
-        );
-      }
-      default: {
-        return (
-          <>
-            <h1>ERROR</h1>
-          </>
-        );
-      }
+export default function GlobalWrapper(props) {
+  switch (props.location) {
+    case 0: {
+      return (
+        <>
+          <NavBar></NavBar>
+          <ThumbPage></ThumbPage>
+        </>
+      );
+    }
+    case 1: {
+      return (
+        <>
+          <NavBar></NavBar>
+          <ImageInfoPage pri={props.location.pri}></ImageInfoPage>
+        </>
+      );
+    }
+    default: {
+      return (
+        <>
+          <h1>ERROR</h1>
+        </>
+      );
     }
   }
 }

@@ -1,24 +1,24 @@
 import React from "react";
 
-export default function ImageCard(){
+export default function ImageCard(props){
     return (
-      <div style={this.props.style.background}>
-        <div style={this.props.style.container}>
+      <div style={props.style.background}>
+        <div style={props.style.container}>
           <div style={imageDivStyle.imageViewport}>
           <img
-            src={this.props.imageInfo.source}
-            style={this.props.style.image}
-            alt={this.props.imageInfo.title}
+            src={props.imageInfo.source}
+            style={props.style.image}
+            alt={props.imageInfo.title}
           ></img>
           </div>
-          <p style={imageDivStyle.titleStyle}>{this.props.imageInfo.title}</p>
+          <p style={imageDivStyle.titleStyle}>{props.imageInfo.title}</p>
           <div style={authorDivStyle}>
             <img
-              src={this.props.imageAuthor.image}
-              alt={this.props.imageAuthor.name}
+              src={props.imageAuthor.image}
+              alt={props.imageAuthor.name}
               style={authorDivStyle.text}
             ></img>
-            <p style={authorDivStyle.text}>{this.props.imageAuthor.name}</p>
+            <p style={authorDivStyle.text}>{props.imageAuthor.name}</p>
           </div>
         </div>
       </div>

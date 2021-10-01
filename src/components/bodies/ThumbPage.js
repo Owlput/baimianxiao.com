@@ -13,7 +13,7 @@ export default class ThumbDiv extends React.Component {
   }
 
   componentDidMount() {
-      fetch("http://localhost:7000/data/thumbData/imageAllThumbs")
+      fetch({type:"thumbs"})
       .then(response=>response.json())
       .then((result) => {
         this.setState({
