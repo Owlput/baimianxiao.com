@@ -1,11 +1,11 @@
 const apiUrl = "http://localhost:7000"
-export default function APIGet(target) {
+export default async function APIGet(target) {
   switch (target.type) {
-      case thumbs : {
-          return fetch(`${apiUrl}/data/imageAllThumbs`)
+      case "getThumbs" : {
+          return await(await fetch(`${apiUrl}/data/thumbData/imageAllThumbs`)).json()
       }
-      case artwork :{
-          return fetch(`${apiUrl}/image/${target.payload.pri}`)
+      case "getArtwork" :{
+          return await(await fetch(`${apiUrl}/data/imageData/${target.payload.pri}`)).json()
       }
       default : {
         throw new Error('Invalid request type!')

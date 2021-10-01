@@ -7,11 +7,11 @@ function App() {
             <GlobalWrapper></GlobalWrapper>
           </div>
   );
-  }
+}
 const pageStyle ={
-  display:'flex',
-  flexDirection:'column',
-  alignItems:'center',
+  display:"flex",
+  flexDirection:"column",
+  alignItems:"center",
 }
 
 export default App

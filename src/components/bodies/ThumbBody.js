@@ -1,17 +1,15 @@
-import React from "react";
 import ImageCard from "../cards/ImageCard";
+import { useThumbsInit } from "../../hooks/thumbBodyHooks/useThumbsInit";
+import {
+  imageCardStyle as ics,
+  imageTabsWrapperStyle as itws,
+  buttonStyle as btns,
+  componentWarpperStyle as cws,
+} from "./ThumbBodyStyle";
 
-export default class ThumbDiv extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentPage: 1,
-      maxPage: 0,
-      imageAll: [],
-      imagesOnPage: [],
-    };
-  }
-
+export default function ThumbBody(props) {
+  const { thumbs, thumbsDisplayed, page } = useThumbsInit(2);
+  /*
   componentDidMount() {
       fetch({type:"thumbs"})
       .then(response=>response.json())
@@ -55,63 +53,23 @@ export default class ThumbDiv extends React.Component {
       //console.log(`now on page ${this.state.currentPage}`)
     }
   };
-  currentInfo = () => {
-    console.log(
-      `Now page ${this.state.currentPage} with ${this.state.imagesOnPage.length} elements`
-    );
+  */
+  const currentInfo = () => {
+    console.log(`Now page ${page[0]} with ${thumbsDisplayed.length} elements`);
   };
-  render() {
-    return (
-      <div style={componentWarpperStyle}>
-        <div style={imageTabsStyle}>
-          {this.state.imagesOnPage.map((image) => (
-            <ImageCard {...image} style={imageCardStyle} key={image.pri}></ImageCard>
-          ))}
-        </div>
-        <div>
-          <button style={buttonStyle} onClick={this.prePage}>
-            上一页
-          </button>
-          <button onClick={this.currentInfo}> Current Status </button>
-          <button style={buttonStyle} onClick={this.nextPage}>
-            下一页
-          </button>
-        </div>
+
+  return (
+    <div style={cws}>
+      <div style={itws}>
+        {thumbsDisplayed.map((image) => (
+          <ImageCard {...image} style={ics} key={image.pri}></ImageCard>
+        ))}
       </div>
-    );
-  }
+      <div>
+        <button style={btns}>上一页</button>
+        <button onClick={currentInfo}> Current Status </button>
+        <button style={btns}>下一页</button>
+      </div>
+    </div>
+  );
 }
-
-const imageTabsStyle = {
-  display: "flex",
-  width:"100%",
-  flexWrap:"wrap",
-  justifyContent:"space-around"
-};
-
-const buttonStyle = {
-  height: "2em",
-};
-const componentWarpperStyle = {
-  display: "flex",
-  maxWidth:"1300px",
-  flexDirection: "column",
-  alignItems:"center",
-  backgroundColor:"rgb(250,250,250)",
-};
-
-const imageCardStyle = {
-  background:{
-    backgroundColor:"rgb(240,240,240)",
-    width:"14em",
-    margin:"1% 1%"
-  },
-  container:{
-    display:"flex",
-    flexDirection:"column",
-    alignItems:"center"
-  },
-  image:{
-    width:"200px",
-  }
-};

@@ -1,15 +1,15 @@
 import React from "react";
-import ImageInfoPage from "./bodies/ArtworkInfoBody";
+import ImageInfoBody from "./bodies/ArtworkInfoBody";
 import NavBar from "./NavBar";
-import ThumbPage from "./bodies/ThumbPage";
+import ThumbBody from "./bodies/ThumbBody";
 
 export default function GlobalWrapper(props) {
-  switch (props.location) {
+  switch (0) {
     case 0: {
       return (
         <>
           <NavBar></NavBar>
-          <ThumbPage></ThumbPage>
+          <ThumbBody></ThumbBody>
         </>
       );
     }
@@ -17,7 +17,7 @@ export default function GlobalWrapper(props) {
       return (
         <>
           <NavBar></NavBar>
-          <ImageInfoPage pri={props.location.pri}></ImageInfoPage>
+          <ImageInfoBody pri={props.location.pri}></ImageInfoBody>
         </>
       );
     }
