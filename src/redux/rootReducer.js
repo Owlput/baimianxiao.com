@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import locationReducer from "./reducers/locationReducer";
+import locationReducer from "./reducers/locationSlice";
 
 const rootReducer = combineReducers({
   location: locationReducer,

@@ -2,7 +2,7 @@ import React from "react";
 import ArtworkInfo from "../ArtworkInfoComponent";
 import AuthorSidebar from "../AuthorSidebar";
 
-export default class ImageInfoPage extends React.Component {
+export default class ArtworkInfoPage extends React.Component {
   constructor() {
     super();
     this.state = {

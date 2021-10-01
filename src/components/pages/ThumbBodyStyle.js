@@ -3,7 +3,6 @@ const buttonStyle = {
   };
   const componentWarpperStyle = {
     display: "flex",
-    maxWidth: "1300px",
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "rgb(250,250,250)",
@@ -12,8 +11,10 @@ const buttonStyle = {
   const imageCardStyle = {
     background: {
       backgroundColor: "rgb(240,240,240)",
-      width: "14em",
-      margin: "1% 1%",
+      width: "13em",
+      height:"300px",
+      margin: "20px 20px",
+      borderRadius:"10px",
     },
     container: {
       display: "flex",
@@ -27,9 +28,10 @@ const buttonStyle = {
 
   const imageTabsWrapperStyle = {
     display: "flex",
-    width: "100%",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
+    maxWidth:"1240px",
+    margin:"5px",
+    justifyContent:"space-around",
+    flexWrap:"wrap",
   };
   
 

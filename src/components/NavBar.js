@@ -1,25 +1,13 @@
 import React from "react";
-import { useDispatch as dispatch } from "react-redux";
 export default function NavBar(props) {
   return (
     <div style={flexWarpperStyle}>
-      <button
-        onClick={() => {
-          dispatch({ type: "toHome" });
-        }}
-      >
-        首页
-      </button>
-      <button
-        onClick={() => {
-          dispatch({
-            type: "toTestpic",
-            payload: { pri: "TempPRI6dfc6b53-7db9-4fc1-a1d4-a33477944979" },
-          });
-        }}
-      >
-        测试图片
-      </button>
+      <a style={aStyle.anchor} href="/">
+        <p style={aStyle.text}>首页</p>
+      </a>
+      <a style={aStyle.anchor} href="/about">
+        <p style={aStyle.text}>关于</p>
+      </a>
     </div>
   );
 }
@@ -28,4 +16,21 @@ const flexWarpperStyle = {
   flexWrap: "wrap",
   justifyContent: "space-around",
   width: "100%",
+  margin: "0px 0px 2em 0px",
+  height: "3em",
+};
+const aStyle = {
+  anchor: {
+    width: "10%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "rgb(250,250,250)",
+    textDecoration:"none",
+  },
+  text: {
+    fontSize:"1.5em",
+    margin:"5px",
+    color:"rgb(100,100,100)"
+  },
 };

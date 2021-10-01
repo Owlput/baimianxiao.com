@@ -31,10 +31,10 @@ const imageDivStyle = {
     width:"200px",
     height:"200px",
     overflow:"hidden",
-    margin:"5%",
+    margin:"5px",
   },
   titleStyle:{
-    margin:"5%"
+    margin:"5px"
   }
 }
 const authorDivStyle = {
@@ -43,7 +43,7 @@ const authorDivStyle = {
     float: "left",
     width:"50px",
     marginRight:"1em",
-    
+    borderRadius:"50%",
   },
   div:{
     display:"flex",
