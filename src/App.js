@@ -3,6 +3,7 @@ import NavBar from "./components/NavBar";
 import ThumbPage from "./components/pages/ThumbPage"
 import { Route , BrowserRouter, Switch} from "react-router-dom"
 import { AboutPage } from "./components/pages/AboutPage";
+import ArtworkInfoPage from "./components/pages/ArtworkInfoPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
             <Switch>
             <Route path="/" exact><ThumbPage></ThumbPage></Route>
             <Route path="/about" exact ><AboutPage></AboutPage></Route>
+            <Route path="/artwork/:pri" ><ArtworkInfoPage></ArtworkInfoPage> </Route>
             </Switch>
             </BrowserRouter>
           </div>

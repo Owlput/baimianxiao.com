@@ -4,7 +4,7 @@ export default async function APIGet(target) {
       case "getThumbs" : {
           return await(await fetch(`${apiUrl}/data/thumbData/imageAllThumbs`)).json()
       }
-      case "getArtwork" :{
+      case "getArtworkInfo" :{
           return await(await fetch(`${apiUrl}/data/imageData/${target.payload.pri}`)).json()
       }
       default : {

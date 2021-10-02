@@ -1,41 +1,44 @@
-import React from "react";
-import ArtworkInfo from "../ArtworkInfoComponent";
+import React, { useState, useEffect } from "react";
+import ArtworkInfo from "../ArtworkInfo";
 import AuthorSidebar from "../AuthorSidebar";
+import APIGet from "../../PAI";
+import { useParams } from "react-router";
 
-export default class ArtworkInfoPage extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      artworkInfo: {
-        imageInfo: {
-          source: "",
-          title: "",
-        },
-        authorInfo: {
-          name: "",
-          image: "",
-        },
-      },
-    };
-  }
-  componentDidMount() {
-    fetch(`http://localhost:7000/data/imageData/${this.props.pri}`)
-      .then((response) => response.json())
-      .then((data) => this.setState({ artworkInfo: data }))
-      .catch((e) => {
-        console.log("Error when mounting ArtworkInfoPage:" + e);
+export default function ArtworkInfoPage({match}) {
+  const initialArtworkInfo = {
+    pri: "",
+    imageInfo: {
+      title: "",
+      source:
+        "",
+    },
+    authorInfo: {
+      name: "",
+      image: "",
+    },
+  };
+
+  const artwork = useParams()
+  const [artworkInfo, setArtworkInfo] = useState(initialArtworkInfo);
+
+  const initArtworkInfo = async (target = artwork.pri ? artwork.pri : 1) => {
+    try {
+      const result = await APIGet({
+        type: "getArtworkInfo",
+        payload: { pri:target},
       });
-  }
-  render() {
-    return (
-      <>
-        <ArtworkInfo
-          artwork={this.state.artworkInfo.imageInfo}
-        ></ArtworkInfo>
-        <AuthorSidebar
-          author={this.state.artworkInfo.authorInfo}
-        ></AuthorSidebar>
-      </>
-    );
-  }
+      setArtworkInfo(result);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  useEffect(() => {
+    initArtworkInfo();
+  }, []);
+  return (
+    <>
+      <ArtworkInfo artwork={artworkInfo.imageInfo}></ArtworkInfo>
+      <AuthorSidebar author={artworkInfo.authorInfo}></AuthorSidebar>
+    </>
+  );
 }
