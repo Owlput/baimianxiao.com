@@ -36,9 +36,14 @@ export default function ArtworkInfoPage({match}) {
     initArtworkInfo();
   }, []);
   return (
-    <>
+    <div style={pageWarpperStyle}>
       <ArtworkInfo artwork={artworkInfo.imageInfo}></ArtworkInfo>
       <AuthorSidebar author={artworkInfo.authorInfo}></AuthorSidebar>
-    </>
+    </div>
   );
+}
+const pageWarpperStyle ={
+  display:"flex",
+  flexDirection:"row",
+  alignItems:"center",
 }

@@ -1,5 +1,14 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+
+
 export default function AuthorSidebar(props) {
+
+  const initialAuthorInfo = {}
+
+  const [authorInfo,setAuthorInfo] = useState(initialAuthorInfo)
+
+
+
   return (
     <div style={componentWrapperStyle}>
       <div style={AuthorInfoStyle.wrapper}>
@@ -10,19 +19,32 @@ export default function AuthorSidebar(props) {
         ></img>
         <p style={AuthorInfoStyle.text}>{props.author.name}</p>
       </div>
-      <div style={RecentWorksStyle.wrapper}></div>
+      <div style={RecentWorksStyle.wrapper}>
+        <p>最近作品</p>
+        <div>
+          {}
+        </div>
+      </div>
     </div>
   );
 }
 
-const componentWrapperStyle = {};
+const componentWrapperStyle = {
+  width:"20%"
+};
 const AuthorInfoStyle = {
   wrapper: {},
-  image: {},
+  image: {
+    width:"80px",
+    borderRadius:"50%",
+  },
   text: {},
   status: {},
 };
 const RecentWorksStyle = {
-  wrapper: {},
+  wrapper: {
+    display:"flex",
+    flexDirection:"column",
+  },
   image: {},
 };

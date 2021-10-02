@@ -12,7 +12,6 @@ export function Heading() {
   useEffect(() => {
     initBigP();
   }, []);
-  /* Init all thumbs */
 
   return <div>
       <img></img>

@@ -5,7 +5,7 @@ import {
   imageTabsWrapperStyle as itws,
   buttonStyle as btns,
   componentWarpperStyle as cws,
-} from "./ThumbBodyStyle";
+} from "./ThumbPageStyle";
 import APIGet from "../../PAI";
 
 export default function ThumbPage(props) {
