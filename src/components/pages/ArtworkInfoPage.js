@@ -1,44 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ArtworkInfo from "../ArtworkInfo";
 import AuthorSidebar from "../AuthorSidebar";
-import APIGet from "../../PAI";
+import { useArtworkDataFetch } from "../../hooks/useArtworkDataFetch";
 import { useParams } from "react-router";
 
-export default function ArtworkInfoPage({match}) {
-  const initialArtworkInfo = {
-    pri: "",
-    imageInfo: {
-      title: "",
-      source:
-        "",
-    },
-    authorInfo: {
-      name: "",
-      image: "",
-    },
-  };
 
+export default function ArtworkInfoPage() {
   const artwork = useParams()
-  const [artworkInfo, setArtworkInfo] = useState(initialArtworkInfo);
 
-  const initArtworkInfo = async (target = artwork.pri ? artwork.pri : 1) => {
-    try {
-      const result = await APIGet({
-        type: "getArtworkInfo",
-        payload: { pri:target},
-      });
-      setArtworkInfo(result);
-    } catch (e) {
-      console.error(e);
+  const artworkDataTarget={
+    type:"getArtworkData",
+    payload:{
+      pri:artwork.pri
     }
-  };
-  useEffect(() => {
-    initArtworkInfo();
-  }, []);
+  }
+
+  const {authorData,artworkData} = useArtworkDataFetch(artworkDataTarget)
+
   return (
     <div style={pageWarpperStyle}>
-      <ArtworkInfo artwork={artworkInfo.imageInfo}></ArtworkInfo>
-      <AuthorSidebar author={artworkInfo.authorInfo}></AuthorSidebar>
+      <ArtworkInfo artwork={artworkData.imageInfo}></ArtworkInfo>
+      <AuthorSidebar author={authorData}></AuthorSidebar>
     </div>
   );
 }

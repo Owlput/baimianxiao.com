@@ -1,33 +1,31 @@
 import ImageCard from "../cards/ImageCard";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   imageCardStyle as ics,
   imageTabsWrapperStyle as itws,
   buttonStyle as btns,
   componentWarpperStyle as cws,
 } from "./ThumbPageStyle";
-import APIGet from "../../PAI";
+import { useThumbFetch } from "../../hooks/useThumbFetch";
 
-export default function ThumbPage(props) {
-  /* Init states */
-  const [thumbs, setThumbs] = useState([]);
-  const [page, setPage] = useState([]);
-  /* Init states */
+export default function ThumbPage() {
+  /* Init all thumbs */
+  const thumbDataTarget = {
+    type:"getThumbs",
+    payload:{}
+  }
+  const thumbs = useThumbFetch(thumbDataTarget)
+  /* Init all thumbs */
 
-  /* Init all thumbs */
-  const initThumbBody = async (p = props.page ? props.page : 1) => {
-    try {
-      const result = await APIGet({ type: "getThumbs", payload: "" });
-      setThumbs(result.thumbs);
-      setPage([p, Math.ceil(result.thumbs.length / 10)]);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-  useEffect(() => {
-    initThumbBody();
-  }, []);
-  /* Init all thumbs */
+    /* Init paging*/
+  const [page, setPage] = useState([1,1]);
+  useEffect(
+    ()=>{
+      setPage([1,Math.ceil(thumbs.length/10)])
+      console.log("now set paging")
+    },[thumbs]
+  )
+  /* Init paging */
 
   /* Button Functions Definition */
   const currentInfo = () => {

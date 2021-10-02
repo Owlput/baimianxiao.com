@@ -1,5 +1,5 @@
 import React from "react";
-import {Switch,Route,useRouteMatch,useParams} from "react-router-dom"
+import {Switch,Route,useRouteMatch} from "react-router-dom"
 import ArtworkInfoPage from "./ArtworkInfoPage";
 
 export function artworkInfoPageSwitch() {

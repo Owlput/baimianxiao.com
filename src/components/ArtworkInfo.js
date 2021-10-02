@@ -2,9 +2,9 @@ import React from "react";
 export default function ArtworkInfo(props) {
   return (
     <div style={componentWarpperStyle}>
-      <img src={props.artwork.source} alt={props.artwork.title} style={imageStyle}></img>
+      <img src={props.artwork? props.artwork.source:""} alt={props.artwork?props.artwork.title:""} style={imageStyle}></img>
       <div>
-        <p>{props.artwork.title}</p>
+        <p>{props.artwork?props.artwork.title:""}</p>
       </div>
     </div>
   );
