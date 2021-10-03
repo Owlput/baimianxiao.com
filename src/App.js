@@ -11,9 +11,9 @@ function App() {
             <NavBar></NavBar>
             <BrowserRouter>
             <Switch>
-            <Route path="/" exact><ThumbPage></ThumbPage></Route>
-            <Route path="/about" exact ><AboutPage></AboutPage></Route>
             <Route path="/artwork/:pri" ><ArtworkInfoPage></ArtworkInfoPage> </Route>
+            <Route path="/about"><AboutPage></AboutPage></Route>
+            <Route path="/"><ThumbPage></ThumbPage></Route>
             </Switch>
             </BrowserRouter>
           </div>

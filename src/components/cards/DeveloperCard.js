@@ -1,9 +1,5 @@
 import React from "react";
 
-export function DeveloperCard(){
-    return(
-        <div>
-            
-        </div>
-    )
+export function DeveloperCard() {
+  return <div></div>;
 }

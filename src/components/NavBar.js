@@ -21,16 +21,16 @@ const flexWarpperStyle = {
 };
 const aStyle = {
   anchor: {
-    width: "10%",
+    width: "8em",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "rgb(250,250,250)",
-    textDecoration:"none",
+    textDecoration: "none",
   },
   text: {
-    fontSize:"1.5em",
-    margin:"5px",
-    color:"rgb(100,100,100)"
+    fontSize: "1.5em",
+    margin: "5px",
+    color: "rgb(100,100,100)",
   },
 };

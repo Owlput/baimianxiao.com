@@ -1,9 +1,5 @@
 import React from "react";
 
 export function PermissionPage() {
-    return(
-        <div>
-            
-        </div>
-    )
+  return <div></div>;
 }

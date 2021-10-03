@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
-export function AboutPage(){
-    return(
-        <div>
-            <h1>关于我们</h1>
-        </div>
-    )
+export function AboutPage() {
+  return (
+    <div>
+      <h1>关于我们</h1>
+    </div>
+  );
 }

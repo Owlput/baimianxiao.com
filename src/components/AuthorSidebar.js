@@ -1,9 +1,13 @@
 import React from "react";
-import { componentWrapperStyle as cws, authorInfoStyle as ais,recentWorksStyle as rws } from "./authorSidebarStyle";
+import {
+  componentWrapperStyle as cws,
+  authorInfoStyle as ais,
+  recentWorksStyle as rws,
+} from "./authorSidebarStyle";
 import LinkedIcon from "./LinkedIcon";
 
 export default function AuthorSidebar(props) {
-  console.log(props)
+  console.log(props);
   return (
     <div style={cws}>
       <div style={ais.wrapper}>
@@ -14,13 +18,11 @@ export default function AuthorSidebar(props) {
             style={ais.image}
             alt={props.author ? props.author.name : ""}
           ></img>
-          <p style={ais.name}>
-            {props.author ? props.author.name : ""}
-          </p>
+          <p style={ais.name}>{props.author ? props.author.name : ""}</p>
         </div>
         <div style={ais.contact.div}>
           {props.author.contact ? (
-            props.author.contact.map((contact,index) => (
+            props.author.contact.map((contact, index) => (
               <LinkedIcon
                 type={contact[0]}
                 to={contact[1]}

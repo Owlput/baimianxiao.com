@@ -1,5 +1,5 @@
 import React from "react";
-import {imageDivStyle, authorDivStyle, anchorStyle} from './imageCardStyle'
+import { imageDivStyle, authorDivStyle, anchorStyle } from "./imageCardStyle";
 
 export default function ImageCard(props) {
   return (
@@ -15,16 +15,17 @@ export default function ImageCard(props) {
           </a>
         </div>
         <p style={imageDivStyle.titleStyle}>{props.imageInfo.title}</p>
-        <div style={authorDivStyle}> 
-        <a href={`http://localhost:3000/artwork/${props.pri}`}
-        style={anchorStyle.text}
-        >
-          <img
-            src={props.imageAuthor.image}
-            alt={props.imageAuthor.name}
-            style={authorDivStyle.text}
-          ></img>
-         
+        <div style={authorDivStyle}>
+          <a
+            href={`http://localhost:3000/artwork/${props.pri}`}
+            style={anchorStyle.text}
+          >
+            <img
+              src={props.imageAuthor.image}
+              alt={props.imageAuthor.name}
+              style={authorDivStyle.text}
+            ></img>
+
             <p style={authorDivStyle.text}>{props.imageAuthor.name}</p>
           </a>
         </div>

@@ -1,38 +1,44 @@
 const buttonStyle = {
-    height: "2em",
-  };
-  const componentWarpperStyle = {
+  height: "2em",
+};
+const componentWarpperStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  borderRadius: "1em",
+  backgroundColor: "rgb(250,250,250)",
+  width: "92%",
+};
+
+const imageCardStyle = {
+  background: {
+    backgroundColor: "rgb(240,240,240)",
+    width: "14em",
+    height: "18.8em",
+    margin: "0.3em 0.3em",
+    borderRadius: "10px",
+  },
+  container: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "rgb(250,250,250)",
-  };
-  
-  const imageCardStyle = {
-    background: {
-      backgroundColor: "rgb(240,240,240)",
-      width: "13em",
-      height:"300px",
-      margin: "20px 20px",
-      borderRadius:"10px",
-    },
-    container: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    },
-    image: {
-      width: "200px",
-    },
-  };
+  },
+  image: {
+    width: "200px",
+  },
+};
 
-  const imageTabsWrapperStyle = {
-    display: "flex",
-    maxWidth:"1240px",
-    margin:"5px",
-    justifyContent:"space-around",
-    flexWrap:"wrap",
-  };
-  
+const imageTabsWrapperStyle = {
+  display: "flex",
+  width: "100%",
+  margin: "5px",
+  justifyContent: "space-around",
+  flexWrap: "wrap",
+};
 
-  export {buttonStyle,componentWarpperStyle,imageCardStyle,imageTabsWrapperStyle}
+export {
+  buttonStyle,
+  componentWarpperStyle,
+  imageCardStyle,
+  imageTabsWrapperStyle,
+};

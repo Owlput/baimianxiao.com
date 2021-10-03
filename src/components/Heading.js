@@ -13,7 +13,9 @@ export function Heading() {
     initBigP();
   }, []);
 
-  return <div>
+  return (
+    <div>
       <img></img>
-  </div>;
+    </div>
+  );
 }

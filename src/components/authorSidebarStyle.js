@@ -7,7 +7,7 @@ const authorInfoStyle = {
   text: {
     textAlign: "center",
     fontSize: "3em",
-    margin:"0.5em 0px 0.5em 0px",
+    margin: "0.5em 0px 0.5em 0px",
     color: "rgb(200,200,200)",
   },
   image: {
@@ -36,9 +36,9 @@ const recentWorksStyle = {
     display: "flex",
     flexDirection: "column",
   },
-  text:{
-      textAlign:"center",
-      fontSize:"1.5em"
+  text: {
+    textAlign: "center",
+    fontSize: "1.5em",
   },
   image: {},
 };

@@ -6,25 +6,26 @@ import {
   buttonStyle as btns,
   componentWarpperStyle as cws,
 } from "./ThumbPageStyle";
-import {useDataFetch} from '../../hooks/useDataFetch'
+import { useDataFetch } from "../../hooks/useDataFetch";
 
 export default function ThumbPage() {
   /* Init all thumbs */
   const thumbDataTarget = {
-    type:"getThumbs",
-    payload:{}
-  }
-  const thumbData = useDataFetch(thumbDataTarget)
+    type: "getThumbs",
+    payload: {},
+  };
+  const thumbData = useDataFetch(thumbDataTarget);
   /* Init all thumbs */
 
-    /* Init paging*/
-  const [page, setPage] = useState([1,1]);
-  useEffect(
-    ()=>{
-      setPage([1,thumbData.thumbs ? Math.ceil(thumbData.thumbs.length/10) : 1])
-      console.log("now set paging")
-    },[thumbData]
-  )
+  /* Init paging*/
+  const [page, setPage] = useState([1, 1]);
+  useEffect(() => {
+    setPage([
+      1,
+      thumbData.thumbs ? Math.ceil(thumbData.thumbs.length / 10) : 1,
+    ]);
+    console.log("now set paging");
+  }, [thumbData]);
   /* Init paging */
 
   /* Button Functions Definition */
@@ -45,15 +46,21 @@ export default function ThumbPage() {
   /* Button Functions Definition */
 
   /* Decide what thumbs to be displayed based on current page */
-  let thumbsDisplayed = thumbData.thumbs ? thumbData.thumbs.slice((page[0] - 1) * 10, page[0] * 10) : []
+  let thumbsDisplayed = thumbData.thumbs
+    ? thumbData.thumbs.slice((page[0] - 1) * 10, page[0] * 10)
+    : [];
   /* Decide what thumbs to be displayed based on current page */
 
   return (
     <div style={cws}>
       <div style={itws}>
-        {thumbsDisplayed ? thumbsDisplayed.map((image) => (
-          <ImageCard {...image} style={ics} key={image.pri}></ImageCard>
-        )) : <></>}
+        {thumbsDisplayed ? (
+          thumbsDisplayed.map((image) => (
+            <ImageCard {...image} style={ics} key={image.pri}></ImageCard>
+          ))
+        ) : (
+          <></>
+        )}
       </div>
       <div>
         <button style={btns} onClick={pervPage}>
