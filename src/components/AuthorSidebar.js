@@ -1,27 +1,30 @@
 import React from "react";
+import { componentWrapperStyle as cws, authorInfoStyle as ais,recentWorksStyle as rws } from "./authorSidebarStyle";
 import LinkedIcon from "./LinkedIcon";
 
 export default function AuthorSidebar(props) {
   console.log(props)
   return (
-    <div style={componentWrapperStyle}>
-      <div style={AuthorInfoStyle.wrapper}>
+    <div style={cws}>
+      <div style={ais.wrapper}>
         <div>
+          <p style={ais.text}>插画作者</p>
           <img
             src={props.author ? props.author.image : ""}
-            style={AuthorInfoStyle.image}
+            style={ais.image}
             alt={props.author ? props.author.name : ""}
           ></img>
-          <p style={AuthorInfoStyle.text}>
+          <p style={ais.name}>
             {props.author ? props.author.name : ""}
           </p>
         </div>
-        <div>
+        <div style={ais.contact.div}>
           {props.author.contact ? (
-            props.author.contact.map((contact) => (
+            props.author.contact.map((contact,index) => (
               <LinkedIcon
                 type={contact[0]}
                 to={contact[1]}
+                key={index}
               ></LinkedIcon>
             ))
           ) : (
@@ -29,30 +32,10 @@ export default function AuthorSidebar(props) {
           )}
         </div>
       </div>
-      <div style={RecentWorksStyle.wrapper}>
-        <p>最近作品</p>
+      <div style={rws.wrapper}>
+        <p style={rws.text}>最近作品</p>
         <div>{}</div>
       </div>
     </div>
   );
 }
-
-const componentWrapperStyle = {
-  width: "20%",
-};
-const AuthorInfoStyle = {
-  wrapper: {},
-  image: {
-    width: "80px",
-    borderRadius: "50%",
-  },
-  text: {},
-  status: {},
-};
-const RecentWorksStyle = {
-  wrapper: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  image: {},
-};

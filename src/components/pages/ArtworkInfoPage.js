@@ -28,4 +28,6 @@ const pageWarpperStyle ={
   display:"flex",
   flexDirection:"row",
   alignItems:"center",
+  width:"85%",
+  justifyContent:"space-around",
 }

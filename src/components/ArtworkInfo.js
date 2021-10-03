@@ -13,8 +13,7 @@ const componentWarpperStyle = {
   display:"flex",
   flexDirection:"column",
   alignItems:"center",
-  margin:"0px 50px 0px 0px"
 };
 const imageStyle={
-  width:"800px"
+  height:"60em"
 }
