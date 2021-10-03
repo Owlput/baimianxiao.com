@@ -6,7 +6,7 @@ import {
   buttonStyle as btns,
   componentWarpperStyle as cws,
 } from "./ThumbPageStyle";
-import { useThumbFetch } from "../../hooks/useThumbFetch";
+import {useDataFetch} from '../../hooks/useDataFetch'
 
 export default function ThumbPage() {
   /* Init all thumbs */
@@ -14,16 +14,16 @@ export default function ThumbPage() {
     type:"getThumbs",
     payload:{}
   }
-  const thumbs = useThumbFetch(thumbDataTarget)
+  const thumbData = useDataFetch(thumbDataTarget)
   /* Init all thumbs */
 
     /* Init paging*/
   const [page, setPage] = useState([1,1]);
   useEffect(
     ()=>{
-      setPage([1,Math.ceil(thumbs.length/10)])
+      setPage([1,thumbData.thumbs ? Math.ceil(thumbData.thumbs.length/10) : 1])
       console.log("now set paging")
-    },[thumbs]
+    },[thumbData]
   )
   /* Init paging */
 
@@ -45,15 +45,15 @@ export default function ThumbPage() {
   /* Button Functions Definition */
 
   /* Decide what thumbs to be displayed based on current page */
-  let thumbsDisplayed = thumbs.slice((page[0] - 1) * 10, page[0] * 10);
+  let thumbsDisplayed = thumbData.thumbs ? thumbData.thumbs.slice((page[0] - 1) * 10, page[0] * 10) : []
   /* Decide what thumbs to be displayed based on current page */
 
   return (
     <div style={cws}>
       <div style={itws}>
-        {thumbsDisplayed.map((image) => (
+        {thumbsDisplayed ? thumbsDisplayed.map((image) => (
           <ImageCard {...image} style={ics} key={image.pri}></ImageCard>
-        ))}
+        )) : <></>}
       </div>
       <div>
         <button style={btns} onClick={pervPage}>
