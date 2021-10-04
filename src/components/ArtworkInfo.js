@@ -1,17 +1,24 @@
 import React from "react";
+import TagCollection from "./tag/TagCollection";
 export default function ArtworkInfo(props) {
+
+  if(props.source){
   return (
     <div style={componentWarpperStyle}>
       <img
-        src={props.artwork ? props.artwork.source : ""}
-        alt={props.artwork ? props.artwork.title : ""}
+        src={props.source}
+        alt={props.title}
         style={imageStyle}
       ></img>
       <div>
-        <p>{props.artwork ? props.artwork.title : ""}</p>
+        <p>{props.title}</p>
+        <TagCollection></TagCollection>
       </div>
     </div>
   );
+  } else {
+    return <></>
+  }
 }
 const componentWarpperStyle = {
   display: "flex",

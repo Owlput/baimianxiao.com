@@ -5,12 +5,12 @@ import { useArtworkDataFetch } from "../../hooks/useArtworkDataFetch";
 import { useParams } from "react-router";
 
 export default function ArtworkInfoPage() {
-  const artwork = useParams();
+  const artworkPRI = useParams();
 
   const artworkDataTarget = {
     type: "getArtworkData",
     payload: {
-      pri: artwork.pri,
+      pri: artworkPRI.pri,
     },
   };
 
@@ -19,10 +19,10 @@ export default function ArtworkInfoPage() {
   return (
     <div style={pageWarpperStyle}>
       <ArtworkInfo
-        artwork={artworkData ? artworkData.imageInfo : undefined}
+        {...artworkData.imageInfo}
       ></ArtworkInfo>
       <AuthorSidebar
-        author={authorData ? authorData : undefined}
+        {...authorData}
       ></AuthorSidebar>
     </div>
   );

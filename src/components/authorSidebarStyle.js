@@ -1,9 +1,15 @@
 const componentWrapperStyle = {
-  width: "15em",
-  backgroundColor: "rgb(250,250,250)",
+  display:"flex",
+  flexDirection:"column",
+  alignItems:"center",
+  backgroundColor: "rgb(250,250,250)",      
+  width:"18em",
 };
 const authorInfoStyle = {
-  wrapper: { display: "flex", flexDirection: "column" },
+  wrapper: {
+     display: "flex", flexDirection: "column",
+
+    },
   text: {
     textAlign: "center",
     fontSize: "3em",
