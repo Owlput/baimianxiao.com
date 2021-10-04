@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import APIGet from "../PAI";
+import APIGet from "../API";
 
 export const useArtworkDataFetch = (target) => {
   const [artworkData, setArtworkData] = useState({});
