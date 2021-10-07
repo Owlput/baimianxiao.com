@@ -6,7 +6,7 @@ export function artworkInfoPageSwitch() {
   let match = useRouteMatch();
   return (
     <Switch>
-      <Route path={`${match.path}/:artworkPRI`}>
+      <Route path={`${match.path}/:uri`}>
         <ArtworkInfoPage></ArtworkInfoPage>
       </Route>
       <Route path={match.path}>

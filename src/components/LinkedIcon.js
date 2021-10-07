@@ -1,20 +1,28 @@
 import React from "react";
-import pixivIcon from "../assets/icons/pixiv.ico";
-import twitterIcon from "../assets/icons/twitter.svg";
+import pxIco from "../assets/icons/pixiv.ico";
+import ttIco from "../assets/icons/twitter.svg";
+import wbIco from '../assets/icons/WeiboIcon.svg'
 
 export default function LinkedIcon(props) {
   switch (props.type) {
-    case "Pixiv": {
+    case "pixiv": {
       return (
         <a href={props.to} style={aStyle}>
-          <img src={pixivIcon} alt={"Pixiv link"} style={imageStyle}></img>
+          <img src={pxIco} alt={"Pixiv link"} style={imageStyle}></img>
         </a>
       );
     }
-    case "Twitter": {
+    case "twitter": {
       return (
         <a href={props.to} style={aStyle}>
-          <img src={twitterIcon} alt={"Twitter Link"} style={imageStyle}></img>
+          <img src={ttIco} alt={"Twitter Link"} style={imageStyle}></img>
+        </a>
+      );
+    }
+    case "weibo": {
+      return (
+        <a href={props.to} style={aStyle}>
+          <img src={wbIco} alt={"Weibo Link"} style={imageStyle}></img>
         </a>
       );
     }

@@ -2,17 +2,23 @@ import React from "react";
 import TagCollection from "./tag/TagCollection";
 export default function ArtworkInfo(props) {
 
-  if(props.source){
+  console.log(props)
+  if(props.uri){
   return (
     <div style={componentWarpperStyle}>
       <img
-        src={props.source}
+        src={props.source.this}
         alt={props.title}
         style={imageStyle}
       ></img>
       <div>
         <p>{props.title}</p>
         <TagCollection></TagCollection>
+        <div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </div>
   );
@@ -26,5 +32,5 @@ const componentWarpperStyle = {
   alignItems: "center",
 };
 const imageStyle = {
-  height: "60em",
+  width: "80%",
 };

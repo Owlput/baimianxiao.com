@@ -1,0 +1,10 @@
+#aliContV{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#aliContH{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

@@ -12,7 +12,7 @@ export const useArtworkDataFetch = (target) => {
       const authorData = await APIGet({
         type: "getAuthorData",
         payload: {
-          name: artworkData.authorInfo.name,
+          aId: artworkData.author[1],
         },
       });
       setAuthorData(authorData);

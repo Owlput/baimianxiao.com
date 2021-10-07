@@ -8,12 +8,12 @@ export default async function APIGet(target) {
     }
     case "getArtworkData": {
       return await (
-        await fetch(`${apiUrl}/data/imageData/${target.payload.pri}`)
+        await fetch(`${apiUrl}/data/imageData/${target.payload.uri}`)
       ).json();
     }
     case "getAuthorData": {
       return await (
-        await fetch(`${apiUrl}/data/authorData/${target.payload.name}`)
+        await fetch(`${apiUrl}/data/authorData/author_${target.payload.aId}`)
       ).json();
     }
     default: {
