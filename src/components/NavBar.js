@@ -5,6 +5,9 @@ export default function NavBar(props) {
       <a style={aStyle.anchor} href="/">
         <p style={aStyle.text}>首页</p>
       </a>
+      <a style={aStyle.anchor} href="/authors">
+        <p style={aStyle.text}>作者与授权</p>
+      </a>
       <a style={aStyle.anchor} href="/about">
         <p style={aStyle.text}>关于</p>
       </a>
@@ -21,7 +24,7 @@ const flexWarpperStyle = {
 };
 const aStyle = {
   anchor: {
-    width: "8em",
+    width: "fit-content",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",

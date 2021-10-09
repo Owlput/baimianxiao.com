@@ -1,4 +1,5 @@
 import React from "react";
+import { imgAddr } from "../assets/config";
 import {
   componentWrapperStyle as cws,
   authorInfoStyle as ais,
@@ -8,16 +9,17 @@ import LinkedThumbCard from "./cards/LinkedThumbCard";
 import LinkedIcon from "./LinkedIcon";
 
 export default function AuthorSidebar(props) {
-  console.log(props);
   const author = props.name ? props : undefined;
 
   if (author) {
+    console.log(author)
+    const authorImgSrc = `${imgAddr}/authorProfile/${author.image}`
     return (
       <div style={cws}>
         <div style={ais.wrapper}>
           <div style={centerAlignV}>
             <p style={ais.text}>插画作者</p>
-            <img src={author.image} style={ais.image} alt={author.name}></img>
+            <img src={authorImgSrc} style={ais.image} alt={author.name}></img>
             <p style={ais.name}>{author.name}</p>
           </div>
           <div style={ais.contact.div}>
@@ -35,8 +37,8 @@ export default function AuthorSidebar(props) {
           <div>
             {author.recentWorks.map((thumb, index) => (
               <LinkedThumbCard
-                source={`http://localhost:7000/files/img${thumb[1]}`}
-                to={`/artwork/${thumb[0]}`}
+                src={`${imgAddr}/thumbs/${thumb}.jpg`}
+                to={`/artwork/${thumb}`}
                 key={index}
                 styling={rws.image}
               ></LinkedThumbCard>

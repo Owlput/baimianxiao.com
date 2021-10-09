@@ -1,9 +1,9 @@
-#aliContV{
+.aliContV{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-#aliContH{
+.aliContH{
     display: flex;
     flex-direction: row;
     align-items: center;

@@ -4,6 +4,8 @@ import ThumbPage from "./components/pages/ThumbPage"
 import { Route , BrowserRouter, Switch} from "react-router-dom"
 import { AboutPage } from "./components/pages/AboutPage";
 import ArtworkInfoPage from "./components/pages/ArtworkInfoPage";
+import AuthorPage from "./components/pages/AuthorPage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -13,9 +15,11 @@ function App() {
             <Switch>
             <Route path="/artwork/:uri" ><ArtworkInfoPage></ArtworkInfoPage> </Route>
             <Route path="/about"><AboutPage></AboutPage></Route>
+            <Route path="/authors"><AuthorPage></AuthorPage></Route>
             <Route path="/"><ThumbPage></ThumbPage></Route>
             </Switch>
             </BrowserRouter>
+            <Footer></Footer>
           </div>
   );
 }

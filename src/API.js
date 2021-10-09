@@ -1,19 +1,14 @@
-const apiUrl = "http://localhost:7000";
+import { apiAddr } from "./assets/config";
 export default async function APIGet(target) {
   switch (target.type) {
     case "getThumbs": {
       return await (
-        await fetch(`${apiUrl}/data/thumbData/imageAllThumbs`)
+        await fetch(`${apiAddr}/baimianxiao/data/thumbData/all`)
       ).json();
     }
     case "getArtworkData": {
       return await (
-        await fetch(`${apiUrl}/data/imageData/${target.payload.uri}`)
-      ).json();
-    }
-    case "getAuthorData": {
-      return await (
-        await fetch(`${apiUrl}/data/authorData/author_${target.payload.aId}`)
+        await fetch(`${apiAddr}/baimianxiao/data/imageData/${target.payload.uri}`)
       ).json();
     }
     default: {

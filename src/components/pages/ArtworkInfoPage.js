@@ -1,8 +1,9 @@
 import React from "react";
 import ArtworkInfo from "../ArtworkInfo";
 import AuthorSidebar from "../AuthorSidebar";
-import { useArtworkDataFetch } from "../../hooks/useArtworkDataFetch";
+
 import { useParams } from "react-router";
+import { useDataFetch } from "../../hooks/useDataFetch";
 
 export default function ArtworkInfoPage() {
   const auri = useParams();
@@ -14,19 +15,23 @@ export default function ArtworkInfoPage() {
     },
   };
 
-  const { authorData, artworkData } = useArtworkDataFetch(artworkDataTarget);
+  const data = useDataFetch(artworkDataTarget);
+  
+  
 
-  console.log(artworkData)
+  if (data){
   return (
     <div style={pageWarpperStyle}>
       <ArtworkInfo
-        {...artworkData}
+        {...(data[0])}
       ></ArtworkInfo>
       <AuthorSidebar
-        {...authorData}
+        {...(data[0].authorInfo)}
       ></AuthorSidebar>
     </div>
-  );
+  );}else{
+    return <></>
+  }
 }
 const pageWarpperStyle = {
   display: "flex",

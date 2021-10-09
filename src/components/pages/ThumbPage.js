@@ -15,7 +15,7 @@ export default function ThumbPage() {
   /* Init paging*/
   const [page, setPage] = useState([1, 1]);
   useEffect(() => {
-    setPage([1, thumbData ? Math.ceil(thumbData.thumbs.length / 10) : 1]);
+    setPage([1, thumbData ? Math.ceil(thumbData.length / 10) : 1]);
   }, [thumbData]);
   /* Init paging */
 
@@ -38,7 +38,7 @@ export default function ThumbPage() {
 
   /* Decide what thumbs to be displayed based on current page */
   let thumbsDisplayed = thumbData
-    ? thumbData.thumbs.slice((page[0] - 1) * 10, page[0] * 10)
+    ? thumbData.slice((page[0] - 1) * 10, page[0] * 10)
     : undefined;
   /* Decide what thumbs to be displayed based on current page */
 

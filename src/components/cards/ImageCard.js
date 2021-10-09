@@ -1,21 +1,26 @@
 import React from "react";
 import LinkedThumbCard from "./LinkedThumbCard";
+import { imgAddr, siteAddr } from "../../assets/config";
 
 export default function ImageCard(props) {
+  
+  if(props.uri){
+    const thumbSrc = `${imgAddr}/thumbs/${props.uri}.jpg`
+  const authorImgSrc = `${imgAddr}/authorProfile/${props.author.image}`
   return (
     <div style={cws}>
       <div>
         <LinkedThumbCard
-          src={props.imageInfo.source}
-          to={`http://localhost:3000/artwork/${props.uri}`}
+          src={thumbSrc}
+          to={`${siteAddr}/artwork/${props.uri}`}
           styling={imds.viewport}
         ></LinkedThumbCard>
-        <p style={imds.title}>{props.imageInfo.title}</p>
+        <p style={imds.title}>{props.title}</p>
       </div>
       <div style={ads.div}>
-        <a href={`http://localhost:3000/artwork/${props.uri}`} style={ads.a}>
+        <a href={`${siteAddr}/artwork/${props.uri}`} style={ads.a}>
           <img
-            src={props.author.image}
+            src={authorImgSrc}
             alt={props.author.name}
             style={ads.image}
           ></img>
@@ -23,7 +28,9 @@ export default function ImageCard(props) {
         <p style={ads.text}>{props.author.name}</p>
       </div>
     </div>
-  );
+  );}else{
+    return <></>
+  }
 }
 
 /*
