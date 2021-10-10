@@ -11,6 +11,11 @@ export default async function APIGet(target) {
         await fetch(`${apiAddr}/baimianxiao/data/imageData/${target.payload.uri}`)
       ).json();
     }
+    case "getPermitData":{
+      return await (
+        await fetch(`${apiAddr}/baimianxiao/data/permitData/all`)
+      ).json();
+    }
     default: {
       throw new Error("Invalid request type!");
     }

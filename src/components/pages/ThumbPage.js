@@ -1,7 +1,6 @@
 import ImageCard from "../cards/ImageCard";
 import { useEffect, useState } from "react";
-import { useDataFetch } from "../../hooks/useDataFetch";
-import PageSelector from "../PageSelector";
+import useDataFetch from "../../hooks/useDataFetch";
 
 export default function ThumbPage() {
   /* Init all thumbs */
@@ -20,9 +19,12 @@ export default function ThumbPage() {
   /* Init paging */
 
   /* Button Functions Definition */
+  
+  /* Dev purpose only
   const currentInfo = () => {
     console.log(`Now page ${page[0]} with ${thumbsDisplayed.length} elements`);
   };
+*/
 
   const pervPage = () => {
     if (page[0] > 1) {
@@ -58,11 +60,9 @@ export default function ThumbPage() {
           <button style={btns} onClick={pervPage}>
             上一页
           </button>
-          <button onClick={currentInfo}> Current Status </button>
           <button style={btns} onClick={nextPage}>
             下一页
           </button>
-          <PageSelector></PageSelector>
         </div>
       </div>
     );

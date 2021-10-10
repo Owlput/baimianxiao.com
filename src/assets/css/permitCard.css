@@ -1,0 +1,29 @@
+#cWrap {
+  background-color: rgb(240, 240, 240);
+  border-radius: 1em;
+  width: 85%;
+  justify-content: space-between;
+  margin: 1em 0px;
+}
+.divide {
+  width: 100%;
+}
+.divide hr{
+  border-top: 0.1em solid rgb(140,140,140);
+  margin: 0px 0.5em 0px 0.8em;
+  width: inherit;
+  border-radius: 0.4em;
+}
+.divide p {
+  min-width:6em
+}
+.workType {
+  width: 12%;
+  text-align: center;
+}
+#artworkWrap {
+  width: 80%;
+  background-color: rgb(230,230,230);
+  margin: 1%;
+  border-radius: 1em;
+}

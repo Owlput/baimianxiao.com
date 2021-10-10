@@ -3,7 +3,7 @@ import ArtworkInfo from "../ArtworkInfo";
 import AuthorSidebar from "../AuthorSidebar";
 
 import { useParams } from "react-router";
-import { useDataFetch } from "../../hooks/useDataFetch";
+import useDataFetch from "../../hooks/useDataFetch";
 
 export default function ArtworkInfoPage() {
   const auri = useParams();

@@ -3,8 +3,8 @@ import React from "react";
 export default function Footer(){
     return(
         <div style={footerWrapper}>
-            <div><p style={textStyle}>赣ICP备2021006793号-2</p></div>
-            <div><p style={textStyle}>联系方式：DrHuangMHT@ptsapi.top</p></div>
+            <div><p style={textStyle}><a style={textStyle} href="https://beian.miit.gov.cn">赣ICP备2021006793号-2</a></p></div>
+            <div><p style={textStyle}>联系：DrHuangMHT@ptsapi.top</p></div>
         </div>
     )
 }
@@ -15,8 +15,10 @@ const footerWrapper={
     flexDirection:"row",
     alignItems:"center",
     justifyContent:"space-around",
+    height:"-moz-available"
 }
 const textStyle={
+    textDecoration:"none",
     color:"rgb(230,230,230)",
     fontSize:"1.2em",
 }

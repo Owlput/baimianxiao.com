@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import APIGet from "../API";
 
-export const useDataFetch = (target) => {
+export default function useDataFetch(target){
   const [data, setData] = useState();
 
   const handleData = async () => {
