@@ -20,7 +20,7 @@ export function AuthorCard(props) {
   if(author){
   return <div className="aliContH" style={cardWrapper}>
     <div style={authorInfoWrapper}>
-      <img src={author.image}></img>
+      <img src={author.image} alt="Author Profile"></img>
       <p>{author.name}</p>
     </div>
     <div id="artworksWrapper">

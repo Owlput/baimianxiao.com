@@ -8,6 +8,7 @@ const componentWrapperStyle = {
 const authorInfoStyle = {
   wrapper: {
      display: "flex", flexDirection: "column",
+     alignItems:"center",
     },
   text: {
     textAlign: "center",
@@ -26,7 +27,7 @@ const authorInfoStyle = {
   },
   contact: {
     div: {
-      width:"90%",
+      maxWidth:"90%",
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-around",

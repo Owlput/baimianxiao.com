@@ -29,7 +29,7 @@ export default function LinkedIcon(props) {
     }
     case "bilibili":{
       return (
-        <a>
+        <a href={props.to}>
           <img src={biIco} alt={"Bilibili Link"} style={imageStyle}></img>
         </a>
       )
