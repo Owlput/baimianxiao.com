@@ -15,7 +15,6 @@ const footerWrapper={
     flexDirection:"row",
     alignItems:"center",
     justifyContent:"space-around",
-    height:"-moz-available"
 }
 const textStyle={
     textDecoration:"none",

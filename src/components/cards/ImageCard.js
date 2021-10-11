@@ -3,33 +3,33 @@ import LinkedThumbCard from "./LinkedThumbCard";
 import { imgAddr, siteAddr } from "../../assets/config";
 
 export default function ImageCard(props) {
-  
-  if(props.uri){
-    const thumbSrc = `${imgAddr}/thumbs/${props.uri}.jpg`
-  const authorImgSrc = `${imgAddr}/authorProfile/${props.author.image}`
-  return (
-    <div style={cws}>
-      <div>
-        <LinkedThumbCard
-          src={thumbSrc}
-          to={`${siteAddr}/artwork/${props.uri}`}
-          styling={imds.viewport}
-        ></LinkedThumbCard>
-        <p style={imds.title}>{props.title}</p>
+  if (props.uri) {
+    const thumbSrc = `${imgAddr}/thumbs/${props.uri}.jpg`;
+    const authorImgSrc = `${imgAddr}/authorProfile/${props.author.image}`;
+    return (
+      <div style={cws}>
+        <div>
+          <LinkedThumbCard
+            src={thumbSrc}
+            to={`${siteAddr}/artwork/${props.uri}`}
+            styling={imds.viewport}
+          ></LinkedThumbCard>
+          <p style={imds.title}>{props.title}</p>
+        </div>
+        <div style={ads.div}>
+          <a href={`${siteAddr}/artwork/${props.uri}`} style={ads.a}>
+            <img
+              src={authorImgSrc}
+              alt={props.author.name}
+              style={ads.image}
+            ></img>
+          </a>
+          <p style={ads.text}>{props.author.name}</p>
+        </div>
       </div>
-      <div style={ads.div}>
-        <a href={`${siteAddr}/artwork/${props.uri}`} style={ads.a}>
-          <img
-            src={authorImgSrc}
-            alt={props.author.name}
-            style={ads.image}
-          ></img>
-        </a>
-        <p style={ads.text}>{props.author.name}</p>
-      </div>
-    </div>
-  );}else{
-    return <></>
+    );
+  } else {
+    return <></>;
   }
 }
 
@@ -55,7 +55,7 @@ const imds = {
   },
   title: {
     margin: "5px",
-    fontSize:"1.2em",
+    fontSize: "1.2em",
     textAlign: "center",
   },
 };

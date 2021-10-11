@@ -57,7 +57,7 @@ const ais = {
   },
   contactSty: {
     div: {
-      maxWidth: "90%",
+      width: "90%",
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-around",

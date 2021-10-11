@@ -47,4 +47,5 @@ const aStyle = {
 const imageStyle = {
   height: "2.5em",
   width: "2.5em",
+  borderRadius:"20%",
 };

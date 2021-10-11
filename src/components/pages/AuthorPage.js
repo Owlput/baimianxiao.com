@@ -28,4 +28,5 @@ const pageWrapper = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  minHeight:"1200px"
 };

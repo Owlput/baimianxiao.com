@@ -16,21 +16,16 @@ export default function ArtworkInfoPage() {
   };
 
   const data = useDataFetch(artworkDataTarget);
-  
-  
 
-  if (data){
-  return (
-    <div style={pageWarpperStyle}>
-      <ArtworkInfo
-        {...(data[0])}
-      ></ArtworkInfo>
-      <AuthorSidebar
-        {...(data[0].authorInfo)}
-      ></AuthorSidebar>
-    </div>
-  );}else{
-    return <></>
+  if (data) {
+    return (
+      <div style={pageWarpperStyle}>
+        <ArtworkInfo {...data[0]}></ArtworkInfo>
+        <AuthorSidebar {...data[0].authorInfo}></AuthorSidebar>
+      </div>
+    );
+  } else {
+    return <></>;
   }
 }
 const pageWarpperStyle = {
