@@ -6,31 +6,19 @@ import { imgAddr, siteAddr } from "../../assets/config";
 export function PermitCard(props) {
   console.log(props);
   if (props.author) {
-    if (!props.permitted[0]) pws.display = "none";
-    if (!props.useable[0]) uws.display = "none";
-    if (!props.other[0]) ows.display = "none";
     return (
       <div className="aliContH" id="cWrap">
         <CSSInjector />
         <AuthorInfoCard {...props.author} {...ais}></AuthorInfoCard>
         <div className="aliContV" id="workDisp">
-          <div style={pws}>
-            <DivideLine text="已授权作品"></DivideLine>
-            <WorkDisplay works={props.permitted}></WorkDisplay>
-          </div>
-          <div style={uws}>
-            <DivideLine text="可使用作品"></DivideLine>
-            <WorkDisplay works={props.useable}></WorkDisplay>
-          </div>
-          <div style={ows}>
-            <DivideLine text="其他作品"></DivideLine>
-            <WorkDisplay works={props.other}></WorkDisplay>
-          </div>
+          <Permitted permitted={props.permitted}/>
+          <Useable useable={props.useable}/>
+          <Other other={props.other}/>
           <DivideLine styling={placeholderDivide}></DivideLine>
         </div>
       </div>
     );
-  }
+} else return <></>
 }
 function DivideLine(props) {
   return (
@@ -57,25 +45,50 @@ function WorkDisplay(props) {
     </div>
   );
 }
+function Permitted(props){
+  if (props.permitted[0]){
+  return (<div style={pws}>
+    <DivideLine text="已授权作品"></DivideLine>
+    <WorkDisplay works={props.permitted}></WorkDisplay>
+  </div>)} else return <></>
+}
+function Useable(props){
+  if(props.useable[0]){
+    return (<div style={uws}>
+    <DivideLine text="可使用作品"></DivideLine>
+    <WorkDisplay works={props.useable}></WorkDisplay>
+  </div>)
+  } else return <></>
+}
+function Other(props){
+  if(props.other[0]){
+    return (
+      <div style={ows}>
+      <DivideLine text="其他作品"></DivideLine>
+      <WorkDisplay works={props.other}></WorkDisplay>
+    </div>
+    )
+  }else return <></>
+}
 
 /* DO NOT COMBINE: These control the visibility of the element related */
 let pws = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  width: "100%",
+  width: "90%",
 };
 let uws = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  width: "inherit",
+  width: "90%",
 };
 let ows = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  width: "inherit",
+  width: "90%",
 };
 /* DO NOT COMBINE: These control the visibility of the element related */
 
@@ -119,10 +132,11 @@ const ais = {
   },
   contactSty: {
     div: {
-      maxWidth: "90%",
+      minWidth: "95%",
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-around",
+      flexWrap:"wrap",
     },
     text: {
       fontSize: "5em",
