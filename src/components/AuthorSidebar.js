@@ -11,7 +11,6 @@ export default function AuthorSidebar(props) {
   const author = props.name ? props : undefined;
 
   if (author) {
-    console.log(author);
     return (
       <div style={cws}>
         <AuthorInfoCard {...author} {...ais}></AuthorInfoCard>
@@ -39,6 +38,7 @@ const ais = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    width:"90%"
   },
   textSty: {
     textAlign: "center",
@@ -49,6 +49,7 @@ const ais = {
   imageSty: {
     width: "70%",
     borderRadius: "50%",
+    textAlign:"center",
   },
   nameSty: {
     textAlign: "center",

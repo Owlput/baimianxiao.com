@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function TagCollection(props) {
-  console.log(props.styling)
   if (props.tags) {
     return (
       <div style={props.styling.wrapper}>

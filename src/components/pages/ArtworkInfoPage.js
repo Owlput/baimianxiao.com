@@ -7,7 +7,6 @@ import useDataFetch from "../../hooks/useDataFetch";
 
 export default function ArtworkInfoPage() {
   const auri = useParams();
-
   const artworkDataTarget = {
     type: "getArtworkData",
     payload: {
@@ -21,7 +20,6 @@ export default function ArtworkInfoPage() {
     return (
       <div style={pageWarpperStyle}>
         <ArtworkInfo {...data[0]}></ArtworkInfo>
-        <AuthorSidebar {...data[0].authorInfo}></AuthorSidebar>
       </div>
     );
   } else {

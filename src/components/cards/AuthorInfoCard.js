@@ -8,10 +8,8 @@ export default function AuthorInfoCard(props) {
     const authorImgSrc = `${imgAddr}/authorProfile/${props.image}`;
     return (
       <div style={props.wrapperSty}>
-        <div className="aliContV">
           <img src={authorImgSrc} style={props.imageSty} alt={props.name}></img>
           <p style={props.nameSty}>{props.name}</p>
-        </div>
         <div style={props.contactSty.div}>
           {props.contact.map((contact, index) => (
             <LinkedIcon

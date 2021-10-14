@@ -1,15 +1,18 @@
 const componentWrapperStyle = {
-  display:"flex",
-  flexDirection:"column",
-  alignItems:"center",
-  backgroundColor: "rgb(250,250,250)",      
-  width:"35rem",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  backgroundColor: "rgb(250,250,250)",
+  width: "100%",
+  maxWidth: "20em",
+  minWidth:"12em",
 };
 const authorInfoStyle = {
   wrapper: {
-     display: "flex", flexDirection: "column",
-     alignItems:"center",
-    },
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
   text: {
     textAlign: "center",
     fontSize: "2em",
@@ -23,11 +26,11 @@ const authorInfoStyle = {
   name: {
     textAlign: "center",
     fontSize: "1.5em",
-    margin: "3% 4% 5% 4%",
+    margin: "0.1em",
   },
   contact: {
     div: {
-      maxWidth:"90%",
+      maxWidth: "90%",
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-around",
@@ -48,7 +51,7 @@ const recentWorksStyle = {
     fontSize: "1.5em",
   },
   image: {
-    width:"50%"
+    width: "50%",
   },
 };
 

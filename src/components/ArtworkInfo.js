@@ -1,100 +1,129 @@
 import React from "react";
 import { imgAddr } from "../assets/config";
 import TagCollection from "./TagCollection";
-import '../assets/css/genuineStyle.css'
+import "../assets/css/genuineStyle.css";
 import LinkedIcon from "./LinkedIcon";
+import { useState } from "react";
+import { usePopper } from "react-popper";
+import AuthorSidebar from "./AuthorSidebar";
 
 export default function ArtworkInfo(props) {
+  const [referenceElement, setReferenceElement] = useState(null);
+  const [popperElement, setPopperElement] = useState(null);
+  const [arrowElement, setArrowElement] = useState(null);
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    modifiers: [{ name: "arrow", options: { element: arrowElement } },{name:"preventOverflow",options:{boundary:document.querySelector("#imgWrap")}}],
+    placement: "right-start",
+  });
+
   if (props.uri) {
     const imgSrc = `${imgAddr}/artwork/${props.source.this}`;
     return (
-      <div style={componentWarpperStyle}>
+      <div id="compWrap">
         <StyleInjector />
-        <img src={imgSrc} alt={props.title} style={imageStyle}></img>
-        <div style={ais.wrapper}>
-          <div style={ais.titleTag.wrapper}>
-            <p style={ais.titleTag.title}>{props.title}</p>
-            <TagCollection
-              styling={ais.titleTag.tag}
-              tags={props.tags}
-            ></TagCollection>
-            <div id="artworkInfoWrapper">
-              <div id="infoAuthor" className="aliContV">
-                <img
-                  src={`${imgAddr}/authorProfile/${props.authorInfo.image}`}
-                  alt="Artwork Author"
-                ></img>
-                <p>{props.author[0]}</p>
-              </div>
-              <hr/>
-              <div id="infoOther" className="aliContV">
-                <p>其他平台</p>
-                <div className="aliContH">
-                  {props.source.other.map((source,index)=><LinkedIcon type={source[0]} to={source[1]} key={index}/>)}
-                </div>
-              </div>
-              <hr/>
-              <div id="infoPermit" className="aliContV"></div>
-            </div>
+        <div id="imgWrap">
+          <img
+            src={imgSrc}
+            alt={props.title}
+            ref={setReferenceElement}
+            id="artworkImage"
+          ></img>
+          <div
+            ref={setPopperElement}
+            style={styles.popper}
+            {...attributes.popper}
+            id="aip"
+          >
+            <AuthorSidebar {...props.authorInfo}></AuthorSidebar>
+            <div ref={setArrowElement} style={styles.arrow} />
           </div>
         </div>
+        <ArtworkInfoDiv {...props}></ArtworkInfoDiv>
       </div>
     );
   } else {
     return <></>;
   }
 }
-const componentWarpperStyle = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-};
-const imageStyle = {
-  width: "80%",
-};
-const ais = {
-  wrapper: {
-    backgroundColor: "rgb(250,250,250)",
-    borderRadius: "1em",
-    margin: "1em 0px",
-    width: "80%",
-  },
-  titleTag: {
-    wrapper: {
-      backgroundColor: "rgb(240,240,240)",
-      borderRadius: "1em",
-      margin: "1em 1em",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "flex-start",
-    },
 
-    title: {
-      fontSize: "1.5em",
-      margin: "0.1em 1em",
-    },
-    tag: {
-      wrapper: {
-        display: "flex",
-        alignItems:"center",
-        margin: "0.1em 1em",
-      },    
-      text:{
-      margin:"0.1em",
-      color:"rgb(100,100,100)",
-    },
-    },
+const tagStyle = {
+  wrapper: {
+    display: "flex",
+    alignItems: "center",
+    margin: "0.1em 1em",
+  },
+  text: {
+    margin: "0.1em",
+    color: "rgb(100,100,100)",
   },
 };
+
+function ArtworkInfoDiv(props) {
+  return (
+    <div id="artworkInfoDiv">
+        <p id="artworkTitle">{props.title}</p>
+        <TagCollection
+          styling={tagStyle}
+          tags={props.tags}
+        ></TagCollection>
+        <div id="artworkInfoWrapper">
+          <div id="infoAuthor" className="aliContV">
+            <img
+              src={`${imgAddr}/authorProfile/${props.authorInfo.image}`}
+              alt="Artwork Author"
+            ></img>
+            <p>{props.author[0]}</p>
+          </div>
+          <hr />
+          <div id="infoOther" className="aliContV">
+            <p>其他平台</p>
+            <div className="aliContH">
+              {props.source.other.map((source, index) => (
+                <LinkedIcon type={source[0]} to={source[1]} key={index} />
+              ))}
+            </div>
+          </div>
+          <hr />
+          <div id="infoPermit" className="aliContV"></div>
+        </div>
+    </div>
+  );
+}
+
 function StyleInjector() {
   return (
     <style>
-      {`#cWrap {
+      {`
+#compWrap{
+
+}
+#artworkImage{
+  width:70%;
+  maxWidth:fit-content;
+}
+#artworkInfoDiv{
+  background-color:rgb(250,250,250);
+  border-radius: 1em;
+  width: 100%;
+  height: 15em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+#artworkTitle{
+  font-size: 1.5em;
+  margin: 0.1em 1em;
+}
+      
+#cWrap {
   background-color: rgb(240, 240, 240);
   border-radius: 1em;
   width: 85%;
   justify-content: space-between;
   margin: 1em 0px;
+}
+#aip{
+  width:30%;
 }
 .divide {
   width: 100%;
@@ -127,12 +156,15 @@ function StyleInjector() {
 #artworkInfoWrapper hr {
   border:1px solid rgb(215,215,215);
   border-radius:30%;
+  height:80%;
 }
 #infoAuthor{
-  width:19%;
+  width:15%;
+  min-width:100px;
+  height:100%;
 }
 #infoAuthor img{
-  width:80%;
+  width:80px;
   border-radius:50%;
 }
 #infoAuthor p{
