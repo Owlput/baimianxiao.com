@@ -8,7 +8,7 @@ export default async function APIGet(target) {
     }
     case "getArtworkData": {
       return await (
-        await fetch(`${apiAddr}/baimianxiao/data/imageData/${target.payload.uri}`)
+        await fetch(`${apiAddr}/baimianxiao/data/workData/${target.payload.uri}`)
       ).json();
     }
     case "getPermitData":{

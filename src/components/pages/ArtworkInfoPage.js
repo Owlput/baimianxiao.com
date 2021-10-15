@@ -1,7 +1,5 @@
 import React from "react";
 import ArtworkInfo from "../ArtworkInfo";
-import AuthorSidebar from "../AuthorSidebar";
-
 import { useParams } from "react-router";
 import useDataFetch from "../../hooks/useDataFetch";
 

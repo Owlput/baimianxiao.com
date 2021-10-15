@@ -15,7 +15,6 @@ export default function NavBar() {
     </div>
   );
 }
-const flexWarpperStyle = {};
 
 function CSSInjector() {
   return (
@@ -25,9 +24,11 @@ function CSSInjector() {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
+        align-items:center;
+        margin-bottom:2em;
         width: 100%;
-        margin: 0px 0px 2em 0px;
-        height: 3em;
+        height: 3.5em;
+        background-color:rgb(240,240,240)
       }
       .nava {
         width: fit-content;
@@ -36,6 +37,7 @@ function CSSInjector() {
         border-radius:1em;
       }
       .navp{
+        text-align:center;
         font-size: 1.5em;
         margin: 0.5em;
         color: rgb(100,100,100);

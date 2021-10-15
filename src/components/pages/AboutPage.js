@@ -22,7 +22,7 @@ export function AboutPage() {
         <div id="sponsor">
           <h2>赞助</h2>
           <p>扫码赞助（要恰饭的嘛，用爱发电怎么可能，赶紧给爷打钱）</p>
-          <img src={sponsor} ></img>
+          <img src={sponsor} alt="Sponsor QR Code"></img>
         </div>
       </div>
     </div>

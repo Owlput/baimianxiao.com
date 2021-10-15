@@ -5,29 +5,32 @@ import "../assets/css/genuineStyle.css";
 import LinkedIcon from "./LinkedIcon";
 import { useState } from "react";
 import { usePopper } from "react-popper";
-import AuthorSidebar from "./AuthorSidebar";
+import AuthorInfoCard from "./cards/AuthorInfoCard";
+import LinkedThumbCard from "./cards/LinkedThumbCard";
+import ArtworkDisplay from "./ArtworkDisplay";
 
 export default function ArtworkInfo(props) {
   const [referenceElement, setReferenceElement] = useState(null);
   const [popperElement, setPopperElement] = useState(null);
   const [arrowElement, setArrowElement] = useState(null);
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    modifiers: [{ name: "arrow", options: { element: arrowElement } },{name:"preventOverflow",options:{boundary:document.querySelector("#imgWrap")}}],
+    modifiers: [
+      { name: "arrow", options: { element: arrowElement } },
+      {name:"preventOverflow",options:{ boundary:document.getElementById("sidebarWarp") }},
+      { name: "offset", options: { offset: [0, 40] } },
+    ],
     placement: "right-start",
   });
 
   if (props.uri) {
-    const imgSrc = `${imgAddr}/artwork/${props.source.this}`;
     return (
       <div id="compWrap">
-        <StyleInjector />
-        <div id="imgWrap">
-          <img
-            src={imgSrc}
-            alt={props.title}
-            ref={setReferenceElement}
-            id="artworkImage"
-          ></img>
+        <CSSInjector />
+        <div id="imgSideWrap">
+          <div id="imgWrap" ref={setReferenceElement}>
+            <ArtworkDisplay {...props} />
+          </div>
+          <div id="sidebarWrap">
           <div
             ref={setPopperElement}
             style={styles.popper}
@@ -36,7 +39,7 @@ export default function ArtworkInfo(props) {
           >
             <AuthorSidebar {...props.authorInfo}></AuthorSidebar>
             <div ref={setArrowElement} style={styles.arrow} />
-          </div>
+          </div></div>
         </div>
         <ArtworkInfoDiv {...props}></ArtworkInfoDiv>
       </div>
@@ -46,63 +49,132 @@ export default function ArtworkInfo(props) {
   }
 }
 
-const tagStyle = {
-  wrapper: {
-    display: "flex",
-    alignItems: "center",
-    margin: "0.1em 1em",
-  },
-  text: {
-    margin: "0.1em",
-    color: "rgb(100,100,100)",
-  },
-};
-
 function ArtworkInfoDiv(props) {
+  const tagStyle = {
+    wrapper: {
+      display: "flex",
+      alignItems: "center",
+      margin: "0.1em 1em",
+    },
+    text: {
+      margin: "0.1em",
+      color: "rgb(100,100,100)",
+    },
+  };
   return (
     <div id="artworkInfoDiv">
-        <p id="artworkTitle">{props.title}</p>
-        <TagCollection
-          styling={tagStyle}
-          tags={props.tags}
-        ></TagCollection>
-        <div id="artworkInfoWrapper">
-          <div id="infoAuthor" className="aliContV">
-            <img
-              src={`${imgAddr}/authorProfile/${props.authorInfo.image}`}
-              alt="Artwork Author"
-            ></img>
-            <p>{props.author[0]}</p>
-          </div>
-          <hr />
-          <div id="infoOther" className="aliContV">
-            <p>其他平台</p>
-            <div className="aliContH">
-              {props.source.other.map((source, index) => (
-                <LinkedIcon type={source[0]} to={source[1]} key={index} />
-              ))}
-            </div>
-          </div>
-          <hr />
-          <div id="infoPermit" className="aliContV"></div>
+      <p id="artworkTitle">{props.title}</p>
+      <TagCollection styling={tagStyle} tags={props.tags}></TagCollection>
+      <div id="artworkInfoWrapper">
+        <div id="infoAuthor" className="aliContV">
+          <img
+            src={`${imgAddr}/authorProfile/${props.authorInfo.image}`}
+            alt="Artwork Author"
+          ></img>
+          <p>{props.author[0]}</p>
         </div>
+        <hr />
+        <div id="infoOther" className="aliContV">
+          <p>其他平台</p>
+          <div className="aliContH">
+            {props.source.other.map((source, index) => (
+              <LinkedIcon type={source[0]} to={source[1]} key={index} />
+            ))}
+          </div>
+        </div>
+        <hr />
+        <div id="infoPermit" className="aliContV"></div>
+      </div>
     </div>
   );
 }
+function AuthorSidebar(props) {
+  const author = props.name ? props : undefined;
+  const ais = {
+    wrapperSty: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      width: "90%",
+    },
+    textSty: {
+      textAlign: "center",
+      fontSize: "2em",
+      margin: "0.5em 0px 0.5em 0px",
+      color: "rgb(200,200,200)",
+    },
+    imageSty: {
+      width: "70%",
+      borderRadius: "50%",
+      textAlign: "center",
+    },
+    nameSty: {
+      textAlign: "center",
+      fontSize: "1.5em",
+      margin: "3% 4% 5% 4%",
+    },
+    contactSty: {
+      div: {
+        width: "90%",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around",
+      },
+      text: {
+        fontSize: "5em",
+      },
+    },
+    statusSty: {},
+  };
+  const recentWorksStyle = {
+    wrapper: {
+      display: "flex",
+      flexDirection: "column",
+    },
+    text: {
+      textAlign: "center",
+      fontSize: "1.5em",
+    },
+    image: {
+      width: "50%",
+    },
+  };
 
-function StyleInjector() {
+  if (author) {
+    return (
+      <div id="authorSidebarWrap">
+        <AuthorInfoCard {...author} {...ais}></AuthorInfoCard>
+        <div style={recentWorksStyle.wrapper}>
+          <p style={recentWorksStyle.text}>最近作品</p>
+          <div>
+            {author.recentWorks.map((thumb, index) => (
+              <LinkedThumbCard
+                src={`${imgAddr}/thumbs/${thumb}.jpg`}
+                to={`/artwork/${thumb}`}
+                key={index}
+                styling={recentWorksStyle.image}
+              ></LinkedThumbCard>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    return <></>;
+  }
+}
+function CSSInjector() {
   return (
     <style>
       {`
 #compWrap{
-
 }
 #artworkImage{
   width:70%;
   maxWidth:fit-content;
 }
 #artworkInfoDiv{
-  background-color:rgb(250,250,250);
+  background-color:rgb(245,245,245);
   border-radius: 1em;
   width: 100%;
   height: 15em;
@@ -124,6 +196,25 @@ function StyleInjector() {
 }
 #aip{
   width:30%;
+}
+#authorSidebarWrap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(250,250,250);
+  width: 100%;
+  max-width: 14em;
+  min-width:9em;
+}
+#imgWrap{
+  width:100%;
+}
+#imgSideWrap{
+  display:grid;
+  grid-template-columns:70% 30%;
+}
+#sidebarWrap{
+  overflow:hidden;
 }
 .divide {
   width: 100%;
