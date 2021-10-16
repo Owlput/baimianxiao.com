@@ -1,6 +1,5 @@
 import React from "react";
 import arrow from "../assets/icons/chevron-left.svg";
-import "../assets/css/pageSelector.css";
 
 export default function PageSelector() {
   return (

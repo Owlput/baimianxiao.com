@@ -1,5 +1,5 @@
 import React from "react";
-import "../../assets/css/genuineStyle.css";
+import "../../assets/css/genericStyle.css";
 import AuthorInfoCard from "./AuthorInfoCard";
 import { imgAddr, siteAddr } from "../../assets/config";
 
@@ -10,15 +10,66 @@ export function PermitCard(props) {
       <div className="aliContH" id="cWrap">
         <CSSInjector />
         <AuthorInfoCard {...props.author} {...ais}></AuthorInfoCard>
-        <div className="aliContV" id="workDisp">
-          <Permitted permitted={props.permitted}/>
-          <Useable useable={props.useable}/>
-          <Other other={props.other}/>
+        <div className="aliContV" id="worksDisp">
+          <Permitted permitted={props.permitted} />
+          <Useable useable={props.useable} />
+          <Other other={props.other} />
           <DivideLine styling={placeholderDivide}></DivideLine>
         </div>
       </div>
     );
-} else return <></>
+  } else return <></>;
+}
+
+function Permitted(props) {
+  if (props.permitted[0]) {
+    return (
+      <div className="workDisp">
+        <DivideLine text="已授权作品"></DivideLine>
+        <WorkDisplay works={props.permitted}></WorkDisplay>
+      </div>
+    );
+  } else return <></>;
+}
+function Useable(props) {
+  if (props.useable[0]) {
+    return (
+      <div className="workDisp">
+        <DivideLine text="可使用作品"></DivideLine>
+        <WorkDisplay works={props.useable}></WorkDisplay>
+      </div>
+    );
+  } else return <></>;
+}
+function Other(props) {
+  if (props.other[0]) {
+    return (
+      <div className="workDisp">
+        <DivideLine text="其他作品"></DivideLine>
+        <WorkDisplay works={props.other}></WorkDisplay>
+      </div>
+    );
+  } else return <></>;
+}
+function WorkDisplay(props) {
+  return (
+    <div style={wws.wrapper}>
+      {props.works.map((source, index) => (
+        <a
+          href={`${siteAddr}/artwork/${source}`}
+          key={`a${index}`}
+          style={wws.a}
+        >
+          <img
+            src={`${imgAddr}/thumbs/${source}.jpg`}
+            key={`img${index}`}
+            style={wws.image}
+            alt="artwork"
+          ></img>
+        </a>
+      ))}
+    </div>
+  );
 }
 function DivideLine(props) {
   return (
@@ -29,68 +80,6 @@ function DivideLine(props) {
     </div>
   );
 }
-function WorkDisplay(props) {
-  return (
-    <div style={wws.wrapper}>
-      {props.works.map((source, index) => (
-        <a href={`${siteAddr}/artwork/${source}`} key={`a${index}`} style={wws.a}>
-          <img
-            src={`${imgAddr}/thumbs/${source}.jpg`}
-            key={`img${index}`}
-            style={wws.image}
-            alt="Permitted Work"
-          ></img>
-        </a>
-      ))}
-    </div>
-  );
-}
-function Permitted(props){
-  if (props.permitted[0]){
-  return (<div style={pws}>
-    <DivideLine text="已授权作品"></DivideLine>
-    <WorkDisplay works={props.permitted}></WorkDisplay>
-  </div>)} else return <></>
-}
-function Useable(props){
-  if(props.useable[0]){
-    return (<div style={uws}>
-    <DivideLine text="可使用作品"></DivideLine>
-    <WorkDisplay works={props.useable}></WorkDisplay>
-  </div>)
-  } else return <></>
-}
-function Other(props){
-  if(props.other[0]){
-    return (
-      <div style={ows}>
-      <DivideLine text="其他作品"></DivideLine>
-      <WorkDisplay works={props.other}></WorkDisplay>
-    </div>
-    )
-  }else return <></>
-}
-
-/* DO NOT COMBINE: These control the visibility of the element related */
-let pws = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  width: "90%",
-};
-let uws = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  width: "90%",
-};
-let ows = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  width: "90%",
-};
-/* DO NOT COMBINE: These control the visibility of the element related */
 
 const wws = {
   wrapper: {
@@ -100,12 +89,12 @@ const wws = {
   },
   image: {
     width: "100px",
-    borderRadius:"1em",
-    margin:"0.5em",
+    borderRadius: "1em",
+    margin: "0.5em",
   },
-  a:{
-    backgroundColor:"rgb(220,220,220)",
-    borderRadius:"1em"
+  a: {
+    backgroundColor: "rgb(220,220,220)",
+    borderRadius: "1em",
   },
 };
 
@@ -136,7 +125,7 @@ const ais = {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-around",
-      flexWrap:"wrap",
+      flexWrap: "wrap",
     },
     text: {
       fontSize: "5em",
@@ -181,11 +170,17 @@ function CSSInjector() {
   margin: 0.1em;
   border-radius: 1em;
 }
-#workDisp{
+#worksDisp{
   width:83%;
   background-color:rgb(230,230,230);
   border-radius:1em;
   margin:0.5em;
+}
+.workDisp{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
 }
 `}
     </style>

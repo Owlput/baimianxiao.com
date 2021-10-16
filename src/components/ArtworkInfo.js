@@ -1,52 +1,25 @@
 import React from "react";
 import { imgAddr } from "../assets/config";
 import TagCollection from "./TagCollection";
-import "../assets/css/genuineStyle.css";
+import "../assets/css/genericStyle.css";
 import LinkedIcon from "./LinkedIcon";
 import { useState } from "react";
-import { usePopper } from "react-popper";
 import AuthorInfoCard from "./cards/AuthorInfoCard";
 import LinkedThumbCard from "./cards/LinkedThumbCard";
-import ArtworkDisplay from "./ArtworkDisplay";
 
 export default function ArtworkInfo(props) {
-  const [referenceElement, setReferenceElement] = useState(null);
-  const [popperElement, setPopperElement] = useState(null);
-  const [arrowElement, setArrowElement] = useState(null);
-  const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    modifiers: [
-      { name: "arrow", options: { element: arrowElement } },
-      {name:"preventOverflow",options:{ boundary:document.getElementById("sidebarWarp") }},
-      { name: "offset", options: { offset: [0, 40] } },
-    ],
-    placement: "right-start",
-  });
+  let data = props.uri ? props : defaultData;
+  return (
+    <div id="compWrap">
+      <CSSInjector />
+      <div id="img-sideWrap" className="aliContH">
+        <ArtworkDisplay {...data} />
 
-  if (props.uri) {
-    return (
-      <div id="compWrap">
-        <CSSInjector />
-        <div id="imgSideWrap">
-          <div id="imgWrap" ref={setReferenceElement}>
-            <ArtworkDisplay {...props} />
-          </div>
-          <div id="sidebarWrap">
-          <div
-            ref={setPopperElement}
-            style={styles.popper}
-            {...attributes.popper}
-            id="aip"
-          >
-            <AuthorSidebar {...props.authorInfo}></AuthorSidebar>
-            <div ref={setArrowElement} style={styles.arrow} />
-          </div></div>
-        </div>
-        <ArtworkInfoDiv {...props}></ArtworkInfoDiv>
+        <AuthorSidebar {...data.authorInfo}></AuthorSidebar>
       </div>
-    );
-  } else {
-    return <></>;
-  }
+      <ArtworkInfoDiv {...data}></ArtworkInfoDiv>
+    </div>
+  );
 }
 
 function ArtworkInfoDiv(props) {
@@ -62,7 +35,7 @@ function ArtworkInfoDiv(props) {
     },
   };
   return (
-    <div id="artworkInfoDiv">
+    <div id="artworkInfoTopWrap">
       <p id="artworkTitle">{props.title}</p>
       <TagCollection styling={tagStyle} tags={props.tags}></TagCollection>
       <div id="artworkInfoWrapper">
@@ -89,7 +62,6 @@ function ArtworkInfoDiv(props) {
   );
 }
 function AuthorSidebar(props) {
-  const author = props.name ? props : undefined;
   const ais = {
     wrapperSty: {
       display: "flex",
@@ -139,110 +111,148 @@ function AuthorSidebar(props) {
       width: "50%",
     },
   };
-
-  if (author) {
-    return (
-      <div id="authorSidebarWrap">
-        <AuthorInfoCard {...author} {...ais}></AuthorInfoCard>
-        <div style={recentWorksStyle.wrapper}>
-          <p style={recentWorksStyle.text}>最近作品</p>
-          <div>
-            {author.recentWorks.map((thumb, index) => (
-              <LinkedThumbCard
-                src={`${imgAddr}/thumbs/${thumb}.jpg`}
-                to={`/artwork/${thumb}`}
-                key={index}
-                styling={recentWorksStyle.image}
-              ></LinkedThumbCard>
-            ))}
-          </div>
+  return (
+    <div id="authorSidebarWrap">
+      <AuthorInfoCard {...props} {...ais}></AuthorInfoCard>
+      <div style={recentWorksStyle.wrapper}>
+        <p style={recentWorksStyle.text}>最近作品</p>
+        <div>
+          {props.recentWorks.map((thumb, index) => (
+            <LinkedThumbCard
+              src={`${imgAddr}/thumbs/${thumb}.jpg`}
+              to={`/artwork/${thumb}`}
+              key={index}
+              styling={recentWorksStyle.image}
+            ></LinkedThumbCard>
+          ))}
         </div>
+      </div>
+    </div>
+  );
+}
+function ArtworkDisplay(props) {
+  let imageDisplayed = props.source ? props.source.this : [];
+  const [expand, setExpand] = useState(false);
+  if (expand) {
+    return (
+      <div id="artDispWrapEd">
+        {imageDisplayed.map((source, index) => (
+          <img
+            src={`${imgAddr}/artwork/${source}`}
+            alt="artwork"
+            key={index}
+          ></img>
+        ))}
+        <button onClick={() => setExpand(false)}>收起</button>
       </div>
     );
   } else {
-    return <></>;
+    return (
+      <div id="artDispWrapUned">
+        <div id="imgViewport">
+          <img
+            src={`${imgAddr}/artwork/${imageDisplayed[0]}`}
+            alt="artwork"
+          ></img>
+        </div>
+        <button onClick={() => setExpand(true)}>
+          <p>展开</p>
+        </button>
+      </div>
+    );
   }
 }
+
 function CSSInjector() {
   return (
     <style>
       {`
 #compWrap{
+ display:flex;
+ flex-direction:column;
 }
-#artworkImage{
-  width:70%;
-  maxWidth:fit-content;
+#img-sideWrap{
+  width:100%;
+  justify-content:space-between;
+  margin-bottom: 1rem;
 }
-#artworkInfoDiv{
+
+#artDispWrapEd{
+  margin-right:0.8rem;
+  width:100%;
+  padding:1rem;
   background-color:rgb(245,245,245);
-  border-radius: 1em;
+  border-radius:1rem;
+}
+#artDispWrapEd button{
+  border:none;
+  padding:0px;
+  width:100%;
+  height:2rem;
+}
+#artDispWrapEd img{
+  width:100%;
+}
+#artDispWrapUned{
+  width:100%;
+  margin-right:0.8rem;
+  max-height:38rem;
+  padding:1rem;
+  background-color:rgb(245,245,245);
+  border-radius:1rem;
+}
+#imgViewport {
+  width:100%;
+  max-height:38rem;
+  overflow:hidden;
+}
+#imgViewport img{
+  width:100%;
+}
+#artDispWrapUned button{
+  width:100%;
+  border:none;
+  position:relative;
+  padding:0px;
+  height:3.5rem;
+  bottom:3.5rem;
+  cursor:pointer;
+  background:linear-gradient(to bottom,rgba(255,255,255,0.2),rgba(255,255,255,0.8))
+}
+#artDispWrapUned p {
+  margin:0px;
+  font-size:2rem;
+}
+
+#authorSidebarWrap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(245,245,245);
   width: 100%;
-  height: 15em;
+  max-width: 14rem;
+  min-width:9rem;
+  margin-left:0.8rem;
+  border-radius:1rem;
+}
+
+#artworkInfoTopWrap{
+  background-color:rgb(245,245,245);
+  border-radius: 1rem;
+  width: 100%;
+  height: 15rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 #artworkTitle{
-  font-size: 1.5em;
-  margin: 0.1em 1em;
-}
-      
-#cWrap {
-  background-color: rgb(240, 240, 240);
-  border-radius: 1em;
-  width: 85%;
-  justify-content: space-between;
-  margin: 1em 0px;
-}
-#aip{
-  width:30%;
-}
-#authorSidebarWrap{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgb(250,250,250);
-  width: 100%;
-  max-width: 14em;
-  min-width:9em;
-}
-#imgWrap{
-  width:100%;
-}
-#imgSideWrap{
-  display:grid;
-  grid-template-columns:70% 30%;
-}
-#sidebarWrap{
-  overflow:hidden;
-}
-.divide {
-  width: 100%;
-}
-.divide hr{
-  border-top: 0.1em solid rgb(140,140,140);
-  margin: 0px 0.5em 0px 0.8em;
-  width: inherit;
-  border-radius: 0.4em;
-}
-.divide p {
-  min-width:6em
-}
-.workType {
-  width: 12%;
-  text-align: center;
-}
-#artworkWrap {
-  width: 80%;
-  background-color: rgb(230,230,230);
-  margin: 1%;
-  border-radius: 1em;
+  font-size: 1.5rem;
+  margin: 0.5rem 1rem;
 }
 #artworkInfoWrapper{
-  margin:0.5em;
-  display:flex;
-  flex-direction:row;
-  justify-content:space-between;
+  margin:1rem;
+  display:grid;
+  grid-template-columns:100px 4px auto 4px 20%;
 }
 #artworkInfoWrapper hr {
   border:1px solid rgb(215,215,215);
@@ -250,8 +260,9 @@ function CSSInjector() {
   height:80%;
 }
 #infoAuthor{
+  align-self:center;
   width:15%;
-  min-width:100px;
+  min-width:90px;
   height:100%;
 }
 #infoAuthor img{
@@ -259,7 +270,7 @@ function CSSInjector() {
   border-radius:50%;
 }
 #infoAuthor p{
-  font-size:1.2em;
+  font-size:1.2rem;
   color:rgb(100,100,100);
   margin:0.5em
 }
@@ -267,18 +278,52 @@ function CSSInjector() {
   min-width:40%;
 }
 #infoOther p {
-  margin:0.5em;
+  margin:0.5rem;
   color:rgb(100,100,100);
-  min-width:5em;
+  min-width:5rem;
 }
 #infoOther div{
   width:90%;
   justify-content:space-around;
 }
-#infoPermit{
-  width:40%;
+
+.divide {
+  width: 100%;
 }
+.divide hr{
+  border-top: 0.1rem solid rgb(140,140,140);
+  margin: 0px 0.5rem 0px 0.8rem;
+  width: inherit;
+  border-radius: 0.4rem;
+}
+.divide p {
+  min-width:6rem
+}
+
 `}
     </style>
   );
 }
+
+const defaultData = {
+  uri: "",
+  title: "",
+  author: ["", ""],
+  tags: [["", 0]],
+  source: {
+    other: [["", ""]],
+    from: "",
+    this: [""],
+  },
+  license: {
+    type: "",
+    source: "",
+  },
+  authorInfo: {
+    name: "",
+    authorId: "",
+    image: "",
+    contact: [["", ""]],
+    recentWorks: ["", ""],
+  },
+};

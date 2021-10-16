@@ -1,5 +1,5 @@
 import React from "react";
-import '../../assets/css/genuineStyle.css'
+import '../../assets/css/genericStyle.css'
 import sponsor from '../../assets/images/sponsor.png'
 
 export function AboutPage() {

@@ -1,7 +1,7 @@
 import React from "react";
 import LinkedIcon from "../LinkedIcon";
 import { imgAddr } from "../../assets/config";
-import "../../assets/css/genuineStyle.css";
+import "../../assets/css/genericStyle.css";
 
 export default function AuthorInfoCard(props) {
   if (props) {
