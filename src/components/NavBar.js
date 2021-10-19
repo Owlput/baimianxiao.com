@@ -1,17 +1,12 @@
 import React from "react";
+import {Button} from '@material-ui/core'
 export default function NavBar() {
   return (
     <div id="flexWrapper">
       <CSSInjector />
-      <a className="nava" href="/">
-        <p className="navp">首页</p>
-      </a>
-      <a className="nava" href="/authors">
-        <p className="navp">作者与授权</p>
-      </a>
-      <a className="nava" href="/about">
-        <p className="navp">关于</p>
-      </a>
+      <Button href="/" className="BnavButton">首页</Button>
+      <Button href="/author" className="BnavButton">作者</Button>
+      <Button href="/about" className="BnavButton">关于</Button>
     </div>
   );
 }
@@ -30,17 +25,9 @@ function CSSInjector() {
         height: 3.5em;
         background-color:rgb(240,240,240)
       }
-      .nava {
-        width: fit-content;
-        background-color: rgb(250,250,250);
-        text-decoration: none;
-        border-radius:1em;
-      }
-      .navp{
-        text-align:center;
-        font-size: 1.5em;
-        margin: 0.5em;
-        color: rgb(100,100,100);
+      .BnavButton{
+        font-size:1.5rem;
+        color:rgb(100,100,100);
       }
       `}
     </style>
