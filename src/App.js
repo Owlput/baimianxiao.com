@@ -15,7 +15,7 @@ function App() {
             <Switch>
             <Route path="/artwork/:uri" ><ArtworkInfoPage></ArtworkInfoPage> </Route>
             <Route path="/about"><AboutPage></AboutPage></Route>
-            <Route path="/authors"><AuthorPage></AuthorPage></Route>
+            <Route path="/author"><AuthorPage></AuthorPage></Route>
             <Route path="/"><ThumbPage></ThumbPage></Route>
             </Switch>
             </BrowserRouter>

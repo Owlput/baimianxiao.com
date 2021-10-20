@@ -1,6 +1,7 @@
 import React from "react";
 import { PermitCard } from "../cards/PermitCard";
 import useDataFetch from "../../hooks/useDataFetch";
+import { CircularProgress } from "@material-ui/core";
 
 export default function AuthorPage() {
   const target = {
@@ -12,21 +13,26 @@ export default function AuthorPage() {
 
   if (permData) {
     return (
-      <div style={pageWrapper}>
+      <div id="pageWrap">
+        <CSSInjector />
         {permData.map((permit, index) => (
           <PermitCard {...permit} key={index}></PermitCard>
         ))}
       </div>
     );
   } else {
-    return <></>;
+    return <CircularProgress />;
   }
 }
-const pageWrapper = {
-  backgroundColor: "rgb(250,250,250)",
-  width: "100%",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  minHeight:"1200px"
-};
+const CSSInjector = () =><style>
+  {`
+    #pageWrap{
+      background-color: rgb(250,250,250);
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height:1200px;
+    }
+  `}
+</style>

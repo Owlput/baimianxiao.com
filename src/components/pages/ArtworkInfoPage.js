@@ -2,6 +2,7 @@ import React from "react";
 import ArtworkInfo from "../ArtworkInfo";
 import { useParams } from "react-router";
 import useDataFetch from "../../hooks/useDataFetch";
+import { CircularProgress } from "@material-ui/core";
 
 export default function ArtworkInfoPage() {
   const auri = useParams();
@@ -16,18 +17,25 @@ export default function ArtworkInfoPage() {
 
   if (data) {
     return (
-      <div style={pageWarpperStyle}>
+      <div id="pageWrap">
+        <CSSInjector />
         <ArtworkInfo {...data[0]}></ArtworkInfo>
       </div>
     );
   } else {
-    return <></>;
+    return <CircularProgress />;
   }
 }
-const pageWarpperStyle = {
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  width: "85%",
-  justifyContent: "space-around",
-};
+function CSSInjector(){
+  return <style>
+    {`
+    #pageWrap{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 85%;
+      justify-content: space-around;
+    }
+    `}
+  </style>
+}

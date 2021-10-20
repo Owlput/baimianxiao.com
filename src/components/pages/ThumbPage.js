@@ -1,6 +1,8 @@
 import ImageCard from "../cards/ImageCard";
 import { useEffect, useState } from "react";
 import useDataFetch from "../../hooks/useDataFetch";
+import PageSelector from "../PageSelector";
+import { CircularProgress } from "@material-ui/core";
 
 export default function ThumbPage() {
   /* Init all thumbs */
@@ -18,25 +20,9 @@ export default function ThumbPage() {
   }, [thumbData]);
   /* Init paging */
 
-  /* Button Functions Definition */
-  
-  /* Dev purpose only
-  const currentInfo = () => {
-    console.log(`Now page ${page[0]} with ${thumbsDisplayed.length} elements`);
-  };
-*/
-
-  const pervPage = () => {
-    if (page[0] > 1) {
-      setPage([page[0] - 1, page[1]]);
-    }
-  };
-  const nextPage = () => {
-    if (page[0] < page[1]) {
-      setPage([page[0] + 1, page[1]]);
-    }
-  };
-  /* Button Functions Definition */
+  const changePage=(to)=>{
+    setPage([to,page[1]])
+  }
 
   /* Decide what thumbs to be displayed based on current page */
   let thumbsDisplayed = thumbData
@@ -56,18 +42,11 @@ export default function ThumbPage() {
             <></>
           )}
         </div>
-        <div>
-          <button style={btns} onClick={pervPage}>
-            上一页
-          </button>
-          <button style={btns} onClick={nextPage}>
-            下一页
-          </button>
-        </div>
+        <PageSelector parentChangePage={changePage} maxPage={page[1]}></PageSelector>
       </div>
     );
   } else {
-    return <></>;
+    return <CircularProgress />;
   }
 }
 
@@ -84,7 +63,7 @@ const cws = {
   borderRadius: "1em",
   backgroundColor: "rgb(250,250,250)",
   width: "92%",
-  maxWidth:"80em"
+  maxWidth: "80em",
 };
 const itws = {
   display: "flex",
@@ -109,7 +88,4 @@ const ics = {
   image: {
     width: "200px",
   },
-};
-const btns = {
-  height: "2em",
 };

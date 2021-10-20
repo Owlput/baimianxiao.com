@@ -1,46 +1,33 @@
 import React from "react";
-import arrow from "../assets/icons/chevron-left.svg";
+import { Pagination, Paper } from "@material-ui/core";
 
-export default function PageSelector() {
+export default function PageSelector(props) {
   return (
-    <div>
-      <CSSInjector />
-      <button className="button">
-        <img
-          src={arrow}
-          style={arrowStyle.left}
-          alt="Previous page button"
-        ></img>
-      </button>
-      <button className="button">
-        <img src={arrow} style={arrowStyle.right} alt="Next page button"></img>
-      </button>
-    </div>
+    <>
+    <CSSInjector />
+    <Paper>
+    <Pagination id="pageSetter" size="large"
+      count={props.maxPage}
+      color="primary"
+      onChange={(ev, page) => props.parentChangePage(page)}
+    /></Paper>
+    </>
   );
 }
-const arrowStyle = {
-  left: {
-    width: "2em",
-  },
-  right: {
-    width: "2em",
-    transform: "rotate(180deg)",
-  },
-};
-function CSSInjector() {
+function CSSInjector(){
   return (
     <style>
-      {`.button{
-    border: none;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: rgb(230,230,230);
-}
-.button:active{
-    background-color: rgb(200,200,200);
-}`}
+      {
+        `
+        #pageSetter{
+          margin:1rem;
+        }
+        #pageSetter ul li button {
+          font-size:1.5rem;
+          border-radius:50%;
+        }
+        `
+      }
     </style>
-  );
+  )
 }
