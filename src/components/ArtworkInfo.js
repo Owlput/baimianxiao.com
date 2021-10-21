@@ -5,7 +5,7 @@ import "../assets/css/genericStyle.css";
 import LinkedIcon from "./LinkedIcon";
 import { useState } from "react";
 import AuthorInfoCard from "./cards/AuthorInfoCard";
-import LinkedThumbCard from "./cards/LinkedThumbCard";
+import { CardActionArea, Paper, Card, CardMedia } from "@material-ui/core";
 
 export default function ArtworkInfo(props) {
   let data = props.uri ? props : defaultData;
@@ -35,7 +35,7 @@ function ArtworkInfoDiv(props) {
     },
   };
   return (
-    <div id="artworkInfoTopWrap">
+    <Paper id="artworkInfoTopWrap">
       <p id="artworkTitle">{props.title}</p>
       <TagCollection styling={tagStyle} tags={props.tags}></TagCollection>
       <div id="artworkInfoWrapper">
@@ -58,7 +58,7 @@ function ArtworkInfoDiv(props) {
         <hr />
         <div id="infoPermit" className="aliContV"></div>
       </div>
-    </div>
+    </Paper>
   );
 }
 function AuthorSidebar(props) {
@@ -98,35 +98,28 @@ function AuthorSidebar(props) {
     },
     statusSty: {},
   };
-  const recentWorksStyle = {
-    wrapper: {
-      display: "flex",
-      flexDirection: "column",
-    },
-    text: {
-      textAlign: "center",
-      fontSize: "1.5em",
-    },
-    image: {
-      width: "50%",
-    },
-  };
   return (
-    <div id="authorSidebarWrap">
-      <AuthorInfoCard {...props} {...ais}></AuthorInfoCard>
-      <div style={recentWorksStyle.wrapper}>
-        <p style={recentWorksStyle.text}>最近作品</p>
-        <div>
-          {props.recentWorks.map((thumb, index) => (
-            <LinkedThumbCard
-              src={`${imgAddr}/thumbs/${thumb}.jpg`}
-              to={`/artwork/${thumb}`}
-              key={index}
-              styling={recentWorksStyle.image}
-            ></LinkedThumbCard>
-          ))}
+    <div id="AuthorSidebarWrap">
+      <Paper className="aliContV">
+        <AuthorInfoCard {...props} {...ais}></AuthorInfoCard>
+        <div id="recentWork">
+          <p id="recentWorkP">最近作品</p>
+          <div id="recentWorkDisp">
+            {props.recentWorks.map((thumb, index) => (
+              <Card>
+                <CardActionArea href={`/artwork/${thumb}`}>
+                  <CardMedia
+                    component="img"
+                    height="90"
+                    image={`${imgAddr}/thumbs/${thumb}.jpg`}
+                    key={index}
+                  />
+                </CardActionArea>
+              </Card>
+            ))}
+          </div>
         </div>
-      </div>
+      </Paper>
     </div>
   );
 }
@@ -135,7 +128,7 @@ function ArtworkDisplay(props) {
   const [expand, setExpand] = useState(false);
   if (expand) {
     return (
-      <div id="artDispWrapEd">
+      <Paper id="artDispWrapEd">
         {imageDisplayed.map((source, index) => (
           <img
             src={`${imgAddr}/artwork/${source}`}
@@ -144,11 +137,11 @@ function ArtworkDisplay(props) {
           ></img>
         ))}
         <button onClick={() => setExpand(false)}>收起</button>
-      </div>
+      </Paper>
     );
   } else {
     return (
-      <div id="artDispWrapUned">
+      <Paper id="artDispWrapUned">
         <div id="imgViewport">
           <img
             src={`${imgAddr}/artwork/${imageDisplayed[0]}`}
@@ -158,7 +151,7 @@ function ArtworkDisplay(props) {
         <button onClick={() => setExpand(true)}>
           <p>展开</p>
         </button>
-      </div>
+      </Paper>
     );
   }
 }
@@ -180,9 +173,8 @@ function CSSInjector() {
 #artDispWrapEd{
   margin-right:0.8rem;
   width:100%;
-  padding:1rem;
-  background-color:rgb(245,245,245);
-  border-radius:1rem;
+  padding:0.5rem;
+  border-radius:0.5rem;
 }
 #artDispWrapEd button{
   border:none;
@@ -197,9 +189,8 @@ function CSSInjector() {
   width:100%;
   margin-right:0.8rem;
   max-height:38rem;
-  padding:1rem;
-  background-color:rgb(245,245,245);
-  border-radius:1rem;
+  padding:0.5rem;
+  border-radius:0.5rem;
 }
 #imgViewport {
   width:100%;
@@ -237,13 +228,13 @@ function CSSInjector() {
 }
 
 #artworkInfoTopWrap{
-  background-color:rgb(245,245,245);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   width: 100%;
   height: 15rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin: 0.5rem 0px;
 }
 #artworkTitle{
   font-size: 1.5rem;
@@ -286,6 +277,19 @@ function CSSInjector() {
   width:90%;
   justify-content:space-around;
 }
+#recentWorkWrap{
+  width:100%;
+}
+#recentWorkP{
+  text-align:center;
+  font-size:1.2rem;
+}
+#recentWorkDisp{
+  display:flex;
+  flex-wrap:wrap;
+  width:100%;
+  justify-content:space-around;
+}
 
 .divide {
   width: 100%;
@@ -299,6 +303,7 @@ function CSSInjector() {
 .divide p {
   min-width:6rem
 }
+
 
 `}
     </style>

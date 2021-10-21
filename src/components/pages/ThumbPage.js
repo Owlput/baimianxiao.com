@@ -2,7 +2,8 @@ import ImageCard from "../cards/ImageCard";
 import { useEffect, useState } from "react";
 import useDataFetch from "../../hooks/useDataFetch";
 import PageSelector from "../PageSelector";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress,Paper } from "@material-ui/core";
+import '../../assets/css/genericStyle.css'
 
 export default function ThumbPage() {
   /* Init all thumbs */
@@ -32,7 +33,9 @@ export default function ThumbPage() {
 
   if (thumbsDisplayed) {
     return (
-      <div style={cws}>
+      <div className="aliContV" id="compWrap">
+        <CSSInjector />
+        <Paper id="thumbDispWrap">
         <div style={itws}>
           {thumbsDisplayed ? (
             thumbsDisplayed.map((image, index) => (
@@ -43,6 +46,7 @@ export default function ThumbPage() {
           )}
         </div>
         <PageSelector parentChangePage={changePage} maxPage={page[1]}></PageSelector>
+      </Paper>
       </div>
     );
   } else {
@@ -56,15 +60,6 @@ export default function ThumbPage() {
   ics=imageCardStyle
   btns=buttonStyle
   */
-const cws = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  borderRadius: "1em",
-  backgroundColor: "rgb(250,250,250)",
-  width: "92%",
-  maxWidth: "80em",
-};
 const itws = {
   display: "flex",
   width: "100%",
@@ -89,3 +84,20 @@ const ics = {
     width: "200px",
   },
 };
+function CSSInjector(){
+  return <style>
+    {`
+    #compWrap{
+      min-width:80%;
+    }
+    #thumbDispWrap{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 1em;
+      width: 92%;
+      max-width: 80em;
+    }
+    `}
+  </style>
+}

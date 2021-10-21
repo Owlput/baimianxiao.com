@@ -1,6 +1,6 @@
 import React from "react";
-import LinkedThumbCard from "./LinkedThumbCard";
 import { imgAddr, siteAddr } from "../../assets/config";
+import { Card,CardActionArea, CardMedia } from "@material-ui/core";
 
 export default function ImageCard(props) {
   if (props.uri) {
@@ -8,24 +8,22 @@ export default function ImageCard(props) {
     const authorImgSrc = `${imgAddr}/authorProfile/${props.author.image}`;
     return (
       <div style={cws}>
-        <div>
-          <LinkedThumbCard
-            src={thumbSrc}
-            to={`${siteAddr}/artwork/${props.uri}`}
-            styling={imds.viewport}
-          ></LinkedThumbCard>
+        <Card>
+          <CardActionArea href={`${siteAddr}/artwork/${props.uri}`}>
+            <CardMedia component="img" height="200" image={thumbSrc} alt="thumbnail"/>
+            </CardActionArea>
           <p style={imds.title}>{props.title}</p>
-        </div>
-        <div style={ads.div}>
-          <a href={`${siteAddr}/artwork/${props.uri}`} style={ads.a}>
-            <img
-              src={authorImgSrc}
-              alt={props.author.name}
-              style={ads.image}
-            ></img>
-          </a>
-          <p style={ads.text}>{props.author.name}</p>
-        </div>
+          <div style={ads.div}>
+            <a href={`${siteAddr}/artwork/${props.uri}`} style={ads.a}>
+              <img
+                src={authorImgSrc}
+                alt={props.author.name}
+                style={ads.image}
+              ></img>
+            </a>
+            <p style={ads.text}>{props.author.name}</p>
+          </div>
+        </Card>
       </div>
     );
   } else {

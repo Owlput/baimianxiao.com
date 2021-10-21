@@ -1,4 +1,5 @@
 import React from "react";
+import { ButtonBase,Chip } from "@material-ui/core";
 
 export default function TagCollection(props) {
   if (props.tags) {
@@ -16,24 +17,17 @@ export default function TagCollection(props) {
 
 function Taggie(props) {
   return (
-    <button id="taggie">
-      <p id="tagName">{props.tag[0]}</p>
-      <p id="tagCount">{props.tag[1]}</p>
-    </button>
+    <ButtonBase id="taggieBase">
+      <Chip label={`${props.tag[0]}`}>
+      </Chip>
+    </ButtonBase>
   );
 }
 function CSSInjector() {
   return (
     <style>
-      {`#taggie {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    border:none;
-    background-color: rgb(231, 231, 231);
-    margin:0.2em 0.4em;
-    border-radius: 1em;
+      {`#taggieBase {
+    border-radius: 1rem;
 }
 #taggie:hover{
     background-color: rgb(195, 216, 230);
@@ -42,11 +36,10 @@ function CSSInjector() {
     background-color: rgb(170, 204, 226);
 }
 #tagName{
-    margin: 0.1em 1.1em 0.1em 0.1em;
-    font-size: 1.1rem;
+    margin: 0px 1.1em 0px 0px;
+    font-size:1rem;
 }
 #tagCount{
-    font-size: 1.1rem;
     margin: 0px;
     color: rgb(141, 141, 141);
 }`}

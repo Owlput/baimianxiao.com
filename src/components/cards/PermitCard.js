@@ -2,12 +2,12 @@ import React from "react";
 import "../../assets/css/genericStyle.css";
 import AuthorInfoCard from "./AuthorInfoCard";
 import { imgAddr, siteAddr } from "../../assets/config";
+import { Tooltip, Paper,Card, CardActionArea, CardMedia } from "@material-ui/core";
 
 export function PermitCard(props) {
-  console.log(props);
   if (props.author) {
     return (
-      <div className="aliContH" id="cWrap">
+      <Paper className="aliContH" id="cWrap">
         <CSSInjector />
         <AuthorInfoCard {...props.author} {...ais}></AuthorInfoCard>
         <div className="aliContV" id="worksDisp">
@@ -16,7 +16,7 @@ export function PermitCard(props) {
           <Other other={props.other} />
           <DivideLine styling={placeholderDivide}></DivideLine>
         </div>
-      </div>
+      </Paper>
     );
   } else return <></>;
 }
@@ -25,7 +25,7 @@ function Permitted(props) {
   if (props.permitted[0]) {
     return (
       <div className="workDisp">
-        <DivideLine text="已授权作品"></DivideLine>
+        <DivideLine text="已授权作品" tip="已经正式获得授权的作品"></DivideLine>
         <WorkDisplay works={props.permitted}></WorkDisplay>
       </div>
     );
@@ -35,7 +35,10 @@ function Useable(props) {
   if (props.useable[0]) {
     return (
       <div className="workDisp">
-        <DivideLine text="可使用作品"></DivideLine>
+        <DivideLine
+          text="可使用作品"
+          tip="以非正式方式声明可以使用的作品"
+        ></DivideLine>
         <WorkDisplay works={props.useable}></WorkDisplay>
       </div>
     );
@@ -45,7 +48,10 @@ function Other(props) {
   if (props.other[0]) {
     return (
       <div className="workDisp">
-        <DivideLine text="其他作品"></DivideLine>
+        <DivideLine
+          text="其他作品"
+          tip='认为属于"合理使用"范围的作品'
+        ></DivideLine>
         <WorkDisplay works={props.other}></WorkDisplay>
       </div>
     );
@@ -53,70 +59,49 @@ function Other(props) {
 }
 function WorkDisplay(props) {
   return (
-    <div style={wws.wrapper}>
+    <div id="workDispWrap">
       {props.works.map((source, index) => (
-        <a
-          href={`${siteAddr}/artwork/${source}`}
-          key={`a${index}`}
-          style={wws.a}
-        >
-          <img
-            src={`${imgAddr}/thumbs/${source}.jpg`}
-            key={`img${index}`}
-            style={wws.image}
-            alt="artwork"
-          ></img>
-        </a>
+        <Card>
+          <CardActionArea href={`${siteAddr}/artwork/${source}`} key={`a${index}`}>
+            <CardMedia component="img" height="100" image={`${imgAddr}/thumbs/${source}.jpg`} key={`img${index}`} alt="artwork"/>
+          </CardActionArea>
+        </Card>
       ))}
     </div>
   );
 }
 function DivideLine(props) {
+  let tip = props.tip ? props.tip : "";
   return (
     <div className="aliContH divide" style={props.styling}>
       <hr></hr>
-      <p className="workType">{props.text}</p>
+      <Tooltip arrow title={tip}>
+        <p className="workType">{props.text}</p>
+      </Tooltip>
       <hr></hr>
     </div>
   );
 }
-
-const wws = {
-  wrapper: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-around",
-  },
-  image: {
-    width: "100px",
-    borderRadius: "1em",
-    margin: "0.5em",
-  },
-  a: {
-    backgroundColor: "rgb(220,220,220)",
-    borderRadius: "1em",
-  },
-};
 
 const ais = {
   wrapperSty: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "rgb(230,230,230)",
     width: "13%",
     minWidth: "90px",
-    borderRadius: "1em",
+    borderRadius: "0.5rem",
     margin: "1%",
   },
   imageSty: {
     width: "80px",
     borderRadius: "50%",
+    margin:"0.5rem"
   },
   nameSty: {
     textAlign: "center",
     fontSize: "1.2em",
-    margin: "3% 4% 5% 4%",
+    margin: "3%",
     width: "100%",
   },
   contactSty: {
@@ -126,6 +111,7 @@ const ais = {
       flexDirection: "row",
       justifyContent: "space-around",
       flexWrap: "wrap",
+      margin:"0.5rem",
     },
     text: {
       fontSize: "5em",
@@ -142,11 +128,15 @@ function CSSInjector() {
     <style>
       {`
   #cWrap {
-  background-color: rgb(240, 240, 240);
-  border-radius: 1em;
+  border-radius: 0.5rem;
   width: 85%;
   justify-content: space-between;
   margin: 1em 0px;
+}
+#workDispWrap{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
 .divide {
   width: 100%;
@@ -172,7 +162,6 @@ function CSSInjector() {
 }
 #worksDisp{
   width:83%;
-  background-color:rgb(230,230,230);
   border-radius:1em;
   margin:0.5em;
 }
