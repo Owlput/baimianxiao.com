@@ -3,7 +3,7 @@ import pxIco from "../assets/icons/pixiv.ico";
 import ttIco from "../assets/icons/twitter.svg";
 import wbIco from "../assets/icons/weibo.svg";
 import biIco from "../assets/icons/bilibili.svg";
-import { Card, CardActionArea, CardMedia } from "@material-ui/core";
+import { CardActionArea, CardMedia } from "@material-ui/core";
 
 export default function LinkedIcon(props) {
   switch (props.type) {
@@ -72,13 +72,3 @@ export default function LinkedIcon(props) {
     }
   }
 }
-const aStyle = {
-  display: "inline-block",
-  height: "2.5em",
-  width: "2.5em",
-};
-const imageStyle = {
-  height: "2.5em",
-  width: "2.5em",
-  borderRadius: "20%",
-};

@@ -22,6 +22,9 @@ function App() {
           <Route path="/author">
             <AuthorPage></AuthorPage>
           </Route>
+          <Route>
+            
+          </Route>
           <Route path="/">
             <ThumbPage></ThumbPage>
           </Route>
