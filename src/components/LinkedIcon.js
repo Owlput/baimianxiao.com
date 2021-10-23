@@ -9,7 +9,7 @@ export default function LinkedIcon(props) {
   switch (props.type) {
     case "pixiv": {
       return (
-        <div>
+        <div className="LinkedIcon">
           <CardActionArea href={props.to}>
             <CardMedia
               component="img"

@@ -2,7 +2,8 @@ import React from "react";
 import "../../assets/css/genericStyle.css";
 import AuthorInfoCard from "./AuthorInfoCard";
 import { imgAddr, siteAddr } from "../../assets/config";
-import { Tooltip, Paper,Card, CardActionArea, CardMedia } from "@material-ui/core";
+import { Paper,Card, CardActionArea, CardMedia } from "@material-ui/core";
+import DivideLine from "../DivideLine";
 
 export function PermitCard(props) {
   if (props.author) {
@@ -70,18 +71,6 @@ function WorkDisplay(props) {
     </div>
   );
 }
-function DivideLine(props) {
-  let tip = props.tip ? props.tip : "";
-  return (
-    <div className="aliContH divide" style={props.styling}>
-      <hr></hr>
-      <Tooltip arrow title={tip}>
-        <p className="workType">{props.text}</p>
-      </Tooltip>
-      <hr></hr>
-    </div>
-  );
-}
 
 const ais = {
   wrapperSty: {
@@ -119,9 +108,6 @@ const ais = {
   },
   statusSty: {},
 };
-const placeholderDivide = {
-  visibility: "hidden",
-};
 
 function CSSInjector() {
   return (
@@ -137,22 +123,6 @@ function CSSInjector() {
   width: 100%;
   display: flex;
   justify-content: space-around;
-}
-.divide {
-  width: 100%;
-}
-.divide hr{
-  border-top: 0.1em solid rgb(140,140,140);
-  margin: 0px 0.5em 0px 0.8em;
-  width: inherit;
-  border-radius: 0.4em;
-}
-.divide p {
-  min-width:6em
-}
-.workType {
-  width: 12%;
-  text-align: center;
 }
 #artworkWrap {
   width: 80%;

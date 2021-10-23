@@ -1,5 +1,6 @@
 import { apiAddr } from "./assets/config";
 export default async function APIGet(target) {
+  console.log("api request recieved")
   switch (target.type) {
     case "getThumbs": {
       return await (
@@ -11,9 +12,14 @@ export default async function APIGet(target) {
         await fetch(`${apiAddr}/baimianxiao/data/workData/${target.payload.uri}`)
       ).json();
     }
-    case "getPermitData":{
+    case "getAllPermitData":{
       return await (
         await fetch(`${apiAddr}/baimianxiao/data/permitData/all`)
+      ).json();
+    }
+    case "getPermitDataSingle":{
+      return await (
+        await fetch(`${apiAddr}/baimianxiao/data/permitData/${target.payload.uri}`)
       ).json();
     }
     default: {

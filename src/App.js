@@ -6,6 +6,7 @@ import { AboutPage } from "./components/pages/AboutPage";
 import ArtworkInfoPage from "./components/pages/ArtworkInfoPage";
 import AuthorPage from "./components/pages/AuthorPage";
 import Footer from "./components/Footer";
+import PermitPage from "./components/pages/PermitPage";
 
 function App() {
   return (
@@ -14,19 +15,19 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/artwork/:uri">
-            <ArtworkInfoPage></ArtworkInfoPage>{" "}
+            <ArtworkInfoPage />
           </Route>
           <Route path="/about">
-            <AboutPage></AboutPage>
+            <AboutPage />
           </Route>
           <Route path="/author">
-            <AuthorPage></AuthorPage>
+            <AuthorPage />
           </Route>
-          <Route>
-            
+          <Route path="/permit/:uri">
+            <PermitPage />
           </Route>
           <Route path="/">
-            <ThumbPage></ThumbPage>
+            <ThumbPage />
           </Route>
         </Switch>
       </BrowserRouter>

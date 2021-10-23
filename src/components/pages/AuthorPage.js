@@ -14,7 +14,7 @@ import "../../assets/css/genericStyle.css";
 
 export default function AuthorPage() {
   const target = {
-    type: "getPermitData",
+    type: "getAllPermitData",
     payload: {},
   };
 
@@ -90,7 +90,7 @@ function WorkDisplay(props) {
   return (
     <div id="workDispWrap">
       {props.works.map((source, index) => (
-        <Card>
+        <Card key={`c${index}`}>
           <CardActionArea
             href={`${siteAddr}/artwork/${source}`}
             key={`a${index}`}
@@ -129,7 +129,7 @@ const ais = {
     width: "13%",
     minWidth: "90px",
     borderRadius: "0.5rem",
-    margin: "1%",
+    margin: "0.5rem",
   },
   imageSty: {
     width: "80px",
@@ -139,7 +139,7 @@ const ais = {
   nameSty: {
     textAlign: "center",
     fontSize: "1.2em",
-    margin: "3%",
+    margin: "0.5rem",
     width: "100%",
   },
   contactSty: {

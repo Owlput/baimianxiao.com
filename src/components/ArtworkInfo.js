@@ -1,14 +1,15 @@
 import React from "react";
-import { imgAddr } from "../assets/config";
+import { imgAddr, siteAddr } from "../assets/config";
 import TagCollection from "./TagCollection";
 import "../assets/css/genericStyle.css";
 import LinkedIcon from "./LinkedIcon";
 import { useState } from "react";
 import AuthorInfoCard from "./cards/AuthorInfoCard";
-import { CardActionArea, Paper, Card, CardMedia } from "@material-ui/core";
+import { CardActionArea, Paper, Card, CardMedia, CircularProgress } from "@material-ui/core";
 
 export default function ArtworkInfo(props) {
-  let data = props.uri ? props : defaultData;
+  if(props.uri){
+  let data = props
   return (
     <div id="compWrap">
       <CSSInjector />
@@ -19,8 +20,9 @@ export default function ArtworkInfo(props) {
       </div>
       <ArtworkInfoDiv {...data}></ArtworkInfoDiv>
     </div>
-  );
-}
+  );}
+  else return <CircularProgress/>
+  }
 
 function ArtworkInfoDiv(props) {
   const tagStyle = {
@@ -49,14 +51,19 @@ function ArtworkInfoDiv(props) {
         <hr />
         <div id="infoOther" className="aliContV">
           <p>其他平台</p>
-          <div className="aliContH">
+          <div className="aliContH" id="infoOtherIcoWrap">
             {props.source.other.map((source, index) => (
               <LinkedIcon type={source[0]} to={source[1]} key={index} />
             ))}
           </div>
         </div>
         <hr />
-        <div id="infoPermit" className="aliContV"></div>
+        <div id="infoPermit" className="aliContV">
+          <p>授权信息</p>
+          <div className="aliContV">
+            <a href={`${siteAddr}/permit/${props.uri}`}>详细信息</a>
+            </div>
+        </div>
       </div>
     </Paper>
   );
@@ -99,15 +106,15 @@ function AuthorSidebar(props) {
     statusSty: {},
   };
   return (
-    <div id="AuthorSidebarWrap">
-      <Paper className="aliContV">
+    <div id="authorSidebarWrap">
+      <Paper className="aliContV fillAvailH">
         <AuthorInfoCard {...props} {...ais}></AuthorInfoCard>
         <div id="recentWork">
           <p id="recentWorkP">最近作品</p>
           <div id="recentWorkDisp">
             {props.recentWorks.map((thumb, index) => (
-              <Card>
-                <CardActionArea href={`/artwork/${thumb}`}>
+              <Card key={`c${index}`}>
+                <CardActionArea href={`/artwork/${thumb}`} key={`b${index}`}>
                   <CardMedia
                     component="img"
                     height="90"
@@ -220,9 +227,9 @@ function CSSInjector() {
   flex-direction: column;
   align-items: center;
   background-color: rgb(245,245,245);
-  width: 100%;
+  width: 20%;
   max-width: 14rem;
-  min-width:9rem;
+  min-width:12rem;
   margin-left:0.8rem;
   border-radius:1rem;
 }
@@ -243,7 +250,7 @@ function CSSInjector() {
 #artworkInfoWrapper{
   margin:1rem;
   display:grid;
-  grid-template-columns:100px 4px auto 4px 20%;
+  grid-template-columns:minmax(7rem,8rem) 4px auto 4px 20%;
 }
 #artworkInfoWrapper hr {
   border:1px solid rgb(215,215,215);
@@ -252,8 +259,8 @@ function CSSInjector() {
 }
 #infoAuthor{
   align-self:center;
-  width:15%;
-  min-width:90px;
+  max-width:8rem;
+  min-width:7rem;
   height:100%;
 }
 #infoAuthor img{
@@ -272,10 +279,20 @@ function CSSInjector() {
   margin:0.5rem;
   color:rgb(100,100,100);
   min-width:5rem;
+  text-align:center;
 }
-#infoOther div{
+#infoOtherIcoWrap{
   width:90%;
   justify-content:space-around;
+}
+#infoPermit p{
+  text-decoration:none;
+  color:rgb(100,100,100);
+  margin:0.5rem;
+}
+#infoPermit a{
+  color:black;
+  margin:0.5rem;
 }
 #recentWorkWrap{
   width:100%;
@@ -309,26 +326,3 @@ function CSSInjector() {
     </style>
   );
 }
-
-const defaultData = {
-  uri: "",
-  title: "",
-  author: ["", ""],
-  tags: [["", 0]],
-  source: {
-    other: [["", ""]],
-    from: "",
-    this: [""],
-  },
-  license: {
-    type: "",
-    source: "",
-  },
-  authorInfo: {
-    name: "",
-    authorId: "",
-    image: "",
-    contact: [["", ""]],
-    recentWorks: ["", ""],
-  },
-};
