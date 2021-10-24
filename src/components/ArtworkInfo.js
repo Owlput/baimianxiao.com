@@ -94,10 +94,11 @@ function AuthorSidebar(props) {
     },
     contactSty: {
       div: {
-        width: "90%",
+        width: "100px",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-around",
+        flexWrap:"wrap",
       },
       text: {
         fontSize: "5em",
