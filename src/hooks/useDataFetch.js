@@ -14,6 +14,6 @@ export default function useDataFetch(target){
   };
   useEffect(() => {
     handleData();
-  }, []);
+  },[]);
   return data;
 };

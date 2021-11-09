@@ -8,8 +8,10 @@ import AuthorInfoCard from "./cards/AuthorInfoCard";
 import { CardActionArea, Paper, Card, CardMedia, CircularProgress } from "@material-ui/core";
 
 export default function ArtworkInfo(props) {
+  
   if(props.uri){
   let data = props
+  console.log(data)
   return (
     <div id="compWrap">
       <CSSInjector />
@@ -59,10 +61,8 @@ function ArtworkInfoDiv(props) {
         </div>
         <hr />
         <div id="infoPermit" className="aliContV">
-          <p>授权信息</p>
-          <div className="aliContV">
             <a href={`${siteAddr}/permit/${props.uri}`}>详细信息</a>
-            </div>
+            <a href={props.source.from}>原图地址</a>
         </div>
       </div>
     </Paper>
