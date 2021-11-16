@@ -2,40 +2,73 @@ import ImageCard from "../cards/ImageCard";
 import { useEffect, useState } from "react";
 import useDataFetch from "../../hooks/useDataFetch";
 import PageSelector from "../PageSelector";
-import { CircularProgress, Paper,FormControl,InputLabel,Select,MenuItem } from "@material-ui/core";
+import {
+  CircularProgress,
+  Paper,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@material-ui/core";
 import "../../assets/css/genericStyle.css";
 
 export default function ThumbPage() {
-  
   /* Init all thumbs */
-   let target = {
+  let target = {
     type: "getThumbs",
-    payload: {
-    },
+    payload: {},
   };
   const thumbData = useDataFetch(target);
   /* Init all thumbs */
 
-  /* Init paging*/
   const [page, setPage] = useState([1, 1]);
+  const [timeSort, setTimeSort] = useState(1);
+  const [thumbDisp, setThumbDisp] = useState();
+
   useEffect(() => {
     setPage([1, thumbData ? Math.ceil(thumbData.length / 10) : 1]);
-
   }, [thumbData]);
-  /* Init paging */
+
   const changePage = (to) => {
     setPage([to, page[1]]);
   };
-  const changeTimeSort = (ev) =>{
-      
-  }
-  /* Decide what thumbs to be displayed based on current page */
-  let thumbsDisplayed = thumbData
-    ? thumbData.slice((page[0] - 1) * 10, page[0] * 10)
-    : undefined;
-  /* Decide what thumbs to be displayed based on current page */
-
-  if (thumbsDisplayed) {
+  const changeTimeSort = (ev) => {
+    setTimeSort(ev.target.value);
+    if (ev.target.value < 0) {
+      console.log("back!");
+    } else console.log("forth!");
+  };
+  useEffect(() => {
+    switch (timeSort) {
+      case -1: {
+        thumbData?.sort((s, t) => {
+          let a = s.date;
+          let b = t.date;
+          if (a > b) return 1;
+          if (a < b) return -1;
+        });
+        break;
+      }
+      case 1: {
+        thumbData?.sort((s, t) => {
+          let a = s.date;
+          let b = t.date;
+          if (a > b) return -1;
+          if (a < b) return 1;
+        });
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  });
+  useEffect(() => {
+    let a = thumbData?.slice((page[0] - 1) * 10, page[0] * 10);
+    setThumbDisp(a);
+  }, [thumbData, timeSort, page]);
+  console.log(thumbDisp);
+  if (thumbDisp) {
     return (
       <div className="aliContV" id="compWrap">
         <CSSInjector />
@@ -47,7 +80,7 @@ export default function ThumbPage() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={""}
+                  value={timeSort}
                   label="TimeSort"
                   onChange={changeTimeSort}
                 >
@@ -57,8 +90,8 @@ export default function ThumbPage() {
               </FormControl>
             </div>
             <div style={itws}>
-              {thumbsDisplayed ? (
-                thumbsDisplayed.map((image, index) => (
+              {thumbDisp ? (
+                thumbDisp.map((image, index) => (
                   <ImageCard {...image} style={ics} key={index}></ImageCard>
                 ))
               ) : (
