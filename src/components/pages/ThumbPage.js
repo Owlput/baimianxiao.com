@@ -59,7 +59,7 @@ export default function ThumbPage() {
         break;
       }
       default: {
-        break;
+        return 1;
       }
     }
   });

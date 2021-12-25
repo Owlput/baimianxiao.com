@@ -7,6 +7,7 @@ import ArtworkInfoPage from "./components/pages/ArtworkInfoPage";
 import AuthorPage from "./components/pages/AuthorPage";
 import Footer from "./components/Footer";
 import PermitPage from "./components/pages/PermitPage";
+import DatagenPage from "./components/pages/DatagenPage";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path="/permit/:uri">
             <PermitPage />
+          </Route>
+          <Route path="/datagen">
+            <DatagenPage />
           </Route>
           <Route path="/">
             <ThumbPage />
