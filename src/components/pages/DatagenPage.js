@@ -5,15 +5,35 @@ import { css } from "@emotion/react";
 import TextField from "@mui/material/TextField";
 
 export default function DatagenPage() {
+  const [location, setLocation] = useState("work");
+  function handleLocation(loc) {
+    if (loc === "work" || loc === "author" || loc === "thumb") setLocation(loc);
+  }
+  switch (location) {
+    case "work":
+      return <WorkDatagen changeLoc={handleLocation} />;
+    case "author":
+      return <AuthorDatagen changeLoc={handleLocation} />;
+    case "thumb":
+      return <ThumbDatagen changeLoc={handleLocation} />;
+    default:
+      return (
+        <h1>
+          ERR:Unrecognized location: {location}. This is a bug, please report.
+        </h1>
+      );
+  }
+}
+
+function WorkDatagen(props) {
   const [workId, setWorkId] = useState("");
   const [workTitle, setWorkTitle] = useState("");
-  const [workTag, setWorkTag] = useState([""]);
   const [workAuthor, setWorkAuthor] = useState(["", ""]);
   const [workSource, setWorkSource] = useState(defaultSource);
   const [workLicense, setWorkLicense] = useState(defaultLicense);
+  const [artTag, setArtTag] = useState([]);
 
   let cache = [];
-  console.log(workTag);
   const handleWorkId = (ev) => {
     setWorkId(ev.target.value);
   };
@@ -27,30 +47,35 @@ export default function DatagenPage() {
     cache = [];
   };
   const handleWorkAuthorId = (ev) => {
-    cache = workAuthor;
+    cache = [...workAuthor];
     cache[1] = ev.target.value;
-    setWorkAuthor();
+    setWorkAuthor(cache);
     cache = [];
   };
-  const handleNewTag = () => {
-    cache = workTag;
+  const handleNewArtTag = () => {
+    cache = [...artTag];
     cache.push("");
-    console.log(cache);
-    setWorkTag(cache);
+    setArtTag(cache);
     cache = [];
   };
-  function handleRemoveTag(target) {
-    cache = workTag;
+  function handleRemoveArtTag(target) {
+    cache = [...artTag];
     cache.splice(target, target + 1);
-    setWorkTag(cache);
+    setArtTag(cache);
     cache = [];
   }
-  function handleTag(target, value) {
-    cache = workTag;
+  function handleArtTag(target, value) {
+    cache = [...artTag];
     cache[target] = value;
-    setWorkTag(cache);
+    setArtTag(cache);
     cache = [];
   }
+  const handleSource = (ev) => {
+    setWorkSource({
+      ...workSource,
+      from: ev.target.value,
+    });
+  };
   const handleNewFilename = () => {
     cache = workSource.this;
     cache.push("");
@@ -78,15 +103,6 @@ export default function DatagenPage() {
     });
     cache = [];
   }
-  function handleWorkSourceType(target, value) {
-    cache = workSource.other;
-    cache[target][0] = value;
-    setWorkSource({
-      ...workSource,
-      other: cache,
-    });
-    cache = [];
-  }
   const handleNewOtherSource = () => {
     cache = workSource.other;
     cache.push(["", ""]);
@@ -105,7 +121,7 @@ export default function DatagenPage() {
     });
     cache = [];
   }
-  const handleWorkSourceUrl = (target, value) => {
+  const handleOtherSourceUrl = (target, value) => {
     cache = workSource.other;
     cache[target][1] = value;
     setWorkSource({
@@ -114,7 +130,15 @@ export default function DatagenPage() {
     });
     cache = [];
   };
-
+  function handleOtherSourceType(target, value) {
+    cache = workSource.other;
+    cache[target][0] = value;
+    setWorkSource({
+      ...workSource,
+      other: cache,
+    });
+    cache = [];
+  }
   const handleWorkLicenseSource = (ev) => {
     setWorkLicense({
       ...workLicense,
@@ -142,6 +166,7 @@ export default function DatagenPage() {
           justify-contents: space-around;
         `}
       >
+        <LocationSwitch changeLoc={props.changeLoc} />
         <div>
           <h2>Basic Info</h2>
           <div
@@ -159,22 +184,22 @@ export default function DatagenPage() {
           <div>
             <TextField
               label="Author Name"
-              value={workAuthor.authorName}
+              value={workAuthor[0]}
               onChange={handleWorkAuthorName}
             />
             <TextField
               label="Author ID"
-              value={workAuthor.authorName}
+              value={workAuthor[1]}
               onChange={handleWorkAuthorId}
             />
           </div>
           <div>
             <h3>Tags</h3>
             <MultiInput
-              content={workTag}
-              new={handleNewTag}
-              remove={handleRemoveTag}
-              change1={handleTag}
+              content={artTag}
+              new={handleNewArtTag}
+              remove={handleRemoveArtTag}
+              change1={handleArtTag}
               remark={["Tag"]}
               single
             />
@@ -187,8 +212,8 @@ export default function DatagenPage() {
               width: 50%;
             `}
             label="Origin"
-            value={workId}
-            onChange={handleWorkId}
+            value={workSource.from}
+            onChange={handleSource}
           />
           <div>
             <h3>Filename</h3>
@@ -207,8 +232,8 @@ export default function DatagenPage() {
               content={workSource.other}
               new={handleNewOtherSource}
               remove={handleRemoveOtherSource}
-              change1={handleWorkSourceType}
-              change2={handleWorkSourceUrl}
+              change1={handleOtherSourceType}
+              change2={handleOtherSourceUrl}
               remark={["Source", "Type", "URL"]}
               dual
             />
@@ -216,13 +241,11 @@ export default function DatagenPage() {
         </div>
         <div>
           <TextField
-            id="outlined-name"
             label="License Type"
             value={workLicense.type}
             onChange={handleWorkLicenseType}
           />
           <TextField
-            id="outlined-name"
             label="License URL"
             value={workLicense.source}
             onChange={handleWorkLicenseSource}
@@ -235,12 +258,13 @@ export default function DatagenPage() {
           margin: 1rem 10% 1rem 10%;
         `}
       >
+        <h3>Work Data</h3>
         <div>{`
         {
           "uri":"${workId}",
           title:"${workTitle}",
           author:${JSON.stringify(workAuthor)},
-          tags:${JSON.stringify(workTag)},
+          tags:${JSON.stringify("")},
           source:{
             this:${JSON.stringify(workSource.this)},
             from:${JSON.stringify(workSource.from)},
@@ -253,7 +277,263 @@ export default function DatagenPage() {
     </div>
   );
 }
+function AuthorDatagen(props) {
+  const [authorInfo, setAuthorInfo] = useState(["", "", "", ""]); //["name","imageLocation","autorId"]
+  const [authorContact, setAuthorContact] = useState([]);
+  const [recentWork, setRecentWork] = useState([]);
+  let cache = [];
+  function handleAuthorInfo(target, value) {
+    cache = [...authorInfo];
+    cache[target] = value;
+    setAuthorInfo(cache);
+    cache = [];
+  }
+  const handleNewContact = () => {
+    cache = [...authorContact];
+    cache.push(["", ""]); //["type","url"]
+    setAuthorContact(cache);
+    cache = [];
+  };
+  function handleRemoveContact(target) {
+    cache = [...authorContact];
+    cache.splice(target, target + 1);
+    setAuthorContact(cache);
+    cache = [];
+  }
+  function handleContactType(target, value) {
+    cache = [...authorContact];
+    cache[target][0] = value;
+    setAuthorContact(cache);
+    cache = [];
+  }
+  function handleContactURL(target, value) {
+    cache = [...authorContact];
+    cache[target][1] = value;
+    setAuthorContact(cache);
+    cache = [];
+  }
+  const handleNewRecentWork = () => {
+    cache = [...recentWork];
+    cache.push("");
+    setRecentWork(cache);
+    cache = [];
+  };
+  function handleRemoveRecentWork(target) {
+    cache = [...recentWork];
+    cache.splice(target, target + 1);
+    setRecentWork(cache);
+    cache = [];
+  }
+  function handleRecentWork(target, value) {
+    cache = [...recentWork];
+    cache[target] = value;
+    setRecentWork(cache);
+    cache = [];
+  }
+  return (
+    <div
+      css={css`
+        width: 100%;
+      `}
+    >
+      <Paper
+        css={css`
+          margin: 0px 10%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-contents: space-around;
+        `}
+      >
+        <LocationSwitch changeLoc={props.changeLoc} />
+        <div>
+          <h2>Basic Info</h2>
+          <TextField
+            label="Author Name"
+            value={authorInfo[0]}
+            onChange={(ev) => handleAuthorInfo(0, ev.target.value)}
+          />
+          <TextField
+            label="Profile Image Filename"
+            value={authorInfo[1]}
+            onChange={(ev) => handleAuthorInfo(1, ev.target.value)}
+          />
+          <TextField
+            label="Author ID"
+            value={authorInfo[2]}
+            onChange={(ev) => handleAuthorInfo(2, ev.target.value)}
+          />
+        </div>
+        <div>
+          <h2>Contacts</h2>
+          <MultiInput
+            content={authorContact}
+            new={handleNewContact}
+            remove={handleRemoveContact}
+            change1={handleContactType}
+            change2={handleContactURL}
+            remark={["Contact", "Type", "URL"]}
+            dual
+          />
+        </div>
+        <div>
+          <h2>Recent Works</h2>
+          <MultiInput
+            content={recentWork}
+            new={handleNewRecentWork}
+            remove={handleRemoveRecentWork}
+            change1={handleRecentWork}
+            remark={["Recent Work"]}
+            single
+          />
+        </div>
+      </Paper>
+      <Paper
+        css={css`
+          margin: 1rem 10%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-contents: space-around;
+        `}
+      >
+        <div>{`
+        {
+          "name":"${authorInfo[0]}",
+          "image":"${authorInfo[1]}",
+          "authorId":"${authorInfo[2]}",
+          "contact":${JSON.stringify(authorContact)},
+          "recentWorks":${JSON.stringify(recentWork)},
+        }
+        `}</div>
+      </Paper>
+    </div>
+  );
+}
+function ThumbDatagen(props) {
+  const [workId, setWorkId] = useState("");
+  const [workTitle, setWorkTitle] = useState("");
+  const [workAuthor, setWorkAuthor] = useState(["", "", ""]); //["name","Author ID","Image Location"]
+  const [postDate, setPostDate] = useState("");
+  let cache = [];
 
+  const handleWorkId = (ev) => {
+    setWorkId(ev.target.value);
+  };
+  const handleWorkTitle = (ev) => {
+    setWorkTitle(ev.target.value);
+  };
+
+  const handlePostDate = (ev) => {
+    setPostDate(ev.target.value);
+  };
+  const handleAuthorName = (ev) => {
+    cache = workAuthor;
+    cache[0] = ev.target.value;
+    setWorkAuthor(cache);
+    cache = [];
+  };
+  const handleAuthorId = (ev) => {
+    cache = [...workAuthor];
+    cache[1] = ev.target.value;
+    setWorkAuthor(cache);
+    cache = [];
+  };
+  const handleAuthorImage = (ev) => {
+    cache = [...workAuthor];
+    cache[2] = ev.target.value;
+    setWorkAuthor(cache);
+    cache = [];
+  };
+  return (
+    <div
+      css={css`
+        width: 100%;
+      `}
+    >
+      <Paper
+        css={css`
+          margin: 0px 10%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-contents: space-around;
+        `}
+      >
+        <LocationSwitch changeLoc={props.changeLoc} />
+        <div>
+          <h2>Basic Info</h2>
+          <TextField label="Work URI" value={workId} onChange={handleWorkId} />
+          <TextField
+            label="Work Title"
+            value={workTitle}
+            onChange={handleWorkTitle}
+          />
+          <TextField
+            label="Work Post Date"
+            value={postDate}
+            onChange={handlePostDate}
+          />
+        </div>
+        <div>
+          <h2>Author Data</h2>
+          <TextField
+            label="Author Name"
+            value={workAuthor[0]}
+            onChange={handleAuthorName}
+          />
+          <TextField
+            label="Author ID"
+            value={workAuthor[1]}
+            onChange={handleAuthorId}
+          />
+          <TextField
+            label="Profile Image Filename"
+            value={workAuthor[2]}
+            onChange={handleAuthorImage}
+          />
+        </div>
+      </Paper>
+      <Paper
+        css={css`
+          margin: 1rem 10%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-contents: space-around;
+        `}
+      >
+        <div>{`
+        {
+          "uri":"${workId}",
+          "title":"${workTitle}",
+          "date":"${postDate}",
+          "author":{
+            "name":"${workAuthor[0]}",
+            "aId":"${workAuthor[1]}",
+            "image":"${workAuthor[2]}"
+          },
+        }
+        `}</div>
+      </Paper>
+    </div>
+  );
+}
+function LocationSwitch(props) {
+  return (
+    <div
+      css={css`
+        align-self: center;
+      `}
+    >
+      <ButtonGroup>
+        <Button onClick={() => props.changeLoc("work")}>Work Data</Button>
+        <Button onClick={() => props.changeLoc("author")}>Author Data</Button>
+        <Button onClick={() => props.changeLoc("thumb")}>Thumb Data</Button>
+      </ButtonGroup>
+    </div>
+  );
+}
 function MultiInput(props) {
   if (props.dual) {
     if (props.content.length === 0)
@@ -274,13 +554,13 @@ function MultiInput(props) {
             >
               <TextField
                 key={`srctype${index}`}
-                label={`${props.remark[0]} ${index + 1} ${props.remark[1]}`}
+                label={`${props.remark[0]} ${index + 1} ${props.remark?.[1]}`}
                 value={item[0]}
                 onChange={(ev) => props.change1(index, ev.target.value)}
               />
               <TextField
                 key={`srcurl${index}`}
-                label={`${props.remark[0]} ${index + 1} ${props.remark[2]}`}
+                label={`${props.remark[0]} ${index + 1} ${props.remark?.[2]}`}
                 value={item[1]}
                 onChange={(ev) => props.change2(index, ev.target.value)}
               />
@@ -362,7 +642,6 @@ function MultiInputBtn(props) {
       </Button>
     );
 }
-
 const defaultSource = {
   this: [""],
   from: "",
