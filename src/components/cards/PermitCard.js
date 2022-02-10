@@ -1,17 +1,40 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
 import React from "react";
 import "../../assets/css/genericStyle.css";
 import AuthorInfoCard from "./AuthorInfoCard";
 import { imgAddr, siteAddr } from "../../assets/config";
-import { Paper,Card, CardActionArea, CardMedia } from "@material-ui/core";
+import { Paper, Card, CardActionArea, CardMedia } from "@material-ui/core";
 import DivideLine from "../DivideLine";
 
 export function PermitCard(props) {
   if (props.author) {
     return (
-      <Paper className="aliContH" id="cWrap">
-        <CSSInjector />
+      <Paper
+        className="aliContH"
+        css={css`
+          border-radius: 0.5rem;
+          width: 85%;
+          justify-content: space-between;
+          margin: 1em 0px;
+        `}
+      >
         <AuthorInfoCard {...props.author} {...ais}></AuthorInfoCard>
-        <div className="aliContV" id="worksDisp">
+        <div
+          className="aliContV"
+          css={css`
+            width: 83%;
+            border-radius: 1em;
+            margin: 0.5em;
+            .workDisp {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              width: 90%;
+            }
+          `}
+        >
           <Permitted permitted={props.permitted} />
           <Useable useable={props.useable} />
           <Other other={props.other} />
@@ -60,11 +83,26 @@ function Other(props) {
 }
 function WorkDisplay(props) {
   return (
-    <div id="workDispWrap">
+    <div
+      css={css`
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+      `}
+    >
       {props.works.map((source, index) => (
         <Card>
-          <CardActionArea href={`${siteAddr}/artwork/${source}`} key={`a${index}`}>
-            <CardMedia component="img" height="100" image={`${imgAddr}/thumbs/${source}.jpg`} key={`img${index}`} alt="artwork"/>
+          <CardActionArea
+            href={`${siteAddr}/artwork/${source}`}
+            key={`a${index}`}
+          >
+            <CardMedia
+              component="img"
+              height="100"
+              image={`${imgAddr}/thumbs/${source}.jpg`}
+              key={`img${index}`}
+              alt="artwork"
+            />
           </CardActionArea>
         </Card>
       ))}
@@ -85,7 +123,7 @@ const ais = {
   imageSty: {
     width: "80px",
     borderRadius: "50%",
-    margin:"0.5rem"
+    margin: "0.5rem",
   },
   nameSty: {
     textAlign: "center",
@@ -100,7 +138,7 @@ const ais = {
       flexDirection: "row",
       justifyContent: "space-around",
       flexWrap: "wrap",
-      margin:"0.5rem",
+      margin: "0.5rem",
     },
     text: {
       fontSize: "5em",
@@ -109,39 +147,3 @@ const ais = {
   statusSty: {},
 };
 
-function CSSInjector() {
-  return (
-    <style>
-      {`
-  #cWrap {
-  border-radius: 0.5rem;
-  width: 85%;
-  justify-content: space-between;
-  margin: 1em 0px;
-}
-#workDispWrap{
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-}
-#artworkWrap {
-  width: 80%;
-  background-color: rgb(230,230,230);
-  margin: 0.1em;
-  border-radius: 1em;
-}
-#worksDisp{
-  width:83%;
-  border-radius:1em;
-  margin:0.5em;
-}
-.workDisp{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
-}
-`}
-    </style>
-  );
-}

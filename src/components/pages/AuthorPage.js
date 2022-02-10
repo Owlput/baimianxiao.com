@@ -1,3 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
 import React from "react";
 import useDataFetch from "../../hooks/useDataFetch";
 import { CircularProgress } from "@material-ui/core";
@@ -12,17 +15,25 @@ import {
 } from "@material-ui/core";
 import "../../assets/css/genericStyle.css";
 
-export default function AuthorPage() {
-  const target = {
-    type: "getAllPermitData",
-    payload: {},
-  };
+const target = {
+  type: "getAllPermitData",
+  payload: {},
+};
 
+export default function AuthorPage() {
   const permData = useDataFetch(target);
   if (permData) {
     return (
-      <div id="pageWrap">
-        <CSSInjector />
+      <div
+        css={css`
+          background-color: rgb(250, 250, 250);
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          min-height: 1200px;
+        `}
+      >
         {permData.map((permit, index) => (
           <PermitCard {...permit} key={index}></PermitCard>
         ))}
@@ -33,64 +44,66 @@ export default function AuthorPage() {
   }
 }
 
-function PermitCard(props) {
-  
-  if (props.author) {
-    return (
-      <Paper className="aliContH" id="cWrap">
-        <AuthorInfoCard {...props.author} {...ais}></AuthorInfoCard>
-        <div className="aliContV" id="worksDisp">
-          <Permitted permitted={props.permitted} />
-          <Useable useable={props.useable} />
-          <Other other={props.other} />
-          <DivideLine styling={placeholderDivide}></DivideLine>
-        </div>
-      </Paper>
-    );
-  } else return <></>;
-}
-
-function Permitted(props) {
-  if (props.permitted[0]) {
-    return (
-      <div className="workDisp">
-        <DivideLine text="已授权作品" tip="已经正式获得授权的作品"></DivideLine>
-        <WorkDisplay works={props.permitted}></WorkDisplay>
+const PermitCard = (props) =>
+  props.author ? (
+    <Paper
+      className="aliContH"
+      css={css`
+        border-radius: 0.5rem;
+        width: 85%;
+        justify-content: space-between;
+        margin: 1em 0px;
+        .workDisp {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 90%;
+        }
+      `}
+    >
+      <AuthorInfoCard {...props.author} {...ais}></AuthorInfoCard>
+      <div
+        className="aliContV"
+        css={css`
+          width: 83%;
+          border-radius: 1em;
+          margin: 0.5em;
+        `}
+      >
+        <Permitted permitted={props.permitted} />
+        <Useable useable={props.useable} />
+        <Other other={props.other} />
+        <DivideLine invisible></DivideLine>
       </div>
-    );
-  } else return <></>;
-}
-function Useable(props) {
-  if (props.useable[0]) {
-    return (
-      <div className="workDisp">
-        <DivideLine
-          text="可使用作品"
-          tip="以非正式方式声明可以使用的作品"
-        ></DivideLine>
-        <WorkDisplay works={props.useable}></WorkDisplay>
-      </div>
-    );
-  } else return <></>;
-}
-function Other(props) {
-  if (props.other[0]) {
-    return (
-      <div className="workDisp">
-        <DivideLine
-          text="其他作品"
-          tip='认为属于"合理使用"范围的作品'
-        ></DivideLine>
-        <WorkDisplay works={props.other}></WorkDisplay>
-      </div>
-    );
-  } else return <></>;
-}
+    </Paper>
+  ) : (
+    <></>
+  );
 function WorkDisplay(props) {
   return (
-    <div id="workDispWrap">
+    <div
+      css={css`
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: space-between;
+      `}
+    >
+      {props.works.length <= 2 ? (
+        <div
+          style={{ height: "0px", width: "0px", visibility: "hidden" }}
+        ></div>
+      ) : (
+        <></>
+      )}
       {props.works.map((source, index) => (
-        <Card key={`c${index}`}>
+        <Card
+          key={`c${index}`}
+          css={css`
+            flex: 0 0 auto;
+          `}
+        >
           <CardActionArea
             href={`${siteAddr}/artwork/${source}`}
             key={`a${index}`}
@@ -105,16 +118,83 @@ function WorkDisplay(props) {
           </CardActionArea>
         </Card>
       ))}
+      {props.works.length <= 2 ? (
+        <div
+          style={{ height: "0px", width: "0px", visibility: "hidden" }}
+        ></div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
+function Permitted(props) {
+  return props.permitted[0] ? (
+    <div className="workDisp">
+      <DivideLine text="已授权作品" tip="已经正式获得授权的作品"></DivideLine>
+      <WorkDisplay works={props.permitted}></WorkDisplay>
+    </div>
+  ) : (
+    <></>
+  );
+}
+function Useable(props) {
+  return props.useable[0] ? (
+    <div className="workDisp">
+      <DivideLine
+        text="可使用作品"
+        tip="以非正式方式声明可以使用的作品"
+      ></DivideLine>
+      <WorkDisplay works={props.useable}></WorkDisplay>
+    </div>
+  ) : (
+    <></>
+  );
+}
+function Other(props) {
+  return props.other[0] ? (
+    <div className="workDisp">
+      <DivideLine
+        text="其他作品"
+        tip='认为属于"合理使用"范围的作品'
+      ></DivideLine>
+      <WorkDisplay works={props.other}></WorkDisplay>
+    </div>
+  ) : (
+    <></>
+  );
+}
 function DivideLine(props) {
-  let tip = props.tip ? props.tip : "";
+  let tip = props.tip ?? "";
   return (
-    <div className="aliContH divide" style={props.styling}>
+    <div
+      css={css`
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        hr {
+          border-top: 0.1em solid rgb(140, 140, 140);
+          margin: 0px 0.5em 0px 0.8em;
+          width: inherit;
+          border-radius: 0.4em;
+        }
+        p {
+          min-width: 6em;
+        }
+      `}
+      style={props.invisible ? { visibility: "hidden" } : {}}
+    >
       <hr></hr>
       <Tooltip arrow title={tip}>
-        <p className="workType">{props.text}</p>
+        <p
+          css={css`
+            width: 12%;
+            text-align: center;
+          `}
+        >
+          {props.text}
+        </p>
       </Tooltip>
       <hr></hr>
     </div>
@@ -144,12 +224,7 @@ const ais = {
   },
   contactSty: {
     div: {
-      minWidth: "95%",
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-around",
-      flexWrap: "wrap",
-      margin: "0.5rem",
+      width: "100%",
     },
     text: {
       fontSize: "5em",
@@ -157,67 +232,3 @@ const ais = {
   },
   statusSty: {},
 };
-const placeholderDivide = {
-  visibility: "hidden",
-};
-
-function CSSInjector() {
-  return (
-    <style>
-      {`
-          #pageWrap{
-            background-color: rgb(250,250,250);
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height:1200px;
-          }
-  #cWrap {
-  border-radius: 0.5rem;
-  width: 85%;
-  justify-content: space-between;
-  margin: 1em 0px;
-}
-#workDispWrap{
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-}
-.divide {
-  width: 100%;
-}
-.divide hr{
-  border-top: 0.1em solid rgb(140,140,140);
-  margin: 0px 0.5em 0px 0.8em;
-  width: inherit;
-  border-radius: 0.4em;
-}
-.divide p {
-  min-width:6em
-}
-.workType {
-  width: 12%;
-  text-align: center;
-}
-#artworkWrap {
-  width: 80%;
-  background-color: rgb(230,230,230);
-  margin: 0.1em;
-  border-radius: 1em;
-}
-#worksDisp{
-  width:83%;
-  border-radius:1em;
-  margin:0.5em;
-}
-.workDisp{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
-}
-`}
-    </style>
-  );
-}

@@ -1,26 +1,32 @@
 import { apiAddr } from "./assets/config";
+import axios from "axios";
+
 export default async function APIGet(target) {
-  console.log("api request recieved")
+  console.log("api request recieved");
   switch (target.type) {
     case "getThumbs": {
-      return await (
-        await fetch(`${apiAddr}/baimianxiao/data/thumbData/all`)
-      ).json();
+      const { data } = await axios.get(
+        `${apiAddr}/baimianxiao/data/thumbData/all`
+      );
+      return data;
     }
     case "getArtworkData": {
-      return await (
-        await fetch(`${apiAddr}/baimianxiao/data/workData/${target.payload.uri}`)
-      ).json();
+      const { data } = await axios.get(
+        `${apiAddr}/baimianxiao/data/workData/${target.payload.uri}`
+      );
+      return data;
     }
-    case "getAllPermitData":{
-      return await (
-        await fetch(`${apiAddr}/baimianxiao/data/permitData/all`)
-      ).json();
+    case "getAllPermitData": {
+      const { data } = await axios.get(
+        `${apiAddr}/baimianxiao/data/permitData/all`
+      );
+      return data;
     }
-    case "getPermitDataSingle":{
-      return await (
-        await fetch(`${apiAddr}/baimianxiao/data/permitData/${target.payload.uri}`)
-      ).json();
+    case "getPermitDataSingle": {
+      const { data } = await axios.get(
+        `${apiAddr}/baimianxiao/data/permitData/${target.payload.uri}`
+      );
+      return data;
     }
     default: {
       throw new Error("Invalid request type!");

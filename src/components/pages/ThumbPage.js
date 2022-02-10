@@ -1,3 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
 import ImageCard from "../cards/ImageCard";
 import { useEffect, useState } from "react";
 import useDataFetch from "../../hooks/useDataFetch";
@@ -11,15 +14,13 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import "../../assets/css/genericStyle.css";
-
-export default function ThumbPage() {
-  /* Init all thumbs */
-  let target = {
+const target = {
     type: "getThumbs",
     payload: {},
   };
+export default function ThumbPage() {
+  
   const thumbData = useDataFetch(target);
-  /* Init all thumbs */
 
   const [page, setPage] = useState([1, 1]);
   const [timeSort, setTimeSort] = useState(1);
@@ -44,8 +45,9 @@ export default function ThumbPage() {
         thumbData?.sort((s, t) => {
           let a = s.date;
           let b = t.date;
-          if (a > b) return 1;
-          if (a < b) return -1;
+          if (a >= b) return 1;
+          else if (a < b) return -1;
+          else return 1;
         });
         break;
       }
@@ -53,8 +55,9 @@ export default function ThumbPage() {
         thumbData?.sort((s, t) => {
           let a = s.date;
           let b = t.date;
-          if (a > b) return -1;
-          if (a < b) return 1;
+          if (a >= b) return -1;
+          else if (a < b) return 1;
+          else return -1;
         });
         break;
       }
@@ -67,14 +70,30 @@ export default function ThumbPage() {
     let a = thumbData?.slice((page[0] - 1) * 10, page[0] * 10);
     setThumbDisp(a);
   }, [thumbData, timeSort, page]);
-  console.log(thumbDisp);
   if (thumbDisp) {
     return (
-      <div className="aliContV" id="compWrap">
-        <CSSInjector />
-        <Paper id="thumbDispWrap">
+      <div className="aliContV" style={{ minWidth: "80%" }}>
+        <Paper
+          css={css`
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 1em;
+            width: 92%;
+            max-width: 80em;
+            @media screen and (max-width: 768px) {
+              width: 100%;
+            }
+          `}
+        >
           <div>
-            <div id="sortBar">
+            <div
+              css={css`
+                @media screen and (max-width: 768px) {
+                  margin: 0.5rem;
+                }
+              `}
+            >
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">时间排序</InputLabel>
                 <Select
@@ -89,10 +108,17 @@ export default function ThumbPage() {
                 </Select>
               </FormControl>
             </div>
-            <div style={itws}>
+            <div
+              css={css`
+                display: flex;
+                width: 100%;
+                justify-content: space-around;
+                flex-wrap: wrap;
+              `}
+            >
               {thumbDisp ? (
                 thumbDisp.map((image, index) => (
-                  <ImageCard {...image} style={ics} key={index}></ImageCard>
+                  <ImageCard {...image} key={index}></ImageCard>
                 ))
               ) : (
                 <></>
@@ -109,54 +135,4 @@ export default function ThumbPage() {
   } else {
     return <CircularProgress />;
   }
-}
-
-/*
-  cws=componentWrapperStyle
-  itws=imageTabsWrapperStyle
-  ics=imageCardStyle
-  btns=buttonStyle
-  */
-const itws = {
-  display: "flex",
-  width: "100%",
-  margin: "5px",
-  justifyContent: "space-around",
-  flexWrap: "wrap",
-};
-const ics = {
-  background: {
-    backgroundColor: "rgb(240,240,240)",
-    width: "14em",
-    height: "18.8em",
-    margin: "0.3em 0.3em",
-    borderRadius: "10px",
-  },
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  image: {
-    width: "200px",
-  },
-};
-function CSSInjector() {
-  return (
-    <style>
-      {`
-    #compWrap{
-      min-width:80%;
-    }
-    #thumbDispWrap{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      border-radius: 1em;
-      width: 92%;
-      max-width: 80em;
-    }
-    `}
-    </style>
-  );
 }

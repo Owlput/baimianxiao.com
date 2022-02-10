@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import { Button, ButtonGroup, Paper } from "@material-ui/core";
 import React, { useState } from "react";
-import { css } from "@emotion/react";
+
 import TextField from "@mui/material/TextField";
 
 export default function DatagenPage() {
@@ -32,7 +33,6 @@ function WorkDatagen(props) {
   const [workSource, setWorkSource] = useState(defaultSource);
   const [workLicense, setWorkLicense] = useState(defaultLicense);
   const [artTag, setArtTag] = useState([]);
-
   let cache = [];
   const handleWorkId = (ev) => {
     setWorkId(ev.target.value);

@@ -1,37 +1,23 @@
 import React from "react";
 import { Tooltip } from "@material-ui/core";
 
-export default function DivideLine(props) {
-  if (props.tip && props.text)
+//Don't know where to use but keep this anyway
+export default function DivideLines(props) {
     return (
-      <div className="aliContH" style={sty.wrap}>
+      <div className="aliContH" style={props.invisible?{visibility:"hidden"}:sty.wrap}>
         <hr style={sty.hr}></hr>
-        <Tooltip arrow title={props.tip}>
-          <p style={sty.p}>{props.text}</p>
-        </Tooltip>
-        <hr style={sty.hr}></hr>
-      </div>
-    );
-  else if (props.text)
-    return (
-      <div className="aliContH" style={sty.wrap}>
-        <hr style={sty.hr}></hr>
-        <p style={sty.p}>{props.text}</p>
-        <hr style={sty.hr}></hr>
-      </div>
-    );
-  else
-    return (
-      <div className="aliContH" style={invisSty}>
-        <hr style={sty.hr}></hr>
-        <p style={sty.p}></p>
+        {props.tip && props.text ? (
+          <Tooltip arrow title={props.tip}>
+            <p style={sty.p}>{props.text}</p>
+          </Tooltip>
+        ) : (
+          <></>
+        )}
+        {!props.tip && props.text ? <p style={sty.p}>{props.text}</p> : <></>}
         <hr style={sty.hr}></hr>
       </div>
     );
 }
-const invisSty = {
-  visibility: "hidden",
-};
 const sty = {
   wrap: {
     width: "100%",

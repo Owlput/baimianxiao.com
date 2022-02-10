@@ -26,7 +26,7 @@ export default function LinkedIcon(props) {
     }
     case "twitter": {
       return (
-        <div>
+        <div className="LinkedIcon">
           <CardActionArea href={props.to}>
             <CardMedia
               component="img"
@@ -41,7 +41,7 @@ export default function LinkedIcon(props) {
     }
     case "weibo": {
       return (
-        <div>
+        <div className="LinkedIcon">
           <CardActionArea href={props.to}>
             <CardMedia
               component="img"
@@ -56,7 +56,7 @@ export default function LinkedIcon(props) {
     }
     case "bilibili": {
       return (
-        <div>
+        <div className="LinkedIcon">
           <CardActionArea href={props.to}>
             <CardMedia
               component="img"
@@ -71,7 +71,7 @@ export default function LinkedIcon(props) {
     }
     case "lofter": {
       return (
-        <div>
+        <div className="LinkedIcon">
           <CardActionArea href={props.to}>
             <CardMedia
               component="img"
@@ -86,7 +86,7 @@ export default function LinkedIcon(props) {
     }
     case "bcy": {
       return (
-        <div>
+        <div className="LinkedIcon">
           <CardActionArea href={props.to}>
             <CardMedia
               component="img"

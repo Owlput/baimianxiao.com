@@ -1,40 +1,30 @@
 import React from "react";
 import NavBar from "./components/NavBar";
 import ThumbPage from "./components/pages/ThumbPage";
-import { Route, BrowserRouter, Switch } from "react-router-dom";
 import { AboutPage } from "./components/pages/AboutPage";
 import ArtworkInfoPage from "./components/pages/ArtworkInfoPage";
 import AuthorPage from "./components/pages/AuthorPage";
 import Footer from "./components/Footer";
 import PermitPage from "./components/pages/PermitPage";
 import DatagenPage from "./components/pages/DatagenPage";
+import BottomNav from "./components/BottomNav";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div style={pageStyle}>
       <NavBar></NavBar>
       <BrowserRouter>
-        <Switch>
-          <Route path="/artwork/:uri">
-            <ArtworkInfoPage />
-          </Route>
-          <Route path="/about">
-            <AboutPage />
-          </Route>
-          <Route path="/author">
-            <AuthorPage />
-          </Route>
-          <Route path="/permit/:uri">
-            <PermitPage />
-          </Route>
-          <Route path="/datagen">
-            <DatagenPage />
-          </Route>
-          <Route path="/">
-            <ThumbPage />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/artwork/:uri" element={<ArtworkInfoPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/author" element={<AuthorPage />} />
+          <Route path="/permit/:uri" element={<PermitPage />} />
+          <Route path="/datagen" element={<DatagenPage />} />
+          <Route path="/" element={<ThumbPage />} />
+        </Routes>
       </BrowserRouter>
+      <BottomNav />
       <Footer></Footer>
     </div>
   );
