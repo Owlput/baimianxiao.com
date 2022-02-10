@@ -17,15 +17,14 @@ import {
   CardMedia,
   CircularProgress,
 } from "@material-ui/core";
-  let artworkDataTarget = {
-    type: "getArtworkData",
-    payload: {
-    },
-  };
+let artworkDataTarget = {
+  type: "getArtworkData",
+  payload: {},
+};
 
 export default function ArtworkInfoPage() {
   const auri = useParams();
-  artworkDataTarget.payload.uri = auri.uri
+  artworkDataTarget.payload.uri = auri.uri;
   const data = useDataFetch(artworkDataTarget);
 
   if (data) {
@@ -237,6 +236,13 @@ function AuthorSidebar(props) {
         max-width: 14rem;
         min-width: 12rem;
         border-radius: 1rem;
+        @media screen and (max-width: 800px) {
+          height: 0px;
+          min-width:0px;
+          width: 0px;
+          margin:0px;
+          visibility: hidden;
+        }
       `}
     >
       <Paper className="aliContV fillAvailH">
@@ -277,22 +283,24 @@ function AuthorSidebar(props) {
   );
 }
 function ArtworkDisplay(props) {
-  let imageDisplayed = props.source ? props.source.this : [];
+  let imageDisplayed = props.source?.this ?? [];
   const [expand, setExpand] = useState(false);
   if (expand) {
     return (
       <Paper
-        css={css`  width: 100%;
-      border-radius: 0.5rem;
-    }
-    button {
-      border: none;
-      padding: 0px;
-      width: 100%;
-      height: 2rem;
-    }img {
-      width: 100%;
-    }`}
+        css={css`
+          width: 100%;
+          border-radius: 0.5rem;
+          button {
+            border: none;
+            padding: 0px;
+            width: 100%;
+            height: 2rem;
+          }
+          img {
+            width: 100%;
+          }
+        `}
       >
         {imageDisplayed.map((source, index) => (
           <img

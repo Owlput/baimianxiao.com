@@ -20,7 +20,7 @@ export default function NavBar() {
           font-size: 1.5rem !important;
           color: rgb(100, 100, 100) !important;
         }
-        @media screen and (max-width:768px){
+        @media screen and (max-width:800px){
           height:0px;
           visibility:hidden;
         }

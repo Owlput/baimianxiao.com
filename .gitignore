@@ -24,3 +24,4 @@ yarn-error.log*
 
 /public/img
 .package-lock.json
+deploy.sh

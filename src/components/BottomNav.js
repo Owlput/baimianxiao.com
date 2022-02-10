@@ -6,15 +6,13 @@ import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 
-
-
 export default function BottomNav(props) {
   
     return (
       <Box css={css`
         visibility:hidden;
         height:0px;
-        @media screen and (max-width:768px){
+        @media screen and (max-width:800px){
             visibility:visible;
             height:auto;
             width:100%;
@@ -24,15 +22,15 @@ export default function BottomNav(props) {
       `}>
         <BottomNavigation
           showLabels
-          value={props.value??"Homepage"}
+          value={props.location??"/"}
           css={css`
             height:3.5rem;
             width:100%;
           `}
         >
-          <BottomNavigationAction label="首页" href="/" value="Homepage"/>
-          <BottomNavigationAction label="作者" href="/author" value="Authors"/>
-          <BottomNavigationAction label="关于" href="/about" value="About"/>
+          <BottomNavigationAction label="首页" href="/" value="/"/>
+          <BottomNavigationAction label="作者" href="/author" value="/author"/>
+          <BottomNavigationAction label="关于" href="/about" value="/about"/>
         </BottomNavigation>
       </Box>
     );

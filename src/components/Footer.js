@@ -12,7 +12,7 @@ export default function Footer(){
             flex-direction:row;
             align-items:center;
             justify-content:space-around;
-            @media screen and (max-width:768px){
+            @media screen and (max-width:800px){
                 margin-bottom:3.5rem;
             }
         `}>

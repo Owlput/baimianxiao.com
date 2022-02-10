@@ -14,14 +14,13 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import "../../assets/css/genericStyle.css";
+
 const target = {
     type: "getThumbs",
     payload: {},
   };
 export default function ThumbPage() {
-  
   const thumbData = useDataFetch(target);
-
   const [page, setPage] = useState([1, 1]);
   const [timeSort, setTimeSort] = useState(1);
   const [thumbDisp, setThumbDisp] = useState();
@@ -81,7 +80,7 @@ export default function ThumbPage() {
             border-radius: 1em;
             width: 92%;
             max-width: 80em;
-            @media screen and (max-width: 768px) {
+            @media screen and (max-width: 800px) {
               width: 100%;
             }
           `}
@@ -89,7 +88,7 @@ export default function ThumbPage() {
           <div>
             <div
               css={css`
-                @media screen and (max-width: 768px) {
+                @media screen and (max-width: 800px) {
                   margin: 0.5rem;
                 }
               `}

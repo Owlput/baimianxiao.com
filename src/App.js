@@ -7,8 +7,8 @@ import AuthorPage from "./components/pages/AuthorPage";
 import Footer from "./components/Footer";
 import PermitPage from "./components/pages/PermitPage";
 import DatagenPage from "./components/pages/DatagenPage";
-import BottomNav from "./components/BottomNav";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import BottomNav from "./components/BottomNav";
 
 function App() {
   return (
@@ -24,8 +24,8 @@ function App() {
           <Route path="/" element={<ThumbPage />} />
         </Routes>
       </BrowserRouter>
-      <BottomNav />
       <Footer></Footer>
+      <BottomNav location={window.location.pathname}/>
     </div>
   );
 }

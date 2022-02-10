@@ -20,14 +20,14 @@ export default function ImageCard(props) {
           border-radius: 5%;
           margin: 5px;
           height: 18rem;
-          @media screen and (max-width: 768px) {
+          @media screen and (max-width: 800px) {
             height: 200px;
           }
         `}
       >
         <Card
           css={css`
-            @media screen and (max-width: 768px) {
+            @media screen and (max-width: 800px) {
               height: 200px;
             }
           `}
@@ -42,7 +42,7 @@ export default function ImageCard(props) {
           </CardActionArea>
           <div
             css={css`
-              @media screen and (max-width: 768px) {
+              @media screen and (max-width: 800px) {
                 height: 0px;
                 margin: 0px;
                 visibility: hidden;
