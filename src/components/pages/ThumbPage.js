@@ -34,9 +34,6 @@ export default function ThumbPage() {
   };
   const changeTimeSort = (ev) => {
     setTimeSort(ev.target.value);
-    if (ev.target.value < 0) {
-      console.log("back!");
-    } else console.log("forth!");
   };
   useEffect(() => {
     switch (timeSort) {
@@ -70,6 +67,7 @@ export default function ThumbPage() {
     setThumbDisp(a);
   }, [thumbData, timeSort, page]);
   if (thumbDisp) {
+    console.log(thumbDisp)
     return (
       <div className="aliContV" style={{ minWidth: "80%" }}>
         <Paper
@@ -117,7 +115,7 @@ export default function ThumbPage() {
             >
               {thumbDisp ? (
                 thumbDisp.map((image, index) => (
-                  <ImageCard {...image} key={index}></ImageCard>
+                  <ImageCard {...image} key={image.uri}></ImageCard>
                 ))
               ) : (
                 <></>
