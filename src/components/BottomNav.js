@@ -24,8 +24,15 @@ export default function BottomNav(props) {
           showLabels
           value={props.location??"/"}
           css={css`
-            height:3.5rem;
-            width:100%;
+            visibility:hidden;
+            height:0px;
+            @media screen and (max-width:800px){
+                visibility:visible;
+                height:3.5rem;
+                width:100%;
+                position:fixed;
+                bottom:0px;
+            }
           `}
         >
           <BottomNavigationAction label="首页" href="/" value="/"/>

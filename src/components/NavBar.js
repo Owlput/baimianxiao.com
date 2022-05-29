@@ -3,8 +3,10 @@ import { css } from "@emotion/react";
 
 import React from "react";
 import { Button } from "@mui/material";
+import { useTranslation } from 'react-i18next'
 
 export default function NavBar() {
+  const {t} = useTranslation();
   return (
     <div
       css={css`
@@ -27,13 +29,13 @@ export default function NavBar() {
       `}
     >
       <Button href="/" className="navbtn">
-        首页
+        {t("homepage")}
       </Button>
       <Button href="/author" className="navbtn">
-        作者
+        {t("authors")}
       </Button>
       <Button href="/about" className="navbtn">
-        关于
+        {t("about")}
       </Button>
     </div>
   );
