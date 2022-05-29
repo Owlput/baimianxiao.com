@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 
 import React from "react";
-import { ButtonBase, Chip } from "@material-ui/core";
+import { ButtonBase, Chip } from "@mui/material";
 
 export default function TagCollection(props) {
   if (props.tags) {

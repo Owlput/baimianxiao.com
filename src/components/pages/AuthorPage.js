@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 
 import React from "react";
 import useDataFetch from "../../hooks/useDataFetch";
-import { CircularProgress } from "@material-ui/core";
 import AuthorInfoCard from "../cards/AuthorInfoCard";
 import { imgAddr, siteAddr } from "../../assets/config";
 import {
@@ -12,7 +11,8 @@ import {
   Card,
   CardActionArea,
   CardMedia,
-} from "@material-ui/core";
+  CircularProgress,
+} from "@mui/material";
 import "../../assets/css/genericStyle.css";
 
 const target = {

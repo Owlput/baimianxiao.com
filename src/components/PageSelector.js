@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 
 import React from "react";
-import { Pagination, Paper } from "@material-ui/core";
+import { Pagination, Paper } from "@mui/material";
 
 export default function PageSelector(props) {
   return (

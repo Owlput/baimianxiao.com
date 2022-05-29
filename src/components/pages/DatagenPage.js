@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { Button, ButtonGroup, Paper } from "@material-ui/core";
+import { Button, ButtonGroup, Paper } from "@mui/material";
 import React, { useState } from "react";
 
 import TextField from "@mui/material/TextField";

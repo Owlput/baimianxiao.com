@@ -1,5 +1,5 @@
 import React from "react";
-import { Tooltip } from "@material-ui/core";
+import { Tooltip } from "@mui/material";
 
 //Don't know where to use but keep this anyway
 export default function DivideLines(props) {

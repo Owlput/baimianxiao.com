@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 
 import React from "react";
-import { Paper } from "@material-ui/core";
+import { Paper } from "@mui/material";
 import "../../assets/css/genericStyle.css";
 import sponsor from "../../assets/images/sponsor.png";
 

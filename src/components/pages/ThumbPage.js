@@ -12,7 +12,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
-} from "@material-ui/core";
+} from "@mui/material";
 import "../../assets/css/genericStyle.css";
 
 const target = {

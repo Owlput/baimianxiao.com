@@ -16,7 +16,7 @@ import {
   Card,
   CardMedia,
   CircularProgress,
-} from "@material-ui/core";
+} from "@mui/material";
 let artworkDataTarget = {
   type: "getArtworkData",
   payload: {},

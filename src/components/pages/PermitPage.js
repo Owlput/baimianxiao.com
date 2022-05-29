@@ -8,7 +8,7 @@ import {
   CardActionArea,
   CardMedia,
   CircularProgress,
-} from "@material-ui/core";
+} from "@mui/material";
 import AuthorInfoCard from "../cards/AuthorInfoCard";
 import { imgAddr, siteAddr } from "../../assets/config";
 import "../../assets/css/genericStyle.css";

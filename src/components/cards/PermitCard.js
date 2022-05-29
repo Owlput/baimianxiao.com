@@ -5,7 +5,7 @@ import React from "react";
 import "../../assets/css/genericStyle.css";
 import AuthorInfoCard from "./AuthorInfoCard";
 import { imgAddr, siteAddr } from "../../assets/config";
-import { Paper, Card, CardActionArea, CardMedia } from "@material-ui/core";
+import { Paper, Card, CardActionArea, CardMedia } from "@mui/material";
 import DivideLine from "../DivideLine";
 
 export function PermitCard(props) {

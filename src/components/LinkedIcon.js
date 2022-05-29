@@ -5,7 +5,7 @@ import wbIco from "../assets/icons/weibo.svg";
 import biIco from "../assets/icons/bilibili.svg";
 import lfIco from "../assets/icons/lofter.svg";
 import bcIco from "../assets/icons/bcy.svg"
-import { CardActionArea, CardMedia } from "@material-ui/core";
+import { CardActionArea, CardMedia } from "@mui/material";
 
 export default function LinkedIcon(props) {
   switch (props.type) {

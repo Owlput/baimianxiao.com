@@ -8,7 +8,7 @@ import {
   CardActionArea,
   CardMedia,
   CircularProgress,
-} from "@material-ui/core";
+} from "@mui/material";
 
 export default function ImageCard(props) {
   if (props.uri) {
